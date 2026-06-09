@@ -37,6 +37,7 @@ export const vets = [
     price: 500,
     rating: 4.8,
     availability: 'Available today',
+    onlineStatus: 'online',
   },
   {
     id: 2,
@@ -47,6 +48,7 @@ export const vets = [
     price: 650,
     rating: 4.7,
     availability: 'Available tomorrow',
+    onlineStatus: 'offline',
   },
   {
     id: 3,
@@ -57,5 +59,6 @@ export const vets = [
     price: 450,
     rating: 4.6,
     availability: 'Video slots open',
+    onlineStatus: 'offline',
   },
 ];

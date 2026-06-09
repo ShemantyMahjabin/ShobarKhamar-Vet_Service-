@@ -4,6 +4,8 @@ import { FarmerDashboard } from './components/FarmerDashboard';
 import { VetRegistration } from './components/VetRegistration';
 import { VetDashboard } from './components/VetDashboard';
 import { BookAppointment } from './components/BookAppointment';
+import { VetProfile } from './components/VetProfile';
+import { VetChatPage } from './components/VetChatPage';
 import { DiseaseHeatmap } from './components/DiseaseHeatmap';
 import { AIDetection } from './components/AIDetection';
 import { FarmManagement } from './components/FarmManagement';
@@ -39,6 +41,8 @@ export default function App() {
           <Route path="/vet-registration" element={<VetRegistration />} />
           <Route path="/vet-dashboard" element={<VetDashboard />} />
           <Route path="/booking" element={<BookAppointment />} />
+          <Route path="/booking/:vetId" element={<VetProfile />} />
+          <Route path="/booking/:vetId/chat" element={<VetChatPage />} />
           <Route path="/heatmap" element={<DiseaseHeatmap />} />
           <Route path="/ai-detection" element={<AIDetection />} />
           <Route path="*" element={<Navigate to="/" replace />} />
