@@ -1,7 +1,7 @@
 
   # Vetservice
 
-  This is a code bundle for Create Mock UI from BPMN. The original project is available at https://www.figma.com/design/ywtFRVDL58x1Hh91F3f90R/Create-Mock-UI-from-BPMN.
+  This is a code bundle for Create Mock UI for vetservice. The original project is available at https://www.figma.com/design/ywtFRVDL58x1Hh91F3f90R/Create-Mock-UI-from-BPMN.
 
   ## Running the code
 
