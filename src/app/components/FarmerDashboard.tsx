@@ -61,10 +61,13 @@ export function FarmerDashboard() {
         </div>
 
         <div className="mt-5 grid grid-cols-3 gap-3">
-          <div className="rounded-[18px] bg-[#E6F7EF] p-4">
+          <button
+            onClick={() => navigate('/farm-management')}
+            className="rounded-[18px] bg-[#E6F7EF] p-4 text-left"
+          >
             <p className="text-[28px] font-black text-[#17212B]">{animals.length}</p>
             <p className="text-xs font-bold text-[#6B7785]">Animals</p>
-          </div>
+          </button>
           <div className="rounded-[18px] bg-[#FFF5DF] p-4">
             <p className="text-[28px] font-black text-[#17212B]">3</p>
             <p className="text-xs font-bold text-[#6B7785]">Cases</p>
