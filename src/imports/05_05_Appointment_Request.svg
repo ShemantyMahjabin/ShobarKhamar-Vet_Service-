@@ -1,0 +1,676 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="70 1044 390 844">
+
+<rect x="0.0" y="0.0" width="1910.0" height="2872.0" rx="0.0" fill="#F4FBF7" stroke="none" stroke-width="1" opacity="1" />
+<text x="70.0" y="38.0" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="900" fill="#17212B" text-anchor="start" opacity="1">VetCare Mobile App — Figma Mock UI Kit</text>
+<text x="70.0" y="63.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Based on the uploaded system specification: farmer, veterinarian, AI diagnosis, booking, payment, reports, heatmap, farm and vaccination management.</text>
+<text x="1120.0" y="38.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Design tokens</text>
+<rect x="1120.0" y="48.0" width="96.0" height="28.0" rx="14.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1168.0" y="67.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Primary</text>
+<rect x="1228.0" y="48.0" width="96.0" height="28.0" rx="14.0" fill="#0F4C81" stroke="none" stroke-width="1" opacity="1" />
+<text x="1276.0" y="67.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Navy</text>
+<rect x="1336.0" y="48.0" width="96.0" height="28.0" rx="14.0" fill="#F5A524" stroke="none" stroke-width="1" opacity="1" />
+<text x="1384.0" y="67.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Warning</text>
+<rect x="1444.0" y="48.0" width="96.0" height="28.0" rx="14.0" fill="#DE3B40" stroke="none" stroke-width="1" opacity="1" />
+<text x="1492.0" y="67.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Danger</text>
+<rect x="1552.0" y="48.0" width="96.0" height="28.0" rx="14.0" fill="#FFFFFF" stroke="#CADAD2" stroke-width="1" opacity="1" />
+<text x="1600.0" y="67.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#17212B" text-anchor="middle" opacity="1">Surface</text>
+<text x="70.0" y="74.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">01  Welcome / Login</text>
+<rect x="74.0" y="108.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="70.0" y="100.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="196.0" y="111.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="98.0" y="131.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="405.0" cy="127.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="418.0" y="122.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="441.0" y="125.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<circle cx="265.0" cy="280.0" r="72.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<path d="M211 302 C225 243,301 241,318 302 Z" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="0.95"/>
+<circle cx="244.0" cy="270.0" r="11.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="286.0" cy="270.0" r="11.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="244.0" cy="271.0" r="4.0" fill="#17212B" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="286.0" cy="271.0" r="4.0" fill="#17212B" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="228.0" y="309.0" width="74.0" height="32.0" rx="16.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1" />
+<text x="265.0" y="331.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#0F4C81" text-anchor="middle" opacity="1">livestock</text>
+<text x="265.0" y="408.0" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="900" fill="#1E9E6F" text-anchor="middle" opacity="1">VetCare</text>
+<text x="265.0" y="434.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#6B7785" text-anchor="middle" opacity="1">Livestock health in one app</text>
+<rect x="106.0" y="482.0" width="318.0" height="152.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="128.0" y="518.0" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Sign in</text>
+<rect x="128.0" y="544.0" width="274.0" height="44.0" rx="12.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="144.0" y="572.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Email or phone number</text>
+<rect x="128.0" y="600.0" width="274.0" height="44.0" rx="12.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="144.0" y="628.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Password</text>
+<rect x="106.0" y="660.0" width="318.0" height="52.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="265.0" y="691.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Login</text>
+<rect x="106.0" y="724.0" width="318.0" height="48.0" rx="16.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="265.0" y="753.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Create farmer account</text>
+<text x="265.0" y="800.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="middle" opacity="1">Also available for verified veterinarians</text>
+<circle cx="244.0" cy="835.0" r="4.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="258.0" cy="835.0" r="4.0" fill="#CBDCD3" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="272.0" cy="835.0" r="4.0" fill="#CBDCD3" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="286.0" cy="835.0" r="4.0" fill="#CBDCD3" stroke="none" stroke-width="1" opacity="1"/>
+<text x="530.0" y="74.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">02  Farmer Home Dashboard</text>
+<rect x="534.0" y="108.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="530.0" y="100.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="656.0" y="111.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="558.0" y="131.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="865.0" cy="127.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="878.0" y="122.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="901.0" y="125.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="554.0" y="178.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Good morning, Rahim</text>
+<text x="554.0" y="200.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">2 alerts • 5 animals monitored</text>
+<circle cx="876.0" cy="184.0" r="22.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<path d="M867 188 C867 180,885 180,885 188 Z" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="0.8"/>
+<circle cx="876.0" cy="176.0" r="7.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="554.0" y="228.0" width="342.0" height="94.0" rx="24.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="578.0" y="263.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="start" opacity="0.9">Today’s priority</text>
+<text x="578.0" y="293.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="start" opacity="1">Cow #A12 vaccine due tomorrow</text>
+<rect x="788.0" y="254.0" width="86.0" height="38.0" rx="16.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1" />
+<text x="831.0" y="278.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">View</text>
+<rect x="554.0" y="344.0" width="102.0" height="84.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="572.0" y="378.0" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900" fill="#17212B" text-anchor="start" opacity="1">12</text>
+<text x="572.0" y="403.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">Animals</text>
+<rect x="668.0" y="344.0" width="102.0" height="84.0" rx="18.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1" />
+<text x="686.0" y="378.0" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900" fill="#17212B" text-anchor="start" opacity="1">3</text>
+<text x="686.0" y="403.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">Open cases</text>
+<rect x="782.0" y="344.0" width="102.0" height="84.0" rx="18.0" fill="#FDEBEB" stroke="none" stroke-width="1" opacity="1" />
+<text x="800.0" y="378.0" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900" fill="#17212B" text-anchor="start" opacity="1">1</text>
+<text x="800.0" y="403.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">High risk</text>
+<text x="554.0" y="462.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Quick actions</text>
+<rect x="554.0" y="485.0" width="154.0" height="94.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="585.0" cy="519.0" r="20.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="585.0" y="524.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">+</text>
+<text x="612.0" y="520.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Book vet</text>
+<text x="612.0" y="542.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Nearest verified vets</text>
+<rect x="725.0" y="485.0" width="154.0" height="94.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="756.0" cy="519.0" r="20.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="756.0" y="524.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">◇</text>
+<text x="783.0" y="520.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">AI check</text>
+<text x="783.0" y="542.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Upload image</text>
+<rect x="554.0" y="601.0" width="154.0" height="94.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="585.0" cy="635.0" r="20.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="585.0" y="640.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">⌁</text>
+<text x="612.0" y="636.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Heatmap</text>
+<text x="612.0" y="658.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Area disease risk</text>
+<rect x="725.0" y="601.0" width="154.0" height="94.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="756.0" cy="635.0" r="20.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="756.0" y="640.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">✓</text>
+<text x="783.0" y="636.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Vaccine</text>
+<text x="783.0" y="658.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Due dates</text>
+<text x="554.0" y="740.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Recent reports</text>
+<rect x="554.0" y="762.0" width="342.0" height="74.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="586.0" cy="799.0" r="20.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="586.0" y="804.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Rx</text>
+<text x="616.0" y="792.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Fever treatment plan</text>
+<text x="616.0" y="814.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Dr. Ahmed • Follow-up Jun 12</text>
+<rect x="548.0" y="862.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<rect x="560.0" y="872.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="585.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">⌂</text>
+<text x="585.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Home</text>
+<text x="655.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="655.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<text x="725.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="725.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<text x="795.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="795.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<text x="865.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⋯</text>
+<text x="865.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">More</text>
+<text x="990.0" y="74.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">03  Farm Management</text>
+<rect x="994.0" y="108.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="990.0" y="100.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="1116.0" y="111.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="1018.0" y="131.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="1325.0" cy="127.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="1338.0" y="122.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="1361.0" y="125.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="1014.0" y="178.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">My Livestock</text>
+<text x="1014.0" y="200.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Add, edit, and monitor animal status</text>
+<rect x="1268.0" y="176.0" width="78.0" height="38.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1307.0" y="200.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">+ Add</text>
+<rect x="1014.0" y="225.0" width="342.0" height="46.0" rx="15.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1034.0" y="254.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Search animal name, type, breed</text>
+<rect x="1014.0" y="294.0" width="342.0" height="108.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1052.0" cy="346.0" r="28.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1052.0" y="352.0" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="900" fill="#1E9E6F" text-anchor="middle" opacity="1">C</text>
+<text x="1094.0" y="329.0" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Cow A12</text>
+<text x="1094.0" y="352.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Holstein • 3y 2m</text>
+<rect x="1094.0" y="367.0" width="82.0" height="24.0" rx="12.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1135.0" y="384.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#17212B" text-anchor="middle" opacity="1">Healthy</text>
+<text x="1270.0" y="384.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Pregnant</text>
+<rect x="1014.0" y="426.0" width="342.0" height="108.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1052.0" cy="478.0" r="28.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1052.0" y="484.0" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="900" fill="#0F4C81" text-anchor="middle" opacity="1">G</text>
+<text x="1094.0" y="461.0" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Goat G08</text>
+<text x="1094.0" y="484.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Black Bengal • 1y</text>
+<rect x="1094.0" y="499.0" width="82.0" height="24.0" rx="12.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1135.0" y="516.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#17212B" text-anchor="middle" opacity="1">Needs check</text>
+<text x="1270.0" y="516.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Symptom</text>
+<rect x="1014.0" y="558.0" width="342.0" height="108.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1052.0" cy="610.0" r="28.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1052.0" y="616.0" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="900" fill="#0F4C81" text-anchor="middle" opacity="1">C</text>
+<text x="1094.0" y="593.0" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Calf C03</text>
+<text x="1094.0" y="616.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Local • 6m</text>
+<rect x="1094.0" y="631.0" width="82.0" height="24.0" rx="12.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1" />
+<text x="1135.0" y="648.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" fill="#17212B" text-anchor="middle" opacity="1">Recovered</text>
+<text x="1270.0" y="648.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">History</text>
+<rect x="1014.0" y="718.0" width="342.0" height="94.0" rx="20.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1" />
+<text x="1038.0" y="751.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#0F4C81" text-anchor="start" opacity="1">Activity note</text>
+<text x="1038.0" y="775.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#17212B" text-anchor="start" opacity="1">Goat G08: reduced appetite logged today</text>
+<rect x="1236.0" y="742.0" width="90.0" height="42.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1281.0" y="768.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Edit</text>
+<rect x="1008.0" y="862.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1045.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⌂</text>
+<text x="1045.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Home</text>
+<rect x="1090.0" y="872.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1115.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">A</text>
+<text x="1115.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Animals</text>
+<text x="1185.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="1185.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<text x="1255.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="1255.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<text x="1325.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⋯</text>
+<text x="1325.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">More</text>
+<text x="1450.0" y="74.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">04  Vet Search &amp; Booking</text>
+<rect x="1454.0" y="108.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="1450.0" y="100.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="1576.0" y="111.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="1478.0" y="131.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="1785.0" cy="127.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="1798.0" y="122.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="1821.0" y="125.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="1474.0" y="178.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Find a Vet</text>
+<text x="1474.0" y="200.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Search by GPS, specialty, fee and rating</text>
+<rect x="1474.0" y="224.0" width="342.0" height="48.0" rx="16.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1496.0" y="254.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Cattle fever specialist near me</text>
+<rect x="1474.0" y="286.0" width="92.0" height="34.0" rx="17.0" fill="#E6F7EF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1520.0" y="308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Nearby</text>
+<rect x="1578.0" y="286.0" width="92.0" height="34.0" rx="17.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1624.0" y="308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Cattle</text>
+<rect x="1682.0" y="286.0" width="92.0" height="34.0" rx="17.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1728.0" y="308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Under ৳600</text>
+<rect x="1474.0" y="348.0" width="342.0" height="118.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1512.0" cy="391.0" r="30.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1512.0" y="398.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" fill="#0F4C81" text-anchor="middle" opacity="1">Dr</text>
+<text x="1556.0" y="380.0" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Dr. Nadia Islam</text>
+<text x="1556.0" y="403.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Cattle &amp; dairy specialist</text>
+<text x="1556.0" y="426.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="start" opacity="1">৳500 consultation</text>
+<rect x="1722.0" y="372.0" width="54.0" height="24.0" rx="12.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1749.0" y="389.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#F5A524" text-anchor="middle" opacity="1">★ 4.8</text>
+<rect x="1694.0" y="420.0" width="88.0" height="34.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1738.0" y="442.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Book</text>
+<rect x="1474.0" y="490.0" width="342.0" height="118.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1512.0" cy="533.0" r="30.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1512.0" y="540.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" fill="#0F4C81" text-anchor="middle" opacity="1">Dr</text>
+<text x="1556.0" y="522.0" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Dr. Mahmud Hasan</text>
+<text x="1556.0" y="545.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Livestock surgeon</text>
+<text x="1556.0" y="568.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="start" opacity="1">৳650 consultation</text>
+<rect x="1722.0" y="514.0" width="54.0" height="24.0" rx="12.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1749.0" y="531.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#F5A524" text-anchor="middle" opacity="1">★ 4.7</text>
+<rect x="1694.0" y="562.0" width="88.0" height="34.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1738.0" y="584.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Book</text>
+<rect x="1474.0" y="632.0" width="342.0" height="118.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1512.0" cy="675.0" r="30.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1512.0" y="682.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" fill="#0F4C81" text-anchor="middle" opacity="1">Dr</text>
+<text x="1556.0" y="664.0" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Dr. Farhana Akter</text>
+<text x="1556.0" y="687.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Poultry &amp; goat care</text>
+<text x="1556.0" y="710.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="start" opacity="1">৳450 consultation</text>
+<rect x="1722.0" y="656.0" width="54.0" height="24.0" rx="12.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1749.0" y="673.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#F5A524" text-anchor="middle" opacity="1">★ 4.6</text>
+<rect x="1694.0" y="704.0" width="88.0" height="34.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1738.0" y="726.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Book</text>
+<rect x="1468.0" y="862.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1505.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⌂</text>
+<text x="1505.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Home</text>
+<text x="1575.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="1575.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<text x="1645.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="1645.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<rect x="1690.0" y="872.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1715.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">+</text>
+<text x="1715.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Vets</text>
+<text x="1785.0" y="893.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⋯</text>
+<text x="1785.0" y="917.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">More</text>
+<text x="70.0" y="1018.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">05  Appointment Request</text>
+<rect x="74.0" y="1052.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="70.0" y="1044.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="196.0" y="1055.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="98.0" y="1075.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="405.0" cy="1071.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="418.0" y="1066.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="441.0" y="1069.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="94.0" y="1122.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Book Appointment</text>
+<text x="94.0" y="1144.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Choose slot and submit symptoms</text>
+<rect x="94.0" y="1168.0" width="342.0" height="90.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="132.0" cy="1212.0" r="28.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="132.0" y="1218.0" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#0F4C81" text-anchor="middle" opacity="1">Dr</text>
+<text x="170.0" y="1198.0" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Dr. Nadia Islam</text>
+<text x="170.0" y="1222.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Cattle specialist • 2.3 km away</text>
+<text x="94.0" y="1298.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Available slots</text>
+<rect x="94.0" y="1320.0" width="160.0" height="42.0" rx="14.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="174.0" y="1347.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#17212B" text-anchor="middle" opacity="1">10:00 AM</text>
+<rect x="272.0" y="1320.0" width="160.0" height="42.0" rx="14.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="352.0" y="1347.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">11:30 AM</text>
+<rect x="94.0" y="1374.0" width="160.0" height="42.0" rx="14.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="174.0" y="1401.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#17212B" text-anchor="middle" opacity="1">2:00 PM</text>
+<rect x="272.0" y="1374.0" width="160.0" height="42.0" rx="14.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="352.0" y="1401.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#17212B" text-anchor="middle" opacity="1">4:30 PM</text>
+<text x="94.0" y="1460.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Animal type</text>
+<rect x="94.0" y="1476.0" width="342.0" height="44.0" rx="14.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="114.0" y="1504.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" fill="#17212B" text-anchor="start" opacity="1">Cow / Cattle</text>
+<text x="94.0" y="1554.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Symptoms</text>
+<rect x="94.0" y="1570.0" width="342.0" height="116.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="114.0" y="1598.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B7785" text-anchor="start" opacity="1">High fever, low appetite, watery eyes,</text>
+<text x="114.0" y="1616.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B7785" text-anchor="start" opacity="1">standing separately from herd.</text>
+<rect x="94.0" y="1704.0" width="158.0" height="40.0" rx="14.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="173.0" y="1730.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#17212B" text-anchor="middle" opacity="1">Video consultation</text>
+<rect x="268.0" y="1704.0" width="158.0" height="40.0" rx="14.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="347.0" y="1730.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">Vet visit</text>
+<rect x="94.0" y="1764.0" width="342.0" height="50.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="265.0" y="1794.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Submit request</text>
+<rect x="88.0" y="1806.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="125.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⌂</text>
+<text x="125.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Home</text>
+<text x="195.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="195.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<text x="265.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="265.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<rect x="310.0" y="1816.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="335.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">+</text>
+<text x="335.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Vets</text>
+<text x="405.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⋯</text>
+<text x="405.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">More</text>
+<text x="530.0" y="1018.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">06  AI Disease Detection</text>
+<rect x="534.0" y="1052.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="530.0" y="1044.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="656.0" y="1055.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="558.0" y="1075.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="865.0" cy="1071.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="878.0" y="1066.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="901.0" y="1069.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="554.0" y="1122.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">AI Health Check</text>
+<text x="554.0" y="1144.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Upload image + symptoms for recommendation</text>
+<rect x="554.0" y="1172.0" width="342.0" height="190.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<rect x="592.0" y="1206.0" width="266.0" height="90.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<circle cx="725.0" cy="1251.0" r="30.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1"/>
+<path d="M712 1255 L724 1240 L738 1255 Z" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1"/>
+<text x="725.0" y="1322.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Tap to upload animal photo</text>
+<text x="554.0" y="1400.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Symptoms</text>
+<rect x="554.0" y="1422.0" width="160.0" height="34.0" rx="17.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="634.0" y="1444.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Skin rash</text>
+<rect x="732.0" y="1422.0" width="160.0" height="34.0" rx="17.0" fill="#E6F7EF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="812.0" y="1444.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Fever</text>
+<rect x="554.0" y="1470.0" width="160.0" height="34.0" rx="17.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="634.0" y="1492.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Lameness</text>
+<rect x="732.0" y="1470.0" width="160.0" height="34.0" rx="17.0" fill="#E6F7EF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="812.0" y="1492.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Eye discharge</text>
+<rect x="554.0" y="1544.0" width="342.0" height="48.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="725.0" y="1573.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Run AI analysis</text>
+<rect x="554.0" y="1620.0" width="342.0" height="138.0" rx="22.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1" />
+<text x="578.0" y="1654.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#0F4C81" text-anchor="start" opacity="1">Prediction preview</text>
+<text x="578.0" y="1684.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#17212B" text-anchor="start" opacity="1">Possible conjunctivitis</text>
+<rect x="578.0" y="1704.0" width="210.0" height="10.0" rx="6.0" fill="#D4E6F5" stroke="none" stroke-width="1" opacity="1" />
+<rect x="578.0" y="1704.0" width="158.0" height="10.0" rx="6.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="804.0" y="1712.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">75% confidence</text>
+<text x="578.0" y="1740.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Recommendation: book a vet if symptoms persist.</text>
+<rect x="548.0" y="1806.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="585.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⌂</text>
+<text x="585.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Home</text>
+<text x="655.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="655.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<rect x="700.0" y="1816.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="725.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">◇</text>
+<text x="725.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">AI</text>
+<text x="795.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="795.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<text x="865.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⋯</text>
+<text x="865.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">More</text>
+<text x="990.0" y="1018.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">07  Payment Summary</text>
+<rect x="994.0" y="1052.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="990.0" y="1044.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="1116.0" y="1055.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="1018.0" y="1075.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="1325.0" cy="1071.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="1338.0" y="1066.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="1361.0" y="1069.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="1014.0" y="1122.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Payment</text>
+<text x="1014.0" y="1144.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Confirm appointment fee and method</text>
+<rect x="1014.0" y="1172.0" width="342.0" height="164.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1038.0" y="1206.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Appointment summary</text>
+<text x="1038.0" y="1236.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Vet</text>
+<text x="1332.0" y="1236.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="end" opacity="1">Dr. Nadia Islam</text>
+<text x="1038.0" y="1262.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Date</text>
+<text x="1332.0" y="1262.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="end" opacity="1">Jun 10, 11:30 AM</text>
+<text x="1038.0" y="1288.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Booking type</text>
+<text x="1332.0" y="1288.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="end" opacity="1">Vet visit</text>
+<text x="1038.0" y="1314.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Consultation fee</text>
+<text x="1332.0" y="1314.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="end" opacity="1">৳500</text>
+<text x="1014.0" y="1376.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Choose method</text>
+<rect x="1014.0" y="1400.0" width="342.0" height="64.0" rx="18.0" fill="#E6F7EF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1048.0" cy="1432.0" r="18.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1048.0" y="1437.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">৳</text>
+<text x="1078.0" y="1427.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">bKash</text>
+<text x="1078.0" y="1447.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Mobile wallet</text>
+<circle cx="1316.0" cy="1432.0" r="10.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="1014.0" y="1480.0" width="342.0" height="64.0" rx="18.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1048.0" cy="1512.0" r="18.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1048.0" y="1517.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#0F4C81" text-anchor="middle" opacity="1">●</text>
+<text x="1078.0" y="1507.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">SSLCommerz</text>
+<text x="1078.0" y="1527.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Card / bank / wallet</text>
+<rect x="1014.0" y="1560.0" width="342.0" height="64.0" rx="18.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1048.0" cy="1592.0" r="18.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1048.0" y="1597.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#0F4C81" text-anchor="middle" opacity="1">●</text>
+<text x="1078.0" y="1587.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Cash after visit</text>
+<text x="1078.0" y="1607.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Only for selected vets</text>
+<rect x="1014.0" y="1669.0" width="342.0" height="76.0" rx="20.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1038.0" y="1700.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#F5A524" text-anchor="start" opacity="1">Secure payment</text>
+<text x="1038.0" y="1724.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">No raw card data stored in the app.</text>
+<rect x="1014.0" y="1764.0" width="342.0" height="50.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1185.0" y="1794.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Pay ৳500</text>
+<rect x="1008.0" y="1806.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1045.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⌂</text>
+<text x="1045.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Home</text>
+<text x="1115.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="1115.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<text x="1185.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="1185.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<text x="1255.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="1255.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<rect x="1300.0" y="1816.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1325.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">⋯</text>
+<text x="1325.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">More</text>
+<text x="1450.0" y="1018.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">08  Diagnosis Report</text>
+<rect x="1454.0" y="1052.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="1450.0" y="1044.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="1576.0" y="1055.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="1478.0" y="1075.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="1785.0" cy="1071.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="1798.0" y="1066.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="1821.0" y="1069.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="1474.0" y="1122.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Diagnosis Report</text>
+<text x="1474.0" y="1144.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Prescription, dosage and follow-up</text>
+<rect x="1474.0" y="1166.0" width="342.0" height="116.0" rx="24.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1498.0" y="1202.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="start" opacity="1">Cow A12</text>
+<text x="1498.0" y="1228.0" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="900" fill="#FFFFFF" text-anchor="start" opacity="1">Diagnosis: Bovine fever</text>
+<text x="1498.0" y="1254.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="start" opacity="0.9">Severity: Moderate • Dr. Nadia</text>
+<text x="1474.0" y="1322.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Prescription</text>
+<rect x="1474.0" y="1346.0" width="342.0" height="70.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1508.0" cy="1381.0" r="20.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1508.0" y="1386.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Rx</text>
+<text x="1538.0" y="1374.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Oxytetracycline</text>
+<text x="1538.0" y="1396.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">10 mg/kg, once daily, 3 days</text>
+<rect x="1474.0" y="1434.0" width="342.0" height="70.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="1508.0" cy="1469.0" r="20.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="1508.0" y="1474.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Rx</text>
+<text x="1538.0" y="1462.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Electrolyte solution</text>
+<text x="1538.0" y="1484.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">2 times daily, 5 days</text>
+<text x="1474.0" y="1552.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Care instructions</text>
+<rect x="1474.0" y="1574.0" width="342.0" height="86.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1498.0" y="1604.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B7785" text-anchor="start" opacity="1">Keep animal hydrated, isolate from</text>
+<text x="1498.0" y="1622.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="400" fill="#6B7785" text-anchor="start" opacity="1">herd, track temperature twice daily.</text>
+<rect x="1474.0" y="1684.0" width="342.0" height="62.0" rx="20.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1498.0" y="1710.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#1E9E6F" text-anchor="start" opacity="1">Follow-up required</text>
+<text x="1498.0" y="1732.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Jun 12, 2026 • In-app reminder enabled</text>
+<rect x="1474.0" y="1764.0" width="154.0" height="48.0" rx="16.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1551.0" y="1793.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Download PDF</text>
+<rect x="1644.0" y="1764.0" width="172.0" height="48.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1730.0" y="1793.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Book follow-up</text>
+<rect x="1468.0" y="1806.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<rect x="1480.0" y="1816.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1505.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">⌂</text>
+<text x="1505.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Home</text>
+<text x="1575.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="1575.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<text x="1645.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="1645.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<text x="1715.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="1715.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<text x="1785.0" y="1837.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⋯</text>
+<text x="1785.0" y="1861.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">More</text>
+<text x="70.0" y="1962.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">09  Disease Heatmap</text>
+<rect x="74.0" y="1996.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="70.0" y="1988.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="196.0" y="1999.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="98.0" y="2019.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="405.0" cy="2015.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="418.0" y="2010.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="441.0" y="2013.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="94.0" y="2066.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Disease Heatmap</text>
+<text x="94.0" y="2088.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Area risk based on reports</text>
+<rect x="94.0" y="2114.0" width="342.0" height="430.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<rect x="112.0" y="2134.0" width="306.0" height="390.0" rx="18.0" fill="#EAF3F0" stroke="none" stroke-width="1" opacity="1" />
+<path d="M130 2193 C180 2133,238 2193,290 2158 S380 2186,398 2248 S342 2326,370 2426 S272 2498,202 2450 S138 2374,152 2308 S90 2248,130 2193" fill="#D8EAE0" stroke="#B7D2C2" stroke-width="2" opacity="1"/>
+<path d="M150 2234 C210 2270,274 2238,356 2298" fill="none" stroke="#FFFFFF" stroke-width="9" opacity="0.9"/>
+<path d="M202 2173 C230 2260,228 2346,300 2456" fill="none" stroke="#FFFFFF" stroke-width="7" opacity="0.8"/>
+<circle cx="295.0" cy="2262.0" r="68.0" fill="#DE3B40" stroke="none" stroke-width="1" opacity="0.38"/>
+<circle cx="295.0" cy="2262.0" r="34.0" fill="#DE3B40" stroke="none" stroke-width="1" opacity="0.58"/>
+<circle cx="210.0" cy="2378.0" r="54.0" fill="#F5A524" stroke="none" stroke-width="1" opacity="0.42"/>
+<circle cx="355.0" cy="2418.0" r="40.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="0.26"/>
+<circle cx="295.0" cy="2262.0" r="7.0" fill="#DE3B40" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="295.0" cy="2262.0" r="3.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="210.0" cy="2378.0" r="7.0" fill="#F5A524" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="210.0" cy="2378.0" r="3.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="355.0" cy="2418.0" r="7.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1"/>
+<circle cx="355.0" cy="2418.0" r="3.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="126.0" y="2484.0" width="270.0" height="28.0" rx="14.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="0.95" />
+<text x="142.0" y="2503.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Risk: High in Savar • 18 reports</text>
+<text x="94.0" y="2584.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Risk filters</text>
+<rect x="94.0" y="2606.0" width="98.0" height="36.0" rx="18.0" fill="#E6F7EF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="143.0" y="2629.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">Cattle</text>
+<rect x="205.0" y="2606.0" width="98.0" height="36.0" rx="18.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="254.0" y="2629.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">Goat</text>
+<rect x="316.0" y="2606.0" width="98.0" height="36.0" rx="18.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="365.0" y="2629.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">Poultry</text>
+<rect x="94.0" y="2662.0" width="342.0" height="64.0" rx="20.0" fill="#FDEBEB" stroke="none" stroke-width="1" opacity="1" />
+<text x="118.0" y="2688.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#DE3B40" text-anchor="start" opacity="1">High-risk zone needs admin approval before alert.</text>
+<text x="118.0" y="2710.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Show preventive steps to farmers.</text>
+<rect x="88.0" y="2750.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="125.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⌂</text>
+<text x="125.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Home</text>
+<text x="195.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="195.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<text x="265.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="265.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<text x="335.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="335.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<rect x="380.0" y="2760.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="405.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">⋯</text>
+<text x="405.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">More</text>
+<text x="530.0" y="1962.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">10  Vaccination Management</text>
+<rect x="534.0" y="1996.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="530.0" y="1988.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="656.0" y="1999.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="558.0" y="2019.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="865.0" cy="2015.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="878.0" y="2010.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="901.0" y="2013.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="554.0" y="2066.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Vaccine Calendar</text>
+<text x="554.0" y="2088.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Due dates, reminders and history</text>
+<rect x="554.0" y="2112.0" width="342.0" height="270.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="578.0" y="2146.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">June 2026</text>
+<text x="584.0" y="2182.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">S</text>
+<text x="626.0" y="2182.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">M</text>
+<text x="668.0" y="2182.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">T</text>
+<text x="710.0" y="2182.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">W</text>
+<text x="752.0" y="2182.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">T</text>
+<text x="794.0" y="2182.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">F</text>
+<text x="836.0" y="2182.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">S</text>
+<text x="584.0" y="2206.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">1</text>
+<text x="626.0" y="2206.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">2</text>
+<text x="668.0" y="2206.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">3</text>
+<text x="710.0" y="2206.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">4</text>
+<text x="752.0" y="2206.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">5</text>
+<text x="794.0" y="2206.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">6</text>
+<text x="836.0" y="2206.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">7</text>
+<text x="584.0" y="2240.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">8</text>
+<circle cx="626.0" cy="2235.0" r="15.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="626.0" y="2240.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">9</text>
+<text x="668.0" y="2240.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">10</text>
+<text x="710.0" y="2240.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">11</text>
+<circle cx="752.0" cy="2235.0" r="15.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="752.0" y="2240.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#F5A524" text-anchor="middle" opacity="1">12</text>
+<text x="794.0" y="2240.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">13</text>
+<text x="836.0" y="2240.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">14</text>
+<text x="584.0" y="2274.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">15</text>
+<text x="626.0" y="2274.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">16</text>
+<text x="668.0" y="2274.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">17</text>
+<circle cx="710.0" cy="2269.0" r="15.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="710.0" y="2274.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">18</text>
+<text x="752.0" y="2274.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">19</text>
+<text x="794.0" y="2274.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">20</text>
+<text x="836.0" y="2274.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">21</text>
+<text x="584.0" y="2308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">22</text>
+<text x="626.0" y="2308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">23</text>
+<text x="668.0" y="2308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">24</text>
+<text x="710.0" y="2308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">25</text>
+<text x="752.0" y="2308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">26</text>
+<text x="794.0" y="2308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">27</text>
+<text x="836.0" y="2308.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">28</text>
+<text x="584.0" y="2342.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">29</text>
+<text x="626.0" y="2342.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">30</text>
+<text x="554.0" y="2420.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Upcoming</text>
+<rect x="554.0" y="2442.0" width="342.0" height="62.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="588.0" cy="2473.0" r="18.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="588.0" y="2478.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="900" fill="#1E9E6F" text-anchor="middle" opacity="1">✓</text>
+<text x="618.0" y="2467.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">FMD vaccine</text>
+<text x="618.0" y="2487.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Cow A12 • Jun 9</text>
+<text x="852.0" y="2478.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="end" opacity="1">Due tomorrow</text>
+<rect x="554.0" y="2520.0" width="342.0" height="62.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="588.0" cy="2551.0" r="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<text x="588.0" y="2556.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="900" fill="#1E9E6F" text-anchor="middle" opacity="1">✓</text>
+<text x="618.0" y="2545.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Anthrax booster</text>
+<text x="618.0" y="2565.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Goat G08 • Jun 18</text>
+<text x="852.0" y="2556.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="end" opacity="1">Scheduled</text>
+<rect x="554.0" y="2598.0" width="342.0" height="62.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<circle cx="588.0" cy="2629.0" r="18.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1"/>
+<text x="588.0" y="2634.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="900" fill="#1E9E6F" text-anchor="middle" opacity="1">✓</text>
+<text x="618.0" y="2623.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">PPR vaccine</text>
+<text x="618.0" y="2643.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Calf C03 • Jul 2</text>
+<text x="852.0" y="2634.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" fill="#6B7785" text-anchor="end" opacity="1">Reminder on</text>
+<rect x="554.0" y="2698.0" width="342.0" height="48.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="725.0" y="2727.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Find nearby vaccination center</text>
+<rect x="548.0" y="2750.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="585.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⌂</text>
+<text x="585.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Home</text>
+<rect x="630.0" y="2760.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="655.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">A</text>
+<text x="655.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Animals</text>
+<text x="725.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="725.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<text x="795.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="795.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<text x="865.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⋯</text>
+<text x="865.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">More</text>
+<text x="990.0" y="1962.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">11  Vet Registration</text>
+<rect x="994.0" y="1996.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="990.0" y="1988.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="1116.0" y="1999.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="1018.0" y="2019.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="1325.0" cy="2015.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="1338.0" y="2010.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="1361.0" y="2013.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="1014.0" y="2066.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Vet Registration</text>
+<text x="1014.0" y="2088.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Credentials, clinic info and approval</text>
+<circle cx="1036.0" cy="2124.0" r="13.0" fill="#1E9E6F" stroke="#1E9E6F" stroke-width="2" opacity="1"/>
+<line x1="1052.0" y1="2124.0" x2="1118.0" y2="2124.0" stroke="#1E9E6F" stroke-width="3" opacity="1"/>
+<text x="1036.0" y="2153.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Personal</text>
+<circle cx="1134.0" cy="2124.0" r="13.0" fill="#1E9E6F" stroke="#1E9E6F" stroke-width="2" opacity="1"/>
+<line x1="1150.0" y1="2124.0" x2="1216.0" y2="2124.0" stroke="#1E9E6F" stroke-width="3" opacity="1"/>
+<text x="1134.0" y="2153.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">License</text>
+<circle cx="1232.0" cy="2124.0" r="13.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="2" opacity="1"/>
+<line x1="1248.0" y1="2124.0" x2="1314.0" y2="2124.0" stroke="#DCE7DF" stroke-width="3" opacity="1"/>
+<text x="1232.0" y="2153.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Clinic</text>
+<circle cx="1330.0" cy="2124.0" r="13.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="2" opacity="1"/>
+<text x="1330.0" y="2153.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Review</text>
+<rect x="1014.0" y="2184.0" width="342.0" height="426.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1038.0" y="2218.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Professional credentials</text>
+<text x="1038.0" y="2246.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">License number</text>
+<rect x="1038.0" y="2258.0" width="294.0" height="38.0" rx="12.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1054.0" y="2283.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#17212B" text-anchor="start" opacity="1">DLS-2026-00921</text>
+<text x="1038.0" y="2312.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">License expiry</text>
+<rect x="1038.0" y="2324.0" width="294.0" height="38.0" rx="12.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1054.0" y="2349.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#17212B" text-anchor="start" opacity="1">Dec 31, 2027</text>
+<text x="1038.0" y="2378.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">Specialization</text>
+<rect x="1038.0" y="2390.0" width="294.0" height="38.0" rx="12.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1054.0" y="2415.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#17212B" text-anchor="start" opacity="1">Cattle, dairy, goat</text>
+<text x="1038.0" y="2444.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">Experience years</text>
+<rect x="1038.0" y="2456.0" width="294.0" height="38.0" rx="12.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1054.0" y="2481.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#17212B" text-anchor="start" opacity="1">8 years</text>
+<text x="1038.0" y="2536.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Upload documents</text>
+<rect x="1038.0" y="2554.0" width="130.0" height="36.0" rx="12.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1103.0" y="2577.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">Degree PDF ✓</text>
+<rect x="1182.0" y="2554.0" width="130.0" height="36.0" rx="12.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1" />
+<text x="1247.0" y="2577.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#0F4C81" text-anchor="middle" opacity="1">License PDF ✓</text>
+<rect x="1014.0" y="2630.0" width="342.0" height="64.0" rx="20.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1038.0" y="2656.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#F5A524" text-anchor="start" opacity="1">Admin verification pending</text>
+<text x="1038.0" y="2678.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">You’ll be notified after approval.</text>
+<rect x="1014.0" y="2712.0" width="342.0" height="48.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1185.0" y="2741.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Submit application</text>
+<rect x="1008.0" y="2750.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1045.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⌂</text>
+<text x="1045.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Home</text>
+<text x="1115.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="1115.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<text x="1185.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="1185.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<text x="1255.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="1255.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<rect x="1300.0" y="2760.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1325.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">⋯</text>
+<text x="1325.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">More</text>
+<text x="1450.0" y="1962.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">12  Vet Dashboard</text>
+<rect x="1454.0" y="1996.0" width="390.0" height="844.0" rx="34.0" fill="#B6C7BD" stroke="none" stroke-width="1" opacity="0.18" />
+<rect x="1450.0" y="1988.0" width="390.0" height="844.0" rx="34.0" fill="#F8FCFA" stroke="#CADAD2" stroke-width="1.4" opacity="1" />
+<rect x="1576.0" y="1999.0" width="138.0" height="22.0" rx="13.0" fill="#14212A" stroke="none" stroke-width="1" opacity="1" />
+<text x="1478.0" y="2019.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#6B7785" text-anchor="start" opacity="1">9:41</text>
+<circle cx="1785.0" cy="2015.0" r="5.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="1798.0" y="2010.0" width="22.0" height="10.0" rx="3.0" fill="none" stroke="#6B7785" stroke-width="1.4" opacity="1" />
+<rect x="1821.0" y="2013.0" width="2.0" height="4.0" rx="1.0" fill="#6B7785" stroke="none" stroke-width="1" opacity="1" />
+<text x="1474.0" y="2066.0" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Vet Dashboard</text>
+<text x="1474.0" y="2088.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="500" fill="#6B7785" text-anchor="start" opacity="1">Requests, consultations and reports</text>
+<circle cx="1796.0" cy="2072.0" r="22.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1"/>
+<path d="M1787 2076 C1787 2068,1805 2068,1805 2076 Z" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="0.8"/>
+<circle cx="1796.0" cy="2064.0" r="7.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1"/>
+<rect x="1474.0" y="2114.0" width="342.0" height="92.0" rx="24.0" fill="#0F4C81" stroke="none" stroke-width="1" opacity="1" />
+<text x="1498.0" y="2148.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#FFFFFF" text-anchor="start" opacity="1">3 appointment requests</text>
+<text x="1498.0" y="2176.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="start" opacity="0.9">2 vet visits • 1 video consultation</text>
+<rect x="1700.0" y="2142.0" width="90.0" height="36.0" rx="16.0" fill="#FFFFFF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1745.0" y="2165.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#0F4C81" text-anchor="middle" opacity="1">Review</text>
+<text x="1474.0" y="2246.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Today</text>
+<rect x="1474.0" y="2270.0" width="342.0" height="78.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1498.0" y="2301.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="900" fill="#17212B" text-anchor="start" opacity="1">10:00</text>
+<text x="1554.0" y="2297.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Rahim • Cow A12</text>
+<text x="1554.0" y="2319.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Fever, low appetite</text>
+<rect x="1732.0" y="2292.0" width="54.0" height="26.0" rx="13.0" fill="#FFF5DF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1759.0" y="2310.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">Pending</text>
+<rect x="1474.0" y="2366.0" width="342.0" height="78.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1498.0" y="2397.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="900" fill="#17212B" text-anchor="start" opacity="1">11:30</text>
+<text x="1554.0" y="2393.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Sadia • Goat G08</text>
+<text x="1554.0" y="2415.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Skin rash</text>
+<rect x="1732.0" y="2388.0" width="54.0" height="26.0" rx="13.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1759.0" y="2406.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">Accepted</text>
+<rect x="1474.0" y="2462.0" width="342.0" height="78.0" rx="20.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<text x="1498.0" y="2493.0" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="900" fill="#17212B" text-anchor="start" opacity="1">15:00</text>
+<text x="1554.0" y="2489.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Karim • Poultry P04</text>
+<text x="1554.0" y="2511.0" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Eye discharge</text>
+<rect x="1732.0" y="2484.0" width="54.0" height="26.0" rx="13.0" fill="#EAF3FB" stroke="none" stroke-width="1" opacity="1" />
+<text x="1759.0" y="2502.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" fill="#17212B" text-anchor="middle" opacity="1">Video</text>
+<text x="1474.0" y="2596.0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#17212B" text-anchor="start" opacity="1">Quick clinical action</text>
+<rect x="1474.0" y="2618.0" width="342.0" height="80.0" rx="20.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1498.0" y="2647.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#1E9E6F" text-anchor="start" opacity="1">Diagnosis form locked until consultation completed.</text>
+<text x="1498.0" y="2670.0" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#6B7785" text-anchor="start" opacity="1">Then enter disease, severity, prescription and follow-up.</text>
+<rect x="1474.0" y="2712.0" width="160.0" height="48.0" rx="16.0" fill="#1E9E6F" stroke="none" stroke-width="1" opacity="1" />
+<text x="1554.0" y="2741.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="1">Start consult</text>
+<rect x="1650.0" y="2712.0" width="166.0" height="48.0" rx="16.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1733.0" y="2741.0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Write Rx</text>
+<rect x="1468.0" y="2750.0" width="354.0" height="64.0" rx="24.0" fill="#FFFFFF" stroke="#DCE7DF" stroke-width="1" opacity="1" />
+<rect x="1480.0" y="2760.0" width="50.0" height="34.0" rx="18.0" fill="#E6F7EF" stroke="none" stroke-width="1" opacity="1" />
+<text x="1505.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#1E9E6F" text-anchor="middle" opacity="1">⌂</text>
+<text x="1505.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#1E9E6F" text-anchor="middle" opacity="1">Home</text>
+<text x="1575.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">A</text>
+<text x="1575.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Animals</text>
+<text x="1645.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">◇</text>
+<text x="1645.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">AI</text>
+<text x="1715.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">+</text>
+<text x="1715.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">Vets</text>
+<text x="1785.0" y="2781.0" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" fill="#6B7785" text-anchor="middle" opacity="1">⋯</text>
+<text x="1785.0" y="2805.0" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" fill="#6B7785" text-anchor="middle" opacity="1">More</text>
+
+</svg>
