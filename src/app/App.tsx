@@ -8,6 +8,7 @@ import { DiseaseHeatmap } from './components/DiseaseHeatmap';
 import { AIDetection } from './components/AIDetection';
 import { FarmManagement } from './components/FarmManagement';
 import { AddAnimal } from './components/AddAnimal';
+import { AnimalDetails } from './components/AnimalDetails';
 import { AddVaccine } from './components/AddVaccine';
 import { VaccinationManagement } from './components/VaccinationManagement';
 import { VaccinationCenters } from './components/VaccinationCenters';
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
           <Route path="/profile" element={<FarmerProfile />} />
           <Route path="/farm-management" element={<FarmManagement />} />
+          <Route path="/farm-management/:animalId" element={<AnimalDetails />} />
           <Route path="/add-animal" element={<AddAnimal />} />
           <Route path="/add-vaccine" element={<AddVaccine />} />
           <Route path="/vaccination-management" element={<VaccinationManagement />} />

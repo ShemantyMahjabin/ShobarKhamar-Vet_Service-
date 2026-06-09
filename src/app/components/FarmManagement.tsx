@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { animals } from '../data/animals';
+import { getAllAnimals, type AnimalRecord } from '../data/animals';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { MobileBottomNav } from './layout/MobileBottomNav';
 import { MobileShell } from './layout/MobileShell';
 import { MobileStatusBar } from './layout/MobileStatusBar';
 
-const animalTypeOptions = ['All', 'Cow', 'Goat', 'Calf', 'Poultry'] as const;
-const statusOptions = ['All status', 'Healthy', 'Needs check', 'Recovered', 'Under review'] as const;
+const animalTypeOptions = ['All', 'Cow', 'Goat', 'Buffalo', 'Sheep', 'Camel', 'Calf', 'Poultry', 'Others'] as const;
+const statusOptions = ['All status', 'Registered', 'Healthy', 'Needs check', 'Recovered', 'Under review'] as const;
 const ageChips = [
   { label: '0-12 months', min: 0, max: 12 },
   { label: '12-24 months', min: 12, max: 24 },
@@ -15,12 +15,13 @@ const ageChips = [
   { label: '36-48 months', min: 36, max: 48 },
 ] as const;
 
-function getAnimalType(animalId: string) {
-  if (animalId.startsWith('Cow')) return 'Cow';
-  if (animalId.startsWith('Goat')) return 'Goat';
-  if (animalId.startsWith('Calf')) return 'Calf';
-  if (animalId.startsWith('Poultry')) return 'Poultry';
-  return 'Other';
+function getAnimalType(animal: AnimalRecord) {
+  if (animal.animalType) return animal.animalType;
+  if (animal.id.startsWith('Cow')) return 'Cow';
+  if (animal.id.startsWith('Goat')) return 'Goat';
+  if (animal.id.startsWith('Calf')) return 'Calf';
+  if (animal.id.startsWith('Poultry')) return 'Poultry';
+  return 'Others';
 }
 
 function parseAgeToMonths(age: string) {
@@ -42,6 +43,7 @@ function getAnimalInitials(name: string) {
 
 export function FarmManagement() {
   const navigate = useNavigate();
+  const [animalRecords] = useState(() => getAllAnimals());
   const [searchTerm, setSearchTerm] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [animalType, setAnimalType] = useState<(typeof animalTypeOptions)[number]>('All');
@@ -52,8 +54,8 @@ export function FarmManagement() {
   const filteredAnimals = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
-    return animals.filter((animal) => {
-      const matchesType = animalType === 'All' || getAnimalType(animal.id) === animalType;
+    return animalRecords.filter((animal) => {
+      const matchesType = animalType === 'All' || getAnimalType(animal) === animalType;
       const matchesStatus = statusFilter === 'All status' || animal.status === statusFilter;
       const matchesSearch =
         normalizedSearch.length === 0 ||
@@ -67,7 +69,7 @@ export function FarmManagement() {
 
       return matchesType && matchesStatus && matchesSearch && matchesMinAge && matchesMaxAge;
     });
-  }, [ageMax, ageMin, animalType, searchTerm, statusFilter]);
+  }, [ageMax, ageMin, animalRecords, animalType, searchTerm, statusFilter]);
 
   return (
     <MobileShell>
@@ -81,17 +83,11 @@ export function FarmManagement() {
           Back
         </button>
 
-        <div className="mt-4 flex items-center justify-between gap-4">
+        <div className="mt-4">
           <div>
             <h1 className="text-2xl font-extrabold text-[#17212B]">My Livestock</h1>
             <p className="mt-1 text-sm font-medium text-[#6B7785]">Search, filter, and monitor all farm animals</p>
           </div>
-          <button
-            onClick={() => navigate('/add-animal')}
-            className="rounded-2xl bg-[#1E9E6F] px-4 py-2 text-sm font-bold text-white"
-          >
-            + Add
-          </button>
         </div>
 
         <div className="mt-5 space-y-3 rounded-[20px] border border-[#DCE7DF] bg-white p-4">
@@ -162,7 +158,12 @@ export function FarmManagement() {
 
         <div className="mt-5 space-y-3">
           {filteredAnimals.map((animal) => (
-            <div key={animal.id} className="rounded-[20px] border border-[#DCE7DF] bg-white p-4">
+            <button
+              key={animal.id}
+              type="button"
+              onClick={() => navigate(`/farm-management/${encodeURIComponent(animal.id)}`)}
+              className="w-full rounded-[20px] border border-[#DCE7DF] bg-white p-4 text-left transition active:scale-[0.99]"
+            >
               <div className="flex items-center gap-3">
                 <Avatar className="h-12 w-12 border border-[#DCE7DF] bg-[#E6F7EF]">
                   <AvatarFallback className="bg-[#E6F7EF] text-sm font-extrabold text-[#1E9E6F]">
@@ -174,7 +175,7 @@ export function FarmManagement() {
                   <p className="mt-1 text-xs font-medium text-[#6B7785]">{animal.id}</p>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
 
           {filteredAnimals.length === 0 ? (

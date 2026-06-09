@@ -1,12 +1,48 @@
+export type AnimalMediaFile = {
+  name: string;
+  url: string;
+  type: string;
+};
+
 export type AnimalRecord = {
   id: string;
   name: string;
   breed: string;
   age: string;
+  ageMin?: string;
+  ageMax?: string;
+  weight?: string;
+  weightMin?: string;
+  weightMax?: string;
+  animalType?: string;
+  subtype?: string;
+  color?: string;
+  teethCount?: string;
+  height?: string;
+  width?: string;
+  length?: string;
+  hasCalved?: string;
+  mediaFiles?: Array<string | AnimalMediaFile>;
+  diseaseHistory?: Array<{
+    diseaseName: string;
+    startDate?: string;
+    endDate?: string;
+    duration?: string;
+  }>;
+  vaccineHistory?: Array<{
+    vaccineName: string;
+    date: string;
+    centre: string;
+    sideEffect: string;
+    sideEffectImageName: string;
+    sideEffectImageUrl?: string;
+  }>;
   status: string;
   note: string;
   description: string;
 };
+
+const userAnimalsStorageKey = 'shobar-khamar-user-animals';
 
 export const animals: AnimalRecord[] = [
   {
@@ -46,3 +82,26 @@ export const animals: AnimalRecord[] = [
     description: 'Layer group with early respiratory symptoms requiring quick flock-level assessment.',
   },
 ];
+
+export function getSavedAnimals() {
+  if (typeof window === 'undefined') {
+    return [];
+  }
+
+  try {
+    const savedAnimals = window.localStorage.getItem(userAnimalsStorageKey);
+    return savedAnimals ? (JSON.parse(savedAnimals) as AnimalRecord[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function getAllAnimals() {
+  return [...getSavedAnimals(), ...animals];
+}
+
+export function saveAnimalRecord(animal: AnimalRecord) {
+  const savedAnimals = getSavedAnimals();
+  const nextAnimals = [animal, ...savedAnimals.filter((savedAnimal) => savedAnimal.id !== animal.id)];
+  window.localStorage.setItem(userAnimalsStorageKey, JSON.stringify(nextAnimals));
+}

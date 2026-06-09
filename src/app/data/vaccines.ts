@@ -1,6 +1,7 @@
 export type VaccineCatalogItem = {
   id: number;
   name: string;
+  centerName?: string;
   supports: string[];
   disease: string;
   ageRangeMonths: [number, number];
@@ -13,10 +14,13 @@ export type VaccineCatalogItem = {
   recommendedDays: number;
 };
 
+const userVaccinesStorageKey = 'shobar-khamar-user-vaccines';
+
 export const vaccineCatalog: VaccineCatalogItem[] = [
   {
     id: 1,
     name: 'FMD vaccine',
+    centerName: 'Badda Livestock Vaccine Point',
     supports: ['cow', 'cattle'],
     disease: 'Foot and mouth disease',
     ageRangeMonths: [22, 46],
@@ -31,6 +35,7 @@ export const vaccineCatalog: VaccineCatalogItem[] = [
   {
     id: 2,
     name: 'Black Quarter',
+    centerName: 'Savar Field Vaccination Camp',
     supports: ['cattle', 'calf'],
     disease: 'Black quarter',
     ageRangeMonths: [22, 40],
@@ -45,6 +50,7 @@ export const vaccineCatalog: VaccineCatalogItem[] = [
   {
     id: 3,
     name: 'Hemorrhagic Septicemia',
+    centerName: 'Badda Livestock Vaccine Point',
     supports: ['cow', 'cattle'],
     disease: 'Hemorrhagic septicemia',
     ageRangeMonths: [28, 46],
@@ -59,6 +65,7 @@ export const vaccineCatalog: VaccineCatalogItem[] = [
   {
     id: 4,
     name: 'Anthrax booster',
+    centerName: 'Savar Field Vaccination Camp',
     supports: ['cattle', 'goat'],
     disease: 'Anthrax',
     ageRangeMonths: [22, 40],
@@ -73,6 +80,7 @@ export const vaccineCatalog: VaccineCatalogItem[] = [
   {
     id: 5,
     name: 'PPR vaccine',
+    centerName: 'Keraniganj Goat Care Center',
     supports: ['goat'],
     disease: 'PPR',
     ageRangeMonths: [10, 34],
@@ -87,6 +95,7 @@ export const vaccineCatalog: VaccineCatalogItem[] = [
   {
     id: 6,
     name: 'Goat pox vaccine',
+    centerName: 'Keraniganj Goat Care Center',
     supports: ['goat'],
     disease: 'Goat pox',
     ageRangeMonths: [10, 28],
@@ -99,3 +108,26 @@ export const vaccineCatalog: VaccineCatalogItem[] = [
     recommendedDays: 180,
   },
 ];
+
+export function getSavedVaccines() {
+  if (typeof window === 'undefined') {
+    return [];
+  }
+
+  try {
+    const savedVaccines = window.localStorage.getItem(userVaccinesStorageKey);
+    return savedVaccines ? (JSON.parse(savedVaccines) as VaccineCatalogItem[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function getAllVaccines() {
+  return [...getSavedVaccines(), ...vaccineCatalog];
+}
+
+export function saveVaccineRecord(vaccine: VaccineCatalogItem) {
+  const savedVaccines = getSavedVaccines();
+  const nextVaccines = [vaccine, ...savedVaccines.filter((savedVaccine) => savedVaccine.id !== vaccine.id)];
+  window.localStorage.setItem(userVaccinesStorageKey, JSON.stringify(nextVaccines));
+}
