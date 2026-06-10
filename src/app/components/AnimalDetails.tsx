@@ -1,6 +1,12 @@
 import { useState, type ChangeEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getAllAnimals, saveAnimalRecord, type AnimalMediaFile, type AnimalRecord } from '../data/animals';
+import {
+  getAllAnimals,
+  saveAnimalRecord,
+  type AnimalMediaFile,
+  type AnimalRecord,
+  type VaccineSideEffectRecord,
+} from '../data/animals';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { MobileBottomNav } from './layout/MobileBottomNav';
 import { MobileShell } from './layout/MobileShell';
@@ -95,6 +101,37 @@ function valueOrDash(value: string | undefined) {
 
 function isMediaFile(file: string | AnimalMediaFile): file is AnimalMediaFile {
   return typeof file !== 'string';
+}
+
+function readFileAsDataUrl(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : '');
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+function getVaccineSideEffects(
+  vaccine: NonNullable<AnimalRecord['vaccineHistory']>[number],
+): VaccineSideEffectRecord[] {
+  if (vaccine.sideEffects?.length) {
+    return vaccine.sideEffects;
+  }
+
+  if (vaccine.sideEffect || vaccine.sideEffectImageName || vaccine.sideEffectImageUrl) {
+    return [
+      {
+        description: vaccine.sideEffect || '',
+        date: '',
+        mediaName: vaccine.sideEffectImageName || '',
+        mediaUrl: vaccine.sideEffectImageUrl,
+        mediaType: vaccine.sideEffectImageType || '',
+      },
+    ];
+  }
+
+  return [];
 }
 
 export function AnimalDetails() {
@@ -200,7 +237,7 @@ export function AnimalDetails() {
             ...current,
             vaccineHistory: [
               ...(current.vaccineHistory ?? []),
-              { vaccineName: '', date: '', centre: '', sideEffect: '', sideEffectImageName: '', sideEffectImageUrl: '' },
+              { vaccineName: '', date: '', centre: '', sideEffects: [{ description: '', date: '', mediaName: '', mediaUrl: '', mediaType: '' }], sideEffect: '', sideEffectImageName: '', sideEffectImageUrl: '' },
             ],
           }
         : current,
@@ -209,7 +246,7 @@ export function AnimalDetails() {
 
   const updateVaccineHistory = (
     index: number,
-    field: 'vaccineName' | 'date' | 'centre' | 'sideEffect' | 'sideEffectImageName' | 'sideEffectImageUrl',
+    field: 'vaccineName' | 'date' | 'centre' | 'sideEffects' | 'sideEffect' | 'sideEffectImageName' | 'sideEffectImageUrl' | 'sideEffectImageType',
     value: string,
   ) => {
     setDraftAnimal((current) =>
@@ -224,10 +261,82 @@ export function AnimalDetails() {
     );
   };
 
-  const updateSideEffectImage = (index: number, files: FileList | null) => {
+  const addVaccineSideEffect = (vaccineIndex: number) => {
+    setDraftAnimal((current) =>
+      current
+        ? {
+            ...current,
+            vaccineHistory: (current.vaccineHistory ?? []).map((item, itemIndex) =>
+              itemIndex === vaccineIndex
+                ? {
+                    ...item,
+                    sideEffects: [...getVaccineSideEffects(item), { description: '', date: '', mediaName: '', mediaUrl: '', mediaType: '' }],
+                  }
+                : item,
+            ),
+          }
+        : current,
+    );
+  };
+
+  const updateVaccineSideEffect = (
+    vaccineIndex: number,
+    sideEffectIndex: number,
+    field: keyof VaccineSideEffectRecord,
+    value: string,
+  ) => {
+    setDraftAnimal((current) =>
+      current
+        ? {
+            ...current,
+            vaccineHistory: (current.vaccineHistory ?? []).map((item, itemIndex) =>
+              itemIndex === vaccineIndex
+                ? {
+                    ...item,
+                    sideEffects: getVaccineSideEffects(item).map((sideEffect, currentIndex) =>
+                      currentIndex === sideEffectIndex ? { ...sideEffect, [field]: value } : sideEffect,
+                    ),
+                  }
+                : item,
+            ),
+          }
+        : current,
+    );
+  };
+
+  const updateVaccineSideEffectMedia = async (vaccineIndex: number, sideEffectIndex: number, files: FileList | null) => {
     const file = files?.[0];
-    updateVaccineHistory(index, 'sideEffectImageName', file?.name ?? '');
-    updateVaccineHistory(index, 'sideEffectImageUrl', file ? URL.createObjectURL(file) : '');
+    if (!file) {
+      updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaName', '');
+      updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaUrl', '');
+      updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaType', '');
+      return;
+    }
+
+    updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaName', file.name);
+    updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaType', file.type);
+    updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaUrl', await readFileAsDataUrl(file));
+  };
+
+  const removeVaccineSideEffect = (vaccineIndex: number, sideEffectIndex: number) => {
+    setDraftAnimal((current) =>
+      current
+        ? {
+            ...current,
+            vaccineHistory: (current.vaccineHistory ?? []).map((item, itemIndex) =>
+              itemIndex === vaccineIndex
+                ? {
+                    ...item,
+                    sideEffects:
+                      getVaccineSideEffects(item).length > 1
+                        ? getVaccineSideEffects(item).filter((_, currentIndex) => currentIndex !== sideEffectIndex)
+                        : getVaccineSideEffects(item),
+                  }
+                : item,
+            ),
+          }
+        : current,
+    );
   };
 
   const removeVaccineHistory = (index: number) => {
@@ -502,21 +611,64 @@ export function AnimalDetails() {
                         onChange={(value) => updateVaccineHistory(index, 'centre', value)}
                         placeholder="Centre"
                       />
-                      <EditableTextarea
-                        value={vaccine.sideEffect}
-                        onChange={(value) => updateVaccineHistory(index, 'sideEffect', value)}
-                        placeholder="Side effect"
-                        rows={3}
-                      />
-                      <label className="flex h-11 cursor-pointer items-center justify-center rounded-xl border border-[#DCE7DF] bg-white text-sm font-bold text-[#1E9E6F]">
-                        {vaccine.sideEffectImageName || 'Upload side effect image'}
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={(event: ChangeEvent<HTMLInputElement>) => updateSideEffectImage(index, event.target.files)}
-                          className="sr-only"
-                        />
-                      </label>
+                      <div className="space-y-3 rounded-xl border border-[#DCE7DF] bg-white p-3">
+                        {getVaccineSideEffects(vaccine).map((sideEffect, sideEffectIndex) => (
+                          <div key={`${index}-${sideEffectIndex}`} className="rounded-xl bg-[#F8FCFA] p-3">
+                            <div className="flex items-center justify-between gap-3">
+                              <p className="text-sm font-extrabold text-[#17212B]">Side Effect #{sideEffectIndex + 1}</p>
+                              {getVaccineSideEffects(vaccine).length > 1 ? (
+                                <button
+                                  type="button"
+                                  onClick={() => removeVaccineSideEffect(index, sideEffectIndex)}
+                                  className="text-xs font-bold text-[#D96758]"
+                                >
+                                  Remove
+                                </button>
+                              ) : null}
+                            </div>
+                            <div className="mt-2">
+                              <EditableTextarea
+                                value={sideEffect.description}
+                                onChange={(value) => updateVaccineSideEffect(index, sideEffectIndex, 'description', value)}
+                                placeholder="Side effect description"
+                                rows={3}
+                              />
+                            </div>
+                            <div className="mt-2">
+                              <EditableInput
+                                value={sideEffect.date}
+                                onChange={(value) => updateVaccineSideEffect(index, sideEffectIndex, 'date', value)}
+                                type="date"
+                              />
+                            </div>
+                            <label className="mt-2 flex h-11 cursor-pointer items-center justify-center rounded-xl border border-[#DCE7DF] bg-white text-sm font-bold text-[#1E9E6F]">
+                              {sideEffect.mediaName || 'Upload side effect image or video'}
+                              <input
+                                type="file"
+                                accept="image/*,video/*"
+                                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                  updateVaccineSideEffectMedia(index, sideEffectIndex, event.target.files)
+                                }
+                                className="sr-only"
+                              />
+                            </label>
+                            {sideEffect.mediaUrl ? (
+                              sideEffect.mediaType?.startsWith('video/') ? (
+                                <video src={sideEffect.mediaUrl} className="mt-3 h-40 w-full rounded-2xl object-cover" controls />
+                              ) : (
+                                <img src={sideEffect.mediaUrl} alt={sideEffect.mediaName} className="mt-3 h-40 w-full rounded-2xl object-cover" />
+                              )
+                            ) : null}
+                          </div>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => addVaccineSideEffect(index)}
+                          className="w-full rounded-xl border border-[#DCE7DF] bg-[#F8FCFA] px-4 py-3 text-sm font-bold text-[#1E9E6F]"
+                        >
+                          Add another side effect
+                        </button>
+                      </div>
                       <button
                         type="button"
                         onClick={() => removeVaccineHistory(index)}
@@ -527,23 +679,20 @@ export function AnimalDetails() {
                     </div>
                   ) : (
                     <>
-                      <p className="text-sm font-extrabold text-[#17212B]">{valueOrDash(vaccine.vaccineName)}</p>
-                      <p className="mt-1 text-sm font-semibold text-[#6B7785]">Date: {valueOrDash(vaccine.date)}</p>
-                      <p className="mt-1 text-sm font-semibold text-[#6B7785]">Centre: {valueOrDash(vaccine.centre)}</p>
-                      <p className="mt-1 text-sm font-semibold text-[#6B7785]">Side effect: {valueOrDash(vaccine.sideEffect)}</p>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          navigate(
+                            `/farm-management/${encodeURIComponent(decodedAnimalId)}/vaccine-history/${index}`,
+                          )
+                        }
+                        className="text-left text-sm font-extrabold text-[#17212B] underline decoration-[#C9D6E0] underline-offset-4"
+                      >
+                        {valueOrDash(vaccine.vaccineName)}
+                      </button>
+                      <p className="mt-1 text-sm font-semibold text-[#6B7785]">Taken on: {valueOrDash(vaccine.date)}</p>
                     </>
                   )}
-                  {vaccine.sideEffectImageUrl ? (
-                    <img
-                      src={vaccine.sideEffectImageUrl}
-                      alt={vaccine.sideEffectImageName}
-                      className="mt-3 h-40 w-full rounded-2xl object-cover"
-                    />
-                  ) : !isEditing ? (
-                    <p className="mt-1 text-sm font-semibold text-[#6B7785]">
-                      Side effect image: {valueOrDash(vaccine.sideEffectImageName)}
-                    </p>
-                  ) : null}
                 </div>
               ))
             ) : (

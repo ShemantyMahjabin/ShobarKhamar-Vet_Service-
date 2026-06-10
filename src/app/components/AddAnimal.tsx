@@ -1,7 +1,7 @@
 import { useMemo, useState, type ChangeEvent, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Camera, Check, ChevronLeft, ClipboardCheck, ImagePlus, Plus, Trash2, Video } from 'lucide-react';
-import { saveAnimalRecord, type AnimalMediaFile } from '../data/animals';
+import { saveAnimalRecord, type AnimalMediaFile, type VaccineSideEffectRecord } from '../data/animals';
 import { getAllVaccines } from '../data/vaccines';
 import { MobileShell } from './layout/MobileShell';
 import { MobileStatusBar } from './layout/MobileStatusBar';
@@ -32,9 +32,7 @@ type VaccineHistory = {
   vaccineName: string;
   date: string;
   centre: string;
-  sideEffect: string;
-  sideEffectImageName: string;
-  sideEffectImageUrl: string;
+  sideEffects: VaccineSideEffectRecord[];
 };
 
 type FormState = {
@@ -67,9 +65,7 @@ const emptyVaccine: VaccineHistory = {
   vaccineName: '',
   date: '',
   centre: '',
-  sideEffect: '',
-  sideEffectImageName: '',
-  sideEffectImageUrl: '',
+  sideEffects: [{ description: '', date: '', mediaName: '', mediaUrl: '', mediaType: '' }],
 };
 
 const initialForm: FormState = {
@@ -93,6 +89,15 @@ const initialForm: FormState = {
 };
 
 const steps = ['Info', 'Media', 'History', 'Verify'];
+
+function readFileAsDataUrl(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : '');
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
 
 function RequiredMark() {
   return <span className="text-[#D96758]">*</span>;
@@ -311,7 +316,7 @@ export function AddAnimal() {
     setStep((current) => current - 1);
   };
 
-  const goNext = () => {
+  const goNext = async () => {
     if (step === steps.length - 1) {
       submitAnimal();
       setIsComplete(true);
@@ -347,7 +352,13 @@ export function AddAnimal() {
       hasCalved: form.hasCalved,
       mediaFiles: form.mediaFiles,
       diseaseHistory: diseases.filter((disease) => disease.diseaseName || disease.startDate || disease.endDate),
-      vaccineHistory: vaccines.filter((vaccine) => vaccine.vaccineName || vaccine.date || vaccine.centre || vaccine.sideEffect || vaccine.sideEffectImageName),
+      vaccineHistory: vaccines.filter(
+        (vaccine) =>
+          vaccine.vaccineName ||
+          vaccine.date ||
+          vaccine.centre ||
+          vaccine.sideEffects.some((sideEffect) => sideEffect.description || sideEffect.mediaName),
+      ),
       status: 'Registered',
       note: form.hasCalved === 'Yes' ? 'Has calved' : 'New animal profile',
       description: form.description || 'No additional information added.',
@@ -358,11 +369,11 @@ export function AddAnimal() {
     setDiseases((current) => current.map((item, itemIndex) => (itemIndex === index ? { ...item, [field]: value } : item)));
   };
 
-  const updateVaccine = (index: number, field: keyof VaccineHistory, value: string) => {
+  const updateVaccine = (index: number, field: keyof VaccineHistory, value: VaccineHistory[keyof VaccineHistory]) => {
     setVaccines((current) => current.map((item, itemIndex) => (itemIndex === index ? { ...item, [field]: value } : item)));
   };
 
-  const updateMediaFiles = (files: FileList | null) => {
+  const updateMediaFiles = async (files: FileList | null) => {
     if (!files) {
       return;
     }
@@ -370,18 +381,77 @@ export function AddAnimal() {
     const selected = Array.from(files);
     const images = selected.filter((file) => file.type.startsWith('image/')).slice(0, 3);
     const videos = selected.filter((file) => file.type.startsWith('video/')).slice(0, 1);
-    const mediaFiles = [...images, ...videos].map((file) => ({
-      name: file.name,
-      type: file.type,
-      url: URL.createObjectURL(file),
-    }));
+    const mediaFiles = await Promise.all(
+      [...images, ...videos].map(async (file) => ({
+        name: file.name,
+        type: file.type,
+        url: await readFileAsDataUrl(file),
+      })),
+    );
     updateForm('mediaFiles', mediaFiles);
   };
 
-  const updateSideEffectImage = (index: number, files: FileList | null) => {
+  const addVaccineSideEffect = (vaccineIndex: number) => {
+    setVaccines((current) =>
+      current.map((item, itemIndex) =>
+        itemIndex === vaccineIndex
+          ? {
+              ...item,
+              sideEffects: [...item.sideEffects, { description: '', date: '', mediaName: '', mediaUrl: '', mediaType: '' }],
+            }
+          : item,
+      ),
+    );
+  };
+
+  const updateVaccineSideEffect = (
+    vaccineIndex: number,
+    sideEffectIndex: number,
+    field: keyof VaccineSideEffectRecord,
+    value: string,
+  ) => {
+    setVaccines((current) =>
+      current.map((item, itemIndex) =>
+        itemIndex === vaccineIndex
+          ? {
+              ...item,
+              sideEffects: item.sideEffects.map((sideEffect, currentIndex) =>
+                currentIndex === sideEffectIndex ? { ...sideEffect, [field]: value } : sideEffect,
+              ),
+            }
+          : item,
+      ),
+    );
+  };
+
+  const updateVaccineSideEffectMedia = async (vaccineIndex: number, sideEffectIndex: number, files: FileList | null) => {
     const file = files?.[0];
-    updateVaccine(index, 'sideEffectImageName', file?.name ?? '');
-    updateVaccine(index, 'sideEffectImageUrl', file ? URL.createObjectURL(file) : '');
+    if (!file) {
+      updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaName', '');
+      updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaUrl', '');
+      updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaType', '');
+      return;
+    }
+
+    updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaName', file.name);
+    updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaType', file.type);
+    updateVaccineSideEffect(vaccineIndex, sideEffectIndex, 'mediaUrl', await readFileAsDataUrl(file));
+  };
+
+  const removeVaccineSideEffect = (vaccineIndex: number, sideEffectIndex: number) => {
+    setVaccines((current) =>
+      current.map((item, itemIndex) =>
+        itemIndex === vaccineIndex
+          ? {
+              ...item,
+              sideEffects:
+                item.sideEffects.length > 1
+                  ? item.sideEffects.filter((_, currentIndex) => currentIndex !== sideEffectIndex)
+                  : item.sideEffects,
+            }
+          : item,
+      ),
+    );
   };
 
   const removeDisease = (index: number) => {
@@ -671,25 +741,62 @@ export function AddAnimal() {
                     placeholder="Choose vaccination centre"
                     options={vaccinationCenters}
                   />
-                  <textarea
-                    value={vaccine.sideEffect}
-                    onChange={(event) => updateVaccine(index, 'sideEffect', event.target.value)}
-                    placeholder="Side effect description"
-                    rows={3}
-                    className="mt-3 w-full resize-none rounded-[18px] border border-[#E7ECEA] bg-white px-5 py-4 text-base font-semibold text-[#161A1D] outline-none placeholder:text-[#C8CCCF] focus:border-[#429EAE]"
-                  />
-                  <UploadButton
-                    label={vaccine.sideEffectImageName || 'Upload side effect image'}
-                    accept="image/*"
-                    onChange={(files) => updateSideEffectImage(index, files)}
-                  />
-                  {vaccine.sideEffectImageUrl ? (
-                    <img
-                      src={vaccine.sideEffectImageUrl}
-                      alt={vaccine.sideEffectImageName}
-                      className="mt-3 h-36 w-full rounded-2xl object-cover"
-                    />
-                  ) : null}
+                  <div className="space-y-3">
+                    {vaccine.sideEffects.map((sideEffect, sideEffectIndex) => (
+                      <div key={`${index}-${sideEffectIndex}`} className="rounded-[16px] border border-[#E7ECEA] bg-white p-3">
+                            <div className="flex items-center justify-between gap-3">
+                              <p className="text-sm font-extrabold text-[#161A1D]">Side Effect #{sideEffectIndex + 1}</p>
+                          {vaccine.sideEffects.length > 1 ? (
+                            <button
+                              type="button"
+                              onClick={() => removeVaccineSideEffect(index, sideEffectIndex)}
+                              className="text-xs font-bold text-[#D96758]"
+                            >
+                              Remove
+                            </button>
+                          ) : null}
+                        </div>
+                        <textarea
+                          value={sideEffect.description}
+                          onChange={(event) =>
+                            updateVaccineSideEffect(index, sideEffectIndex, 'description', event.target.value)
+                          }
+                          placeholder="Side effect description"
+                          rows={3}
+                          className="mt-3 w-full resize-none rounded-[18px] border border-[#E7ECEA] bg-[#F8FCFA] px-5 py-4 text-base font-semibold text-[#161A1D] outline-none placeholder:text-[#C8CCCF] focus:border-[#429EAE]"
+                        />
+                        <input
+                          type="date"
+                          value={sideEffect.date ?? ''}
+                          onChange={(event) =>
+                            updateVaccineSideEffect(index, sideEffectIndex, 'date', event.target.value)
+                          }
+                          className="mt-3 h-12 w-full rounded-[18px] border border-[#E7ECEA] bg-[#F8FCFA] px-5 text-base font-semibold text-[#161A1D] outline-none focus:border-[#429EAE]"
+                        />
+                        <div className="mt-3">
+                          <UploadButton
+                            label={sideEffect.mediaName || 'Upload side effect image or video'}
+                            accept="image/*,video/*"
+                            onChange={(files) => updateVaccineSideEffectMedia(index, sideEffectIndex, files)}
+                          />
+                        </div>
+                        {sideEffect.mediaUrl ? (
+                          sideEffect.mediaType?.startsWith('video/') ? (
+                            <video src={sideEffect.mediaUrl} className="mt-3 h-36 w-full rounded-2xl object-cover" controls />
+                          ) : (
+                            <img src={sideEffect.mediaUrl} alt={sideEffect.mediaName} className="mt-3 h-36 w-full rounded-2xl object-cover" />
+                          )
+                        ) : null}
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => addVaccineSideEffect(index)}
+                      className="flex h-12 w-full items-center justify-center gap-2 rounded-[16px] border border-[#429EAE] bg-[#E8F7F9] text-sm font-extrabold text-[#2E8794]"
+                    >
+                      <Plus size={18} /> Add another side effect
+                    </button>
+                  </div>
                 </div>
               ))}
               <button
@@ -760,16 +867,10 @@ export function AddAnimal() {
                 <div key={`summary-vaccine-${index}`} className="rounded-[16px] bg-white p-4 text-sm font-semibold text-[#757B80]">
                   <p className="font-extrabold text-[#161A1D]">{vaccine.vaccineName || `Vaccine #${index + 1}`}</p>
                   <p>{[vaccine.date, vaccine.centre].filter(Boolean).join(' - ') || 'Date and centre not added'}</p>
-                  <p>{vaccine.sideEffect || 'No side effect description added'}</p>
-                  {vaccine.sideEffectImageUrl ? (
-                    <img
-                      src={vaccine.sideEffectImageUrl}
-                      alt={vaccine.sideEffectImageName}
-                      className="mt-3 h-32 w-full rounded-2xl object-cover"
-                    />
-                  ) : vaccine.sideEffectImageName ? (
-                    <p>Image: {vaccine.sideEffectImageName}</p>
-                  ) : null}
+                  <p>
+                    {vaccine.sideEffects.filter((sideEffect) => sideEffect.description || sideEffect.mediaName).length || 0} side
+                    effect entries
+                  </p>
                 </div>
               ))}
             </section>
