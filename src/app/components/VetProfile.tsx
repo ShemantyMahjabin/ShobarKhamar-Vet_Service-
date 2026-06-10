@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CalendarDays } from "lucide-react";
 
@@ -43,6 +43,14 @@ const slotOptions: Record<Exclude<VisitMode, "Chat">, string[]> = {
   "Request vet to visit": ["8:00 AM", "10:30 AM", "1:30 PM", "5:00 PM"],
 };
 
+const existingAppointments = [
+  {
+    dateText: "Tue, 9 Jun 2026",
+    time: "11:30 AM - 12:30 PM",
+    label: "11:30 AM",
+  },
+];
+
 function getVetInitials(name: string) {
   return name
     .split(" ")
@@ -65,6 +73,7 @@ function getAnimalInitials(id: string) {
 export function VetProfile() {
   const navigate = useNavigate();
   const { vetId } = useParams();
+  const schedulingSectionRef = useRef<HTMLDivElement | null>(null);
 
   const vet = vets.find((item) => String(item.id) === vetId) ?? vets[0];
   const isVideoOnline = vet.onlineStatus === "online";
@@ -73,9 +82,18 @@ export function VetProfile() {
   const [selectedDate, setSelectedDate] = useState(9);
   const [selectedSlot, setSelectedSlot] = useState(slotOptions["In Person"][1]);
   const [selectedAnimalIds, setSelectedAnimalIds] = useState<string[]>([animals[0]?.id ?? ""]);
+  const [showConflictWarning, setShowConflictWarning] = useState(false);
   const [symptoms, setSymptoms] = useState(
     "High fever, low appetite, watery eyes, standing separately from herd.",
   );
+  const [additionalCharge] = useState(() => {
+    const charge = localStorage.getItem('rescheduleCharge');
+    if (charge) {
+      localStorage.removeItem('rescheduleCharge');
+      return parseInt(charge, 10);
+    }
+    return 0;
+  });
 
   const selectedAnimals = useMemo(
     () => animals.filter((animal) => selectedAnimalIds.includes(animal.id)),
@@ -86,9 +104,17 @@ export function VetProfile() {
   const basePrice = Math.round(vet.price * pricing.multiplier);
   const extraAnimalCount = Math.max(selectedAnimals.length - 1, 0);
   const extraAnimalCharge = extraAnimalCount * pricing.extraAnimalFee;
-  const totalPrice = basePrice + extraAnimalCharge + pricing.travelFee;
+  const totalPrice = basePrice + extraAnimalCharge + pricing.travelFee + additionalCharge;
   const selectedSchedule = dateOptions.find((option) => option.day === selectedDate) ?? dateOptions[0];
   const shouldShowVideoImmediateCall = selectedVisitMode === "Video consultation" && isVideoOnline;
+  const selectedTimeLabel =
+    selectedVisitMode === "In Person" ? selectedSchedule.time : selectedSlot;
+  const hasAppointmentConflict = existingAppointments.some((appointment) =>
+    appointment.dateText === selectedSchedule.dateText &&
+    (selectedVisitMode === "In Person"
+      ? appointment.time === selectedSchedule.time
+      : appointment.label === selectedSlot),
+  );
 
   function handleVisitModeChange(mode: VisitMode) {
     if (mode === "Chat") {
@@ -98,6 +124,7 @@ export function VetProfile() {
 
     setSelectedVisitMode(mode);
     setSelectedSlot(slotOptions[mode][0]);
+    setShowConflictWarning(false);
   }
 
   function toggleAnimal(animalId: string) {
@@ -109,6 +136,21 @@ export function VetProfile() {
         return current.filter((id) => id !== animalId);
       }
       return [...current, animalId];
+    });
+  }
+
+  function handleSubmit() {
+    if (!shouldShowVideoImmediateCall && hasAppointmentConflict) {
+      setShowConflictWarning(true);
+      schedulingSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    navigate("/booking-confirmation", {
+      state: {
+        vetName: vet.name,
+        visitMode: selectedVisitMode,
+      },
     });
   }
 
@@ -153,7 +195,7 @@ export function VetProfile() {
           </CardContent>
         </Card>
 
-        <div className="mt-8 space-y-4">
+        <div ref={schedulingSectionRef} className="mt-8 space-y-4">
           <h3 className="text-2xl font-extrabold text-slate-900">Consultation option</h3>
           <div className="grid grid-cols-2 gap-4">
             {visitModes.map((mode) => {
@@ -202,11 +244,11 @@ export function VetProfile() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-4 border-b border-[#d7e3d6] bg-[#f7faf8] text-sm font-extrabold text-slate-500">
-                  <div className="border-r border-[#d7e3d6] px-4 py-3">Appointment</div>
-                  <div className="border-r border-[#d7e3d6] px-4 py-3">Day</div>
-                  <div className="border-r border-[#d7e3d6] px-4 py-3">Center</div>
-                  <div className="px-4 py-3">Schedule time</div>
+                <div className="grid grid-cols-[1.2fr_0.75fr_1fr_1fr] border-b border-[#d7e3d6] bg-[#f7faf8] text-[13px] font-extrabold text-slate-500">
+                  <div className="border-r border-[#d7e3d6] px-5 py-3">Appointment</div>
+                  <div className="border-r border-[#d7e3d6] px-5 py-3">Day</div>
+                  <div className="border-r border-[#d7e3d6] px-5 py-3">Center</div>
+                  <div className="px-5 py-3">Schedule time</div>
                 </div>
 
                 <div>
@@ -219,25 +261,26 @@ export function VetProfile() {
                         type="button"
                         onClick={() => {
                           setSelectedDate(option.day);
+                          setShowConflictWarning(false);
                           const matchingSlot = slotOptions["In Person"].find((slot) => option.time.includes(slot));
                           if (matchingSlot) {
                             setSelectedSlot(matchingSlot);
                           }
                         }}
-                        className={`grid w-full grid-cols-4 text-left transition ${
+                        className={`grid w-full grid-cols-[1.2fr_0.75fr_1fr_1fr] text-left transition ${
                           isSelected ? "bg-[#eef8f1]" : "bg-white"
                         }`}
                       >
-                        <div className="border-r border-t border-[#d7e3d6] px-4 py-4 text-sm font-semibold text-slate-700">
+                        <div className="border-r border-t border-[#d7e3d6] px-5 py-4 text-sm font-semibold text-slate-700">
                           {option.appointmentType}
                         </div>
-                        <div className="border-r border-t border-[#d7e3d6] px-4 py-4 text-sm font-extrabold text-slate-900">
+                        <div className="border-r border-t border-[#d7e3d6] px-5 py-4 text-sm font-extrabold text-slate-900">
                           {option.label}
                         </div>
-                        <div className="border-r border-t border-[#d7e3d6] px-4 py-4 text-sm font-semibold text-slate-700">
+                        <div className="border-r border-t border-[#d7e3d6] px-5 py-4 text-sm font-semibold text-slate-700">
                           {option.center}
                         </div>
-                        <div className="border-t border-[#d7e3d6] px-4 py-4 text-sm font-semibold text-slate-700">
+                        <div className="border-t border-[#d7e3d6] px-5 py-4 text-sm font-semibold text-slate-700">
                           {option.time}
                         </div>
                       </button>
@@ -289,7 +332,10 @@ export function VetProfile() {
                       <button
                         key={option.day}
                         type="button"
-                        onClick={() => setSelectedDate(option.day)}
+                        onClick={() => {
+                          setSelectedDate(option.day);
+                          setShowConflictWarning(false);
+                        }}
                         className={`min-w-[58px] rounded-3xl px-3 py-3 text-center transition ${
                           isSelected
                             ? "bg-[#56a774] text-white"
@@ -320,7 +366,10 @@ export function VetProfile() {
                   <button
                     key={slot}
                     type="button"
-                    onClick={() => setSelectedSlot(slot)}
+                    onClick={() => {
+                      setSelectedSlot(slot);
+                      setShowConflictWarning(false);
+                    }}
                     className={`rounded-[22px] border px-4 py-5 text-center text-[18px] font-extrabold transition ${
                       isSelected
                         ? "border-[#56a774] bg-[#56a774] text-white"
@@ -412,6 +461,12 @@ export function VetProfile() {
                   <span>BDT {pricing.travelFee}</span>
                 </div>
               ) : null}
+              {additionalCharge > 0 ? (
+                <div className="flex items-center justify-between gap-3">
+                  <span>Reschedule/Cancellation fee</span>
+                  <span>BDT {additionalCharge}</span>
+                </div>
+              ) : null}
               <div className="flex items-center justify-between gap-3 border-t border-[#d7e3d6] pt-3 text-[20px] font-extrabold text-slate-900">
                 <span>Total payment</span>
                 <span className="text-[#56a774]">BDT {totalPrice}</span>
@@ -427,10 +482,36 @@ export function VetProfile() {
           </CardContent>
         </Card>
 
+        {showConflictWarning ? (
+          <Card className="mt-5 rounded-[24px] border-[#f2d7a6] bg-[#fff7e8] shadow-none">
+            <CardContent className="space-y-4 p-5">
+              <div className="space-y-2">
+                <p className="text-[18px] font-extrabold text-slate-900">
+                  You already have an appointment at that time.
+                </p>
+                <p className="text-base font-medium leading-7 text-slate-600">
+                  Do you want to choose another time slot?
+                </p>
+                <p className="text-sm font-semibold text-[#b7791f]">
+                  {selectedSchedule.dateText} • {selectedTimeLabel}
+                </p>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                className="h-14 w-full rounded-[20px] border-[#e7c98d] bg-white text-[16px] font-extrabold text-slate-900"
+                onClick={() => schedulingSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              >
+                Choose another time slot
+              </Button>
+            </CardContent>
+          </Card>
+        ) : null}
+
         <Button
           type="button"
           className="mt-8 h-20 rounded-[28px] bg-[#56a774] text-[20px] font-extrabold text-white hover:bg-[#4b9968]"
-          onClick={() => navigate("/diagnosis-report")}
+          onClick={() => (shouldShowVideoImmediateCall ? navigate("/diagnosis-report") : handleSubmit())}
         >
           {shouldShowVideoImmediateCall ? "Call now" : "Submit request"}
         </Button>
