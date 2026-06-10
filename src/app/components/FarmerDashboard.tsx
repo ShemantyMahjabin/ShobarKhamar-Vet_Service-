@@ -26,8 +26,8 @@ const profileStats = [
     icon: PawPrint,
   },
   {
-    title: 'Book Vet',
-    subtitle: 'Book a vet visit',
+    title: 'Vet',
+    subtitle: 'Book or schedule',
     tone: 'bg-amber-50 text-amber-600',
     icon: ShieldPlus,
   },

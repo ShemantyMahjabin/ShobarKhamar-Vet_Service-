@@ -32,9 +32,43 @@ const defaultFilters: VetFilters = {
   maxPrice: '',
 };
 
+const appointmentPreview = [
+  {
+    id: 1,
+    vetName: 'Dr. Nadia Islam',
+    animalNames: 'Cow A12, Goat G08',
+    date: 'Thu, Jun 12, 2026',
+    time: '11:30 AM - 12:30 PM',
+    center: 'Badda Livestock Care',
+    mode: 'In Person',
+    status: 'Accepted',
+  },
+  {
+    id: 2,
+    vetName: 'Dr. Mahmud Hasan',
+    animalNames: 'Calf C03',
+    date: 'Sun, Jun 15, 2026',
+    time: '3:00 PM - 3:30 PM',
+    center: 'Video consultation',
+    mode: 'Video consultation',
+    status: 'Pending',
+  },
+  {
+    id: 3,
+    vetName: 'Dr. Farhana Akter',
+    animalNames: 'Goat G05',
+    date: 'Wed, Jun 11, 2026',
+    time: '10:00 AM - 11:00 AM',
+    center: 'Farm visit',
+    mode: 'Request vet to visit',
+    status: 'Accepted',
+  },
+] as const;
+
 export function BookAppointment() {
   const navigate = useNavigate();
   const { presence } = useVetConsultationStore();
+  const [activeSection, setActiveSection] = useState<'book' | 'schedule'>('book');
   const [searchTerm, setSearchTerm] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filters, setFilters] = useState<VetFilters>(defaultFilters);
@@ -92,96 +126,156 @@ export function BookAppointment() {
     <MobileShell>
       <MobileStatusBar />
 
-      <div className="px-6 pt-2">
-        <button
-          onClick={() => navigate('/farmer-dashboard')}
-          className="rounded-full border border-[#DCE7DF] bg-white px-4 py-2 text-sm font-bold text-[#17212B]"
-        >
-          Back
-        </button>
+      <div className="flex h-full flex-col overflow-hidden pb-24">
+        <div className="px-6 pt-2">
+          <button
+            onClick={() => navigate('/farmer-dashboard')}
+            className="rounded-full border border-[#DCE7DF] bg-white px-4 py-2 text-sm font-bold text-[#17212B]"
+          >
+            Back
+          </button>
 
-        <div className="mt-4">
-          <h1 className="text-2xl font-extrabold text-[#17212B]">All Veterinarians</h1>
+          <div className="mt-4">
+            <h1 className="text-2xl font-extrabold text-[#17212B]">Vet</h1>
+          </div>
+
+          <section className="mx-auto mt-5 w-[96%] rounded-[22px] border border-[#DCE7DF] bg-white p-2.5">
+            <div className="grid grid-cols-2 gap-2.5 rounded-[20px] bg-[#f8faf8] p-2">
+              <button
+                type="button"
+                onClick={() => setActiveSection('book')}
+                className={`min-h-[68px] rounded-[18px] px-5 py-2.5 text-[15px] font-black leading-tight ${
+                  activeSection === 'book' ? 'bg-[#27a36a] text-white' : 'bg-white text-[#69716b]'
+                }`}
+              >
+                Book a Vet
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveSection('schedule')}
+                className={`min-h-[68px] rounded-[18px] px-5 py-2.5 text-[15px] font-black leading-tight ${
+                  activeSection === 'schedule' ? 'bg-[#27a36a] text-white' : 'bg-white text-[#69716b]'
+                }`}
+              >
+                Appointment Schedule
+              </button>
+            </div>
+          </section>
+
+          {activeSection === 'book' ? (
+            <section className="mt-5 space-y-3 rounded-[22px] border border-[#DCE7DF] bg-white p-4">
+              <div className="flex items-center gap-3">
+                <input
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                  placeholder="Search veterinarians"
+                  className="w-full rounded-2xl border border-[#DCE7DF] bg-[#F8FCFA] px-4 py-3 text-sm font-semibold text-[#17212B] outline-none placeholder:text-[#6B7785]"
+                />
+                <button
+                  type="button"
+                  onClick={openFilterPanel}
+                  aria-label="Open filters"
+                  className="relative rounded-2xl border border-[#DCE7DF] bg-[#F8FCFA] px-4 py-3 text-[#17212B]"
+                >
+                  <span className="flex items-center justify-center">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="M4 5H10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      <path d="M14 5H16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      <path d="M4 10H6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      <path d="M10 10H16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      <path d="M4 15H12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      <path d="M16 15H16.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      <circle cx="12" cy="5" r="2" stroke="currentColor" strokeWidth="1.8" />
+                      <circle cx="8" cy="10" r="2" stroke="currentColor" strokeWidth="1.8" />
+                      <circle cx="14" cy="15" r="2" stroke="currentColor" strokeWidth="1.8" />
+                    </svg>
+                  </span>
+                  {activeFilterCount > 0 ? (
+                    <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#1E9E6F] text-[10px] text-white">
+                      {activeFilterCount}
+                    </span>
+                  ) : null}
+                </button>
+              </div>
+            </section>
+          ) : null}
         </div>
 
-        <section className="mt-5 space-y-3 rounded-[22px] border border-[#DCE7DF] bg-white p-4">
-          <div className="flex items-center gap-3">
-            <input
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-              placeholder="Search veterinarians"
-              className="w-full rounded-2xl border border-[#DCE7DF] bg-[#F8FCFA] px-4 py-3 text-sm font-semibold text-[#17212B] outline-none placeholder:text-[#6B7785]"
-            />
-            <button
-              type="button"
-              onClick={openFilterPanel}
-              aria-label="Open filters"
-              className="relative rounded-2xl border border-[#DCE7DF] bg-[#F8FCFA] px-4 py-3 text-[#17212B]"
-            >
-              <span className="flex items-center justify-center">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M4 5H10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                  <path d="M14 5H16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                  <path d="M4 10H6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                  <path d="M10 10H16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                  <path d="M4 15H12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                  <path d="M16 15H16.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                  <circle cx="12" cy="5" r="2" stroke="currentColor" strokeWidth="1.8" />
-                  <circle cx="8" cy="10" r="2" stroke="currentColor" strokeWidth="1.8" />
-                  <circle cx="14" cy="15" r="2" stroke="currentColor" strokeWidth="1.8" />
-                </svg>
-              </span>
-              {activeFilterCount > 0 ? (
-                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#1E9E6F] text-[10px] text-white">
-                  {activeFilterCount}
-                </span>
-              ) : null}
-            </button>
-          </div>
-        </section>
+        <div className="mt-5 flex-1 overflow-y-auto px-6 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <section className="space-y-3">
+            {activeSection === 'book' ? (
+              <>
+                {filteredVets.map((vet) => (
+                  (() => {
+                    const onlineStatus = presence[vet.id] ?? vet.onlineStatus;
 
-        <section className="mt-5 space-y-3">
-          {filteredVets.map((vet) => (
-            (() => {
-              const onlineStatus = presence[vet.id] ?? vet.onlineStatus;
+                    return (
+                      <button
+                        key={vet.id}
+                        type="button"
+                        onClick={() => navigate(`/booking/${vet.id}`)}
+                        className="w-full rounded-[22px] border border-[#DCE7DF] bg-white p-4 text-left"
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <h2 className="text-sm font-extrabold text-[#17212B]">{vet.name}</h2>
+                            <p className="mt-1 text-xs font-semibold text-[#1E9E6F]">{vet.specialty}</p>
+                            <p className="mt-1 text-[11px] font-medium text-[#6B7785]">{vet.location}</p>
+                            <p className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] ${
+                              onlineStatus === 'online'
+                                ? 'bg-[#E6F7EF] text-[#1E9E6F]'
+                                : 'bg-[#F5F7F6] text-[#6B7785]'
+                            }`}>
+                              {onlineStatus}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-sm font-extrabold text-[#17212B]">BDT {vet.price}</p>
+                            <p className="mt-1 text-[11px] font-bold text-[#F5A524]">Rating {vet.rating}</p>
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })()
+                ))}
 
-              return (
-            <button
-              key={vet.id}
-              type="button"
-              onClick={() => navigate(`/booking/${vet.id}`)}
-              className="w-full rounded-[22px] border border-[#DCE7DF] bg-white p-4 text-left"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <h2 className="text-sm font-extrabold text-[#17212B]">{vet.name}</h2>
-                  <p className="mt-1 text-xs font-semibold text-[#1E9E6F]">{vet.specialty}</p>
-                  <p className="mt-1 text-[11px] font-medium text-[#6B7785]">{vet.location}</p>
-                  <p className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] ${
-                    onlineStatus === 'online'
-                      ? 'bg-[#E6F7EF] text-[#1E9E6F]'
-                      : 'bg-[#F5F7F6] text-[#6B7785]'
-                  }`}>
-                    {onlineStatus}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm font-extrabold text-[#17212B]">BDT {vet.price}</p>
-                  <p className="mt-1 text-[11px] font-bold text-[#F5A524]">Rating {vet.rating}</p>
-                </div>
-              </div>
-            </button>
-              );
-            })()
-          ))}
+                {filteredVets.length === 0 ? (
+                  <div className="rounded-[22px] border border-[#DCE7DF] bg-white p-5 text-center">
+                    <p className="text-sm font-extrabold text-[#17212B]">No veterinarians found</p>
+                    <p className="mt-2 text-xs font-medium text-[#6B7785]">Try another search or filter combination.</p>
+                  </div>
+                ) : null}
+              </>
+            ) : (
+              <>
+                {appointmentPreview.map((appointment) => (
+                  <div key={appointment.id} className="rounded-[20px] border border-[#DCE7DF] bg-[#F8FCFA] p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-lg font-extrabold text-[#17212B]">{appointment.vetName}</p>
+                        <p className="mt-1 text-sm font-semibold text-[#6B7785]">{appointment.mode}</p>
+                      </div>
+                      <div className={`rounded-2xl px-3 py-2 text-xs font-bold ${
+                        appointment.status === 'Accepted'
+                          ? 'bg-[#EAF7EF] text-[#1E9E6F]'
+                          : 'bg-[#FEF3E2] text-[#B8860B]'
+                      }`}>
+                        {appointment.status}
+                      </div>
+                    </div>
 
-          {filteredVets.length === 0 ? (
-            <div className="rounded-[22px] border border-[#DCE7DF] bg-white p-5 text-center">
-              <p className="text-sm font-extrabold text-[#17212B]">No veterinarians found</p>
-              <p className="mt-2 text-xs font-medium text-[#6B7785]">Try another search or filter combination.</p>
-            </div>
-          ) : null}
-        </section>
+                    <div className="mt-4 space-y-2 rounded-[18px] bg-white p-4">
+                      <p className="text-sm font-bold text-[#17212B]">{appointment.date}</p>
+                      <p className="text-sm font-medium text-[#6B7785]">{appointment.time}</p>
+                      <p className="text-sm font-medium text-[#6B7785]">{appointment.center}</p>
+                      <p className="text-sm font-medium text-[#6B7785]">Animals: {appointment.animalNames}</p>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
+          </section>
+        </div>
       </div>
 
       {isFilterOpen ? (
