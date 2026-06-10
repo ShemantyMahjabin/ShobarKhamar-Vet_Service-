@@ -4,6 +4,14 @@ export type AnimalMediaFile = {
   type: string;
 };
 
+export type VaccineSideEffectRecord = {
+  description: string;
+  date?: string;
+  mediaName?: string;
+  mediaUrl?: string;
+  mediaType?: string;
+};
+
 export type AnimalRecord = {
   id: string;
   name: string;
@@ -33,9 +41,11 @@ export type AnimalRecord = {
     vaccineName: string;
     date: string;
     centre: string;
-    sideEffect: string;
+    sideEffects?: VaccineSideEffectRecord[];
+    sideEffect?: string;
     sideEffectImageName: string;
     sideEffectImageUrl?: string;
+    sideEffectImageType?: string;
   }>;
   status: string;
   note: string;
@@ -97,11 +107,57 @@ export function getSavedAnimals() {
 }
 
 export function getAllAnimals() {
-  return [...getSavedAnimals(), ...animals];
+  const savedAnimals = getSavedAnimals();
+  const savedIds = new Set(savedAnimals.map((animal) => animal.id));
+  return [...savedAnimals, ...animals.filter((animal) => !savedIds.has(animal.id))];
 }
 
 export function saveAnimalRecord(animal: AnimalRecord) {
   const savedAnimals = getSavedAnimals();
   const nextAnimals = [animal, ...savedAnimals.filter((savedAnimal) => savedAnimal.id !== animal.id)];
   window.localStorage.setItem(userAnimalsStorageKey, JSON.stringify(nextAnimals));
+}
+
+export function appendAnimalVaccineHistory(input: {
+  animalId: string;
+  vaccineName: string;
+  date: string;
+  centre: string;
+}) {
+  const animal = getAllAnimals().find((item) => item.id === input.animalId);
+  if (!animal) {
+    return null;
+  }
+
+  const vaccineHistory = animal.vaccineHistory ?? [];
+  const alreadyExists = vaccineHistory.some(
+    (item) =>
+      item.vaccineName === input.vaccineName &&
+      item.date === input.date &&
+      item.centre === input.centre,
+  );
+
+  if (alreadyExists) {
+    return animal;
+  }
+
+  const updatedAnimal: AnimalRecord = {
+    ...animal,
+    vaccineHistory: [
+      {
+        vaccineName: input.vaccineName,
+        date: input.date,
+        centre: input.centre,
+        sideEffects: [],
+        sideEffect: '',
+        sideEffectImageName: '',
+        sideEffectImageUrl: '',
+        sideEffectImageType: '',
+      },
+      ...vaccineHistory,
+    ],
+  };
+
+  saveAnimalRecord(updatedAnimal);
+  return updatedAnimal;
 }

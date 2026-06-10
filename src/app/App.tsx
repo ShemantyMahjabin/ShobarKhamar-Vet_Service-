@@ -11,6 +11,7 @@ import { AIDetection } from './components/AIDetection';
 import { FarmManagement } from './components/FarmManagement';
 import { AddAnimal } from './components/AddAnimal';
 import { AnimalDetails } from './components/AnimalDetails';
+import { VaccineHistoryDetails } from './components/VaccineHistoryDetails';
 import { AddVaccine } from './components/AddVaccine';
 import { VaccinationManagement } from './components/VaccinationManagement';
 import { VaccinationCenters } from './components/VaccinationCenters';
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/profile" element={<FarmerProfile />} />
           <Route path="/farm-management" element={<FarmManagement />} />
           <Route path="/farm-management/:animalId" element={<AnimalDetails />} />
+          <Route path="/farm-management/:animalId/vaccine-history/:vaccineIndex" element={<VaccineHistoryDetails />} />
           <Route path="/add-animal" element={<AddAnimal />} />
           <Route path="/add-vaccine" element={<AddVaccine />} />
           <Route path="/vaccination-management" element={<VaccinationManagement />} />

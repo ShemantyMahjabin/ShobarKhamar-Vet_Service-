@@ -1,4 +1,4 @@
-import { animals } from './animals';
+import { appendAnimalVaccineHistory, getAllAnimals } from './animals';
 import { vaccineCatalog } from './vaccines';
 
 export type VaccinationStatus = 'done' | 'pending';
@@ -117,11 +117,19 @@ export function processPendingVaccinationRecord(recordId: number) {
   if (record.status !== 'done') {
     record.status = 'done';
     record.entries = createEntries(record);
+    record.eligibleAnimalIds.forEach((animalId) => {
+      appendAnimalVaccineHistory({
+        animalId,
+        vaccineName: record.vaccineName,
+        date: record.date,
+        centre: record.center,
+      });
+    });
   }
 
   return { ...record, entries: [...record.entries] };
 }
 
 export function getAnimalName(animalId: string) {
-  return animals.find((animal) => animal.id === animalId)?.name ?? animalId;
+  return getAllAnimals().find((animal) => animal.id === animalId)?.name ?? animalId;
 }
