@@ -20,6 +20,7 @@ import { VaccinationSchedule } from './components/VaccinationSchedule';
 import { FarmerProfile } from './components/FarmerProfile';
 import { VaccinationRecords } from './components/VaccinationRecords';
 import { DiagnosisReport } from './components/DiagnosisReport';
+import { VetOffers } from './components/VetOffers';
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/diagnosis-report" element={<DiagnosisReport />} />
           <Route path="/vet-registration" element={<VetRegistration />} />
           <Route path="/vet-dashboard" element={<VetDashboard />} />
+          <Route path="/vet-offers" element={<VetOffers />} />
           <Route path="/booking" element={<BookAppointment />} />
           <Route path="/booking/:vetId" element={<VetProfile />} />
           <Route path="/booking/:vetId/chat" element={<VetChatPage />} />
