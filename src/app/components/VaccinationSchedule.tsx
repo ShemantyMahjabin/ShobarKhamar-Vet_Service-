@@ -71,9 +71,6 @@ export function VaccinationSchedule() {
 
         <section className="mt-4 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
           <h1 className="text-2xl font-extrabold text-[#17212B]">Vaccination Schedule</h1>
-          <p className="mt-2 text-sm font-medium text-[#6B7785]">
-            Review reminder dates and tap any vaccine name below a date to open its detailed page.
-          </p>
         </section>
 
         <section className="mt-5 rounded-[22px] border border-[#DCE7DF] bg-white p-4">

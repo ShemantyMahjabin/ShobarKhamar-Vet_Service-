@@ -29,7 +29,6 @@ export function VetDashboard() {
         </button>
 
         <h1 className="text-2xl font-extrabold text-[#17212B] mb-1">Vet Dashboard</h1>
-        <p className="text-sm font-medium text-[#6B7785]">Requests, consultations, and reports</p>
       </div>
 
       <div className="px-6 mb-6">

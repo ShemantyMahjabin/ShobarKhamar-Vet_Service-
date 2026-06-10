@@ -86,8 +86,16 @@ export function FarmManagement() {
         <div className="mt-4">
           <div>
             <h1 className="text-2xl font-extrabold text-[#17212B]">My Livestock</h1>
-            <p className="mt-1 text-sm font-medium text-[#6B7785]">Search, filter, and monitor all farm animals</p>
           </div>
+        </div>
+
+        <div className="mt-5">
+          <button
+            onClick={() => navigate('/add-animal')}
+            className="rounded-2xl bg-[#1E9E6F] px-5 py-3 text-sm font-bold text-white"
+          >
+            Add animal
+          </button>
         </div>
 
         <div className="mt-5 space-y-3 rounded-[20px] border border-[#DCE7DF] bg-white p-4">

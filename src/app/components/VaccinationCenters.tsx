@@ -51,7 +51,6 @@ export function VaccinationCenters() {
         </button>
 
         <h1 className="mt-4 text-2xl font-extrabold text-[#17212B]">Vaccination Centers</h1>
-        <p className="mt-1 text-sm font-medium text-[#6B7785]">All centers stored in the server from vaccine entries.</p>
 
         <div className="mt-5 space-y-3">
           {centers.map((center) => (

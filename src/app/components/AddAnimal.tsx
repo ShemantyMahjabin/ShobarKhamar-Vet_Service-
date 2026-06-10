@@ -100,7 +100,7 @@ function RequiredMark() {
 
 function FieldLabel({ children, required = false }: { children: string; required?: boolean }) {
   return (
-    <label className="text-[24px] font-extrabold leading-tight text-[#161A1D]">
+    <label className="text-base font-extrabold leading-tight text-[#161A1D]">
       {children}
       {required ? <RequiredMark /> : null}
     </label>
@@ -124,7 +124,7 @@ function TextInput({
       onChange={(event) => onChange(event.target.value)}
       placeholder={placeholder}
       type={type}
-      className="mt-3 h-14 w-full rounded-[18px] border border-[#E7ECEA] bg-white px-5 text-[20px] font-semibold text-[#161A1D] shadow-[0_8px_22px_rgba(23,33,43,0.04)] outline-none placeholder:text-[#C8CCCF] focus:border-[#429EAE]"
+      className="mt-3 h-14 w-full rounded-[18px] border border-[#E7ECEA] bg-white px-5 text-base font-semibold text-[#161A1D] shadow-[0_8px_22px_rgba(23,33,43,0.04)] outline-none placeholder:text-[#C8CCCF] focus:border-[#429EAE]"
     />
   );
 }
@@ -144,7 +144,7 @@ function SelectInput({
     <select
       value={value}
       onChange={(event) => onChange(event.target.value)}
-      className={`mt-3 h-14 w-full rounded-[18px] border border-[#E7ECEA] bg-white px-5 text-[20px] font-extrabold shadow-[0_8px_22px_rgba(23,33,43,0.04)] outline-none focus:border-[#429EAE] ${
+      className={`mt-3 h-14 w-full rounded-[18px] border border-[#E7ECEA] bg-white px-5 text-base font-extrabold shadow-[0_8px_22px_rgba(23,33,43,0.04)] outline-none focus:border-[#429EAE] ${
         value ? 'text-[#161A1D]' : 'text-[#C8CCCF]'
       }`}
     >
@@ -179,7 +179,7 @@ function StepHeader({
         >
           <ChevronLeft size={28} strokeWidth={2.6} />
         </button>
-        <h1 className="text-[34px] font-extrabold leading-none text-[#161A1D]">{title}</h1>
+        <h1 className="text-[24px] font-extrabold leading-none text-[#161A1D]">{title}</h1>
       </div>
       <div className="mt-5 grid grid-cols-4 gap-2 px-8">
         {steps.map((step, index) => (
@@ -402,21 +402,21 @@ export function AddAnimal() {
                 <Check size={42} strokeWidth={3} />
               </div>
             </div>
-            <h1 className="mt-8 text-[40px] font-extrabold text-[#A5A8AA]">Success</h1>
-            <p className="mt-5 text-xl font-extrabold text-[#161A1D]">New animal added successfully</p>
+            <h1 className="mt-8 text-[28px] font-extrabold text-[#A5A8AA]">Success</h1>
+            <p className="mt-5 text-lg font-extrabold text-[#161A1D]">New animal added successfully</p>
           </div>
           <div className="mt-24 space-y-4">
             <button
               type="button"
               onClick={() => navigate('/farm-management')}
-              className="h-16 w-full rounded-[20px] bg-[#46B653] text-[28px] font-extrabold text-white"
+              className="h-14 w-full rounded-[20px] bg-[#46B653] text-lg font-extrabold text-white"
             >
               View My Animals
             </button>
             <button
               type="button"
               onClick={() => navigate('/farmer-dashboard')}
-              className="h-16 w-full rounded-[20px] border border-[#BFC6C2] bg-white text-[28px] font-extrabold text-[#161A1D]"
+              className="h-14 w-full rounded-[20px] border border-[#BFC6C2] bg-white text-lg font-extrabold text-[#161A1D]"
             >
               Return to dashboard
             </button>
@@ -435,7 +435,7 @@ export function AddAnimal() {
           <div className="space-y-8">
             <section>
               <FieldLabel required>Animal Name OR Number</FieldLabel>
-              <p className="mt-2 text-[20px] font-medium text-[#B8BABC]">Write your animal name</p>
+              <p className="mt-2 text-sm font-medium text-[#B8BABC]">Write your animal name</p>
               <TextInput
                 value={form.name}
                 onChange={(value) => updateForm('name', value)}
@@ -515,7 +515,7 @@ export function AddAnimal() {
                 onChange={(event) => updateForm('description', event.target.value)}
                 placeholder="Write more details about your animal..."
                 rows={5}
-                className="mt-3 w-full resize-none rounded-[20px] border border-[#E7ECEA] bg-white px-5 py-4 text-lg font-semibold text-[#161A1D] shadow-[0_8px_22px_rgba(23,33,43,0.04)] outline-none placeholder:text-[#C8CCCF] focus:border-[#429EAE]"
+                className="mt-3 w-full resize-none rounded-[20px] border border-[#E7ECEA] bg-white px-5 py-4 text-base font-semibold text-[#161A1D] shadow-[0_8px_22px_rgba(23,33,43,0.04)] outline-none placeholder:text-[#C8CCCF] focus:border-[#429EAE]"
               />
             </section>
 
@@ -553,14 +553,14 @@ export function AddAnimal() {
               <span className="flex h-28 w-28 items-center justify-center rounded-full bg-[#429EAE] text-white">
                 <Camera size={48} strokeWidth={2.6} />
               </span>
-              <span className="mt-7 text-[32px] font-extrabold text-[#161A1D]">Click to add Media</span>
-              <span className="mt-4 flex items-center gap-2 text-[24px] font-medium text-[#8D9296]">
+              <span className="mt-7 text-[24px] font-extrabold text-[#161A1D]">Click to add Media</span>
+              <span className="mt-4 flex items-center gap-2 text-base font-medium text-[#8D9296]">
                 <ImagePlus size={28} /> {imageCount}/3 images
               </span>
               <span className="mt-2 flex items-center gap-2 text-lg font-semibold text-[#8D9296]">
                 <Video size={20} /> {videoCount}/1 video
               </span>
-              <span className="mt-3 text-xl font-extrabold text-[#46B653]">Add images + video (any order)</span>
+              <span className="mt-3 text-base font-extrabold text-[#46B653]">Add images + video (any order)</span>
               <input
                 type="file"
                 accept="image/*,video/*"
@@ -601,8 +601,8 @@ export function AddAnimal() {
         {step === 2 ? (
           <div className="space-y-5">
             <div>
-              <h2 className="text-[30px] font-extrabold leading-tight text-[#161A1D]">Medical history metadata</h2>
-              <p className="mt-2 text-base font-semibold leading-snug text-[#8D9296]">
+              <h2 className="text-[22px] font-extrabold leading-tight text-[#161A1D]">Medical history metadata</h2>
+              <p className="mt-2 text-sm font-semibold leading-snug text-[#8D9296]">
                 Add previous disease and vaccine records before verifying the animal profile.
               </p>
             </div>
@@ -706,15 +706,15 @@ export function AddAnimal() {
         {step === 3 ? (
           <div className="space-y-6">
             <div>
-              <h2 className="text-[34px] font-extrabold leading-tight text-[#161A1D]">Verify Information</h2>
-              <p className="mt-3 text-xl font-medium leading-snug text-[#989C9F]">
+              <h2 className="text-[24px] font-extrabold leading-tight text-[#161A1D]">Verify Information</h2>
+              <p className="mt-3 text-base font-medium leading-snug text-[#989C9F]">
                 Check the card below to ensure the information provided is correct.
               </p>
             </div>
 
             <section className="rounded-[20px] border border-[#E2E9E6] bg-white p-5 shadow-[0_12px_30px_rgba(23,33,43,0.06)]">
               <div className="flex items-start justify-between gap-3">
-                <h3 className="text-[28px] font-extrabold leading-tight text-[#161A1D]">
+                <h3 className="text-[20px] font-extrabold leading-tight text-[#161A1D]">
                   {form.animalType || 'Animal'} &gt; {form.subtype || 'Subtype'}
                 </h3>
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#E8F7F9] text-[#429EAE]">
@@ -779,7 +779,7 @@ export function AddAnimal() {
         <button
           type="button"
           onClick={goNext}
-          className="mt-8 h-16 w-full rounded-[22px] bg-[#429EAE] text-[28px] font-extrabold text-white shadow-[0_12px_22px_rgba(66,158,174,0.25)] disabled:bg-[#D7D9DB]"
+          className="mt-8 h-14 w-full rounded-[22px] bg-[#429EAE] text-lg font-extrabold text-white shadow-[0_12px_22px_rgba(66,158,174,0.25)] disabled:bg-[#D7D9DB]"
         >
           {step === steps.length - 1 ? 'Submit' : 'Next Step ->'}
         </button>

@@ -136,9 +136,6 @@ export function VaccinationManagement() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <h1 className="text-2xl font-extrabold text-[#17212B]">All Vaccines</h1>
-              <p className="mt-2 text-sm font-medium text-[#6B7785]">
-                Available vaccines currently listed in the server.
-              </p>
             </div>
             <button
               type="button"

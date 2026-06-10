@@ -11,8 +11,6 @@ export function FarmerDashboard() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [records, setRecords] = useState(getVaccinationRecords());
 
-  const pendingCount = records.filter((record) => record.status === 'pending').length;
-
   function openProfilePanel() {
     setRecords(getVaccinationRecords());
     setIsProfileOpen(true);
@@ -36,9 +34,6 @@ export function FarmerDashboard() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-extrabold text-[#17212B]">Good morning, Rahim</h1>
-            <p className="mt-1 text-sm font-medium text-[#6B7785]">
-              2 alerts • {animals.length} animals monitored
-            </p>
           </div>
           <button
             onClick={openProfilePanel}
@@ -60,30 +55,20 @@ export function FarmerDashboard() {
           </button>
         </div>
 
-        <div className="mt-5 grid grid-cols-3 gap-3">
+        <div className="mt-5">
           <button
             onClick={() => navigate('/farm-management')}
-            className="rounded-[18px] bg-[#E6F7EF] p-4 text-left"
+            className="w-full rounded-[24px] border border-[#DCE7DF] bg-[linear-gradient(135deg,#E6F7EF_0%,#F8FCFA_100%)] p-5 text-left"
           >
-            <p className="text-[28px] font-black text-[#17212B]">{animals.length}</p>
-            <p className="text-xs font-bold text-[#6B7785]">Animals</p>
-          </button>
-          <div className="rounded-[18px] bg-[#FFF5DF] p-4">
-            <p className="text-[28px] font-black text-[#17212B]">3</p>
-            <p className="text-xs font-bold text-[#6B7785]">Cases</p>
-          </div>
-          <div className="rounded-[18px] bg-[#FDEBEB] p-4">
-            <p className="text-[28px] font-black text-[#17212B]">{pendingCount}</p>
-            <p className="text-xs font-bold text-[#6B7785]">Pending vaccines</p>
-          </div>
-        </div>
-
-        <div className="mt-6">
-          <button
-            onClick={() => navigate('/add-animal')}
-            className="rounded-2xl bg-[#1E9E6F] px-4 py-2 text-xs font-bold text-white"
-          >
-            Add animal
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="text-[32px] font-black text-[#17212B]">{animals.length}</p>
+                <p className="mt-1 text-sm font-bold text-[#6B7785]">Animals</p>
+              </div>
+              <div className="rounded-full bg-white px-4 py-2 text-xs font-bold text-[#1E9E6F]">
+                Open livestock
+              </div>
+            </div>
           </button>
         </div>
 

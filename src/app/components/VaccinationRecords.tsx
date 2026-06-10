@@ -46,9 +46,6 @@ export function VaccinationRecords() {
 
         <section className="mt-4 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
           <h1 className="text-2xl font-extrabold text-[#17212B]">Vaccination Records</h1>
-          <p className="mt-2 text-sm font-medium text-[#6B7785]">
-            Review scheduled records and confirm whether the vaccine was actually given.
-          </p>
         </section>
 
         {message ? (

@@ -56,9 +56,6 @@ export function AddVaccine() {
 
         <div className="mt-4">
           <h1 className="text-2xl font-extrabold text-[#17212B]">Add Vaccine</h1>
-          <p className="mt-1 text-sm font-medium text-[#6B7785]">
-            Create a vaccine entry with center, dose, safety conditions, and animal eligibility details.
-          </p>
         </div>
 
         <div className="mt-5 space-y-4 rounded-[22px] border border-[#DCE7DF] bg-white p-4">

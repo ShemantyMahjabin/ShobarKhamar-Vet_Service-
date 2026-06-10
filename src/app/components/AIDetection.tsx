@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MobileBottomNav } from './layout/MobileBottomNav';
+import { MobileShell } from './layout/MobileShell';
+import { MobileStatusBar } from './layout/MobileStatusBar';
 
 export function AIDetection() {
   const navigate = useNavigate();
@@ -33,21 +36,20 @@ export function AIDetection() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FCFA] px-6 py-6">
-      <div className="mx-auto max-w-4xl">
+    <MobileShell>
+      <MobileStatusBar />
+
+      <div className="px-6 pt-2 pb-8">
         <button
           onClick={() => navigate('/farmer-dashboard')}
           className="mb-4 rounded-full border border-[#DCE7DF] bg-white px-4 py-2 text-sm font-bold text-[#17212B]"
         >
-          Back to dashboard
+          Back
         </button>
 
         <h1 className="text-3xl font-black text-[#17212B]">AI Disease Detection</h1>
-        <p className="mt-2 text-sm font-medium text-[#6B7785]">
-          Upload photos or describe symptoms for a preliminary livestock health review.
-        </p>
 
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 space-y-4">
           <div className="rounded-[28px] border border-[#DCE7DF] bg-white p-6">
             <h2 className="text-lg font-extrabold text-[#17212B]">Upload animal photos</h2>
             <div className="mt-4 rounded-[24px] border-2 border-dashed border-[#90caf9] bg-[#EAF3FB] p-8 text-center">
@@ -112,6 +114,8 @@ export function AIDetection() {
           </div>
         )}
       </div>
-    </div>
+
+      <MobileBottomNav active="detect disease" />
+    </MobileShell>
   );
 }

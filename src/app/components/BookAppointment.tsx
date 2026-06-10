@@ -100,7 +100,6 @@ export function BookAppointment() {
 
         <div className="mt-4">
           <h1 className="text-2xl font-extrabold text-[#17212B]">All Veterinarians</h1>
-          <p className="mt-1 text-sm font-medium text-[#6B7785]">Search and filter the full veterinarian list.</p>
         </div>
 
         <section className="mt-5 space-y-3 rounded-[22px] border border-[#DCE7DF] bg-white p-4">

@@ -1,4 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import bangladeshHeatmap from '../../imports/cattle_disease_real_bangladesh_heatmap_mobile_v2.svg';
+import { MobileBottomNav } from './layout/MobileBottomNav';
+import { MobileShell } from './layout/MobileShell';
+import { MobileStatusBar } from './layout/MobileStatusBar';
 
 const diseaseAlerts = [
   { disease: 'Avian flu', area: 'North region', risk: 'High', cases: 23, trend: 'Increasing' },
@@ -10,19 +14,18 @@ export function DiseaseHeatmap() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#F8FCFA] px-6 py-6">
-      <div className="mx-auto max-w-5xl">
+    <MobileShell>
+      <MobileStatusBar />
+
+      <div className="px-6 pt-2 pb-8">
         <button
           onClick={() => navigate('/farmer-dashboard')}
           className="mb-4 rounded-full border border-[#DCE7DF] bg-white px-4 py-2 text-sm font-bold text-[#17212B]"
         >
-          Back to dashboard
+          Back
         </button>
 
         <h1 className="text-3xl font-black text-[#17212B]">Disease Heatmap</h1>
-        <p className="mt-2 text-sm font-medium text-[#6B7785]">
-          Seasonal disease patterns and active alerts in your area.
-        </p>
 
         <div className="mt-6 rounded-[28px] border border-[#90caf9] bg-[#EAF3FB] p-6">
           <p className="text-sm font-bold text-[#0F4C81]">Active alert</p>
@@ -31,25 +34,26 @@ export function DiseaseHeatmap() {
           </p>
         </div>
 
-        <div className="mt-6 rounded-[28px] border border-[#DCE7DF] bg-white p-6">
-          <h2 className="text-lg font-extrabold text-[#17212B]">Interactive heatmap</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            <div className="rounded-[24px] bg-[#FDEBEB] p-6 text-center">
-              <p className="text-sm font-bold text-[#DE3B40]">North region</p>
-              <p className="mt-2 text-xl font-black text-[#17212B]">High risk</p>
+        <div className="mt-6 rounded-[28px] border border-[#DCE7DF] bg-white p-5">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-extrabold text-[#17212B]">Bangladesh heatmap</h2>
             </div>
-            <div className="rounded-[24px] bg-[#FFF5DF] p-6 text-center">
-              <p className="text-sm font-bold text-[#F5A524]">East region</p>
-              <p className="mt-2 text-xl font-black text-[#17212B]">Medium risk</p>
+            <div className="rounded-full bg-[#F8FCFA] px-3 py-1 text-[10px] font-bold text-[#17212B]">
+              BD map
             </div>
-            <div className="rounded-[24px] bg-[#E6F7EF] p-6 text-center">
-              <p className="text-sm font-bold text-[#1E9E6F]">South region</p>
-              <p className="mt-2 text-xl font-black text-[#17212B]">Low risk</p>
-            </div>
+          </div>
+
+          <div className="mt-4 overflow-hidden rounded-[24px] border border-[#DCE7DF] bg-[#F8FCFA]">
+            <img
+              src={bangladeshHeatmap}
+              alt="Bangladesh cattle disease heatmap"
+              className="h-auto w-full"
+            />
           </div>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <div className="mt-6 space-y-4">
           {diseaseAlerts.map((alert) => (
             <div key={alert.disease} className="rounded-[24px] border border-[#DCE7DF] bg-white p-5">
               <p className="text-lg font-extrabold text-[#17212B]">{alert.disease}</p>
@@ -63,7 +67,7 @@ export function DiseaseHeatmap() {
           ))}
         </div>
 
-        <div className="mt-6 rounded-[28px] bg-white border border-[#DCE7DF] p-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="mt-6 rounded-[28px] border border-[#DCE7DF] bg-white p-6">
           <div>
             <p className="text-lg font-extrabold text-[#17212B]">Want to schedule a preventive checkup?</p>
             <p className="mt-1 text-sm font-medium text-[#6B7785]">
@@ -72,12 +76,14 @@ export function DiseaseHeatmap() {
           </div>
           <button
             onClick={() => navigate('/booking')}
-            className="rounded-2xl bg-[#1E9E6F] px-5 py-3 text-sm font-bold text-white"
+            className="mt-4 w-full rounded-2xl bg-[#1E9E6F] px-5 py-3 text-sm font-bold text-white"
           >
             Book now
           </button>
         </div>
       </div>
-    </div>
+
+      <MobileBottomNav active="detect disease" />
+    </MobileShell>
   );
 }

@@ -55,7 +55,6 @@ export function VetChatPage() {
 
         <div className="space-y-2">
           <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Chat with Vet</h1>
-          <p className="text-lg text-slate-500">Send a message directly without date, time, or animal booking steps.</p>
         </div>
 
         <Card className="mt-8 rounded-[32px] border-[#d7e3d6] bg-white shadow-none">

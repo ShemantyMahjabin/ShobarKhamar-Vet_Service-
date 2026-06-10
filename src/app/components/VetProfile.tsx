@@ -28,13 +28,13 @@ const visitModePricing: Record<Exclude<VisitMode, "Chat">, { multiplier: number;
 };
 
 const dateOptions = [
-  { label: "Sun", day: 7, dateText: "Sun, 7 Jun 2026", appointmentType: "General visit", time: "2:00 PM - 3:00 PM" },
-  { label: "Mon", day: 8, dateText: "Mon, 8 Jun 2026", appointmentType: "General visit", time: "2:00 PM - 3:00 PM" },
-  { label: "Tue", day: 9, dateText: "Tue, 9 Jun 2026", appointmentType: "General visit", time: "11:30 AM - 12:30 PM" },
-  { label: "Wed", day: 10, dateText: "Wed, 10 Jun 2026", appointmentType: "General visit", time: "2:00 PM - 3:00 PM" },
-  { label: "Thu", day: 11, dateText: "Thu, 11 Jun 2026", appointmentType: "General visit", time: "4:00 PM - 5:00 PM" },
-  { label: "Fri", day: 12, dateText: "Fri, 12 Jun 2026", appointmentType: "General visit", time: "10:00 AM - 11:00 AM" },
-  { label: "Sat", day: 13, dateText: "Sat, 13 Jun 2026", appointmentType: "General visit", time: "2:30 PM - 3:30 PM" },
+  { label: "Sun", day: 7, dateText: "Sun, 7 Jun 2026", appointmentType: "General visit", center: "Badda Vet Center", time: "2:00 PM - 3:00 PM" },
+  { label: "Mon", day: 8, dateText: "Mon, 8 Jun 2026", appointmentType: "General visit", center: "Dhanmondi Vet Point", time: "2:00 PM - 3:00 PM" },
+  { label: "Tue", day: 9, dateText: "Tue, 9 Jun 2026", appointmentType: "General visit", center: "Badda Livestock Care", time: "11:30 AM - 12:30 PM" },
+  { label: "Wed", day: 10, dateText: "Wed, 10 Jun 2026", appointmentType: "General visit", center: "Savar Field Clinic", time: "2:00 PM - 3:00 PM" },
+  { label: "Thu", day: 11, dateText: "Thu, 11 Jun 2026", appointmentType: "General visit", center: "Keraniganj Vet Hub", time: "4:00 PM - 5:00 PM" },
+  { label: "Fri", day: 12, dateText: "Fri, 12 Jun 2026", appointmentType: "General visit", center: "Dhanmondi Vet Point", time: "10:00 AM - 11:00 AM" },
+  { label: "Sat", day: 13, dateText: "Sat, 13 Jun 2026", appointmentType: "General visit", center: "Badda Vet Center", time: "2:30 PM - 3:30 PM" },
 ];
 
 const slotOptions: Record<Exclude<VisitMode, "Chat">, string[]> = {
@@ -128,7 +128,6 @@ export function VetProfile() {
 
         <div className="space-y-2">
           <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Book Appointment</h1>
-          <p className="text-lg text-slate-500">Select service, schedule time, choose animals, and review payment.</p>
         </div>
 
         <Card className="mt-8 rounded-[32px] border-[#d7e3d6] bg-white shadow-none">
@@ -198,13 +197,15 @@ export function VetProfile() {
                     <div>
                       <p className="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Selected day</p>
                       <p className="text-[18px] font-extrabold text-slate-900">{selectedSchedule.dateText}</p>
+                      <p className="text-sm font-semibold text-[#56a774]">{selectedSchedule.center}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 border-b border-[#d7e3d6] bg-[#f7faf8] text-sm font-extrabold text-slate-500">
+                <div className="grid grid-cols-4 border-b border-[#d7e3d6] bg-[#f7faf8] text-sm font-extrabold text-slate-500">
                   <div className="border-r border-[#d7e3d6] px-4 py-3">Appointment</div>
                   <div className="border-r border-[#d7e3d6] px-4 py-3">Day</div>
+                  <div className="border-r border-[#d7e3d6] px-4 py-3">Center</div>
                   <div className="px-4 py-3">Schedule time</div>
                 </div>
 
@@ -223,7 +224,7 @@ export function VetProfile() {
                             setSelectedSlot(matchingSlot);
                           }
                         }}
-                        className={`grid w-full grid-cols-3 text-left transition ${
+                        className={`grid w-full grid-cols-4 text-left transition ${
                           isSelected ? "bg-[#eef8f1]" : "bg-white"
                         }`}
                       >
@@ -232,6 +233,9 @@ export function VetProfile() {
                         </div>
                         <div className="border-r border-t border-[#d7e3d6] px-4 py-4 text-sm font-extrabold text-slate-900">
                           {option.label}
+                        </div>
+                        <div className="border-r border-t border-[#d7e3d6] px-4 py-4 text-sm font-semibold text-slate-700">
+                          {option.center}
                         </div>
                         <div className="border-t border-[#d7e3d6] px-4 py-4 text-sm font-semibold text-slate-700">
                           {option.time}
