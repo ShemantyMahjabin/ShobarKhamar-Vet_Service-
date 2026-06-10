@@ -194,7 +194,7 @@ export function FarmerDashboard() {
 
             <button
               type="button"
-              onClick={() => navigate('/vaccination-management')}
+              onClick={() => navigate('/vaccination-records')}
               className="mt-6 flex w-full items-center rounded-[18px] border border-[#e2e9e4] bg-white p-3 text-left shadow-[0_5px_18px_rgba(39,58,44,0.07)]"
             >
               <img

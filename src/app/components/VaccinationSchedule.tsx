@@ -13,16 +13,16 @@ const vaccineReminders = [
 
 const weeklyVetAppointments = [
   {
-    id: 101,
+    id: 3,
     date: '2026-06-11',
     vetName: 'Dr. Farhana Akter',
     time: '10:00 AM - 11:00 AM',
-    mode: 'Farm visit',
+    mode: 'Request vet to visit',
     animals: 'Goat G05',
     status: 'Accepted',
   },
   {
-    id: 102,
+    id: 1,
     date: '2026-06-12',
     vetName: 'Dr. Nadia Islam',
     time: '11:30 AM - 12:30 PM',
@@ -31,7 +31,7 @@ const weeklyVetAppointments = [
     status: 'Accepted',
   },
   {
-    id: 103,
+    id: 2,
     date: '2026-06-15',
     vetName: 'Dr. Mahmud Hasan',
     time: '3:00 PM - 3:30 PM',
@@ -157,7 +157,7 @@ export function VaccinationSchedule() {
                             <button
                               key={appointment.id}
                               type="button"
-                              onClick={() => navigate('/appointment-schedule')}
+                              onClick={() => navigate(`/appointment-schedule?appointmentId=${appointment.id}`)}
                               className={`w-full rounded-[14px] px-3 py-3 text-left text-xs font-bold ${appointmentCardTone}`}
                             >
                               <p>

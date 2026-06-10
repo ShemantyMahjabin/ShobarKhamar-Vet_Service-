@@ -36,7 +36,7 @@ export function VaccinationRecords() {
     <MobileShell>
       <MobileStatusBar />
 
-      <div className="px-6 pt-2">
+      <div className="h-[844px] overflow-y-auto px-6 pb-24 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <button
           onClick={() => navigate('/farmer-dashboard')}
           className="rounded-full border border-[#DCE7DF] bg-white px-4 py-2 text-sm font-bold text-[#17212B]"
