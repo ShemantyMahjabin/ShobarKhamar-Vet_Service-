@@ -4,10 +4,8 @@ import {
   CalendarDays,
   ChevronRight,
   Heart,
-  Menu,
   Package,
   PawPrint,
-  Search,
   Share2,
   ShieldPlus,
   Syringe,
@@ -107,13 +105,6 @@ export function FarmerDashboard() {
                 alt="Farm banner"
                 className="h-full w-full object-cover"
               />
-              <button
-                type="button"
-                onClick={openProfilePanel}
-                className="absolute left-4 top-4 rounded-[10px] bg-[#242424]/72 px-3 py-2 text-sm font-bold text-white backdrop-blur"
-              >
-                Preview
-              </button>
             </div>
           </div>
 
@@ -347,23 +338,6 @@ export function FarmerDashboard() {
           </aside>
         </div>
       ) : null}
-
-      <div className="absolute right-4 top-11 z-20 flex gap-2 text-[#1f2722]">
-        <button
-          type="button"
-          onClick={openProfilePanel}
-          className="grid h-10 w-10 place-items-center rounded-full bg-white/70 shadow-sm backdrop-blur"
-        >
-          <Search className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          onClick={openProfilePanel}
-          className="grid h-10 w-10 place-items-center rounded-full bg-white/70 shadow-sm backdrop-blur"
-        >
-          <Menu className="h-5 w-5" />
-        </button>
-      </div>
 
       <MobileBottomNav active="home" />
     </MobileShell>
