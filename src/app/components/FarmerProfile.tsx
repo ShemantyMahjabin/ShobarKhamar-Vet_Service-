@@ -8,54 +8,102 @@ export function FarmerProfile() {
   const navigate = useNavigate();
   const records = getVaccinationRecords();
   const pendingCount = records.filter((record) => record.status === 'pending').length;
+  const acceptedAppointmentCount = 1;
 
   return (
     <MobileShell>
       <MobileStatusBar />
 
-      <div className="px-6 pt-2">
-        <button
-          onClick={() => navigate('/farmer-dashboard')}
-          className="rounded-full border border-[#DCE7DF] bg-white px-4 py-2 text-sm font-bold text-[#17212B]"
-        >
-          Back
-        </button>
+      <div className="px-6 pb-8 pt-2">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-[28px] font-extrabold leading-tight text-[#17212B]">Rahim</h1>
+            <h2 className="mt-2 text-[28px] font-extrabold leading-tight text-[#17212B]">Profile</h2>
+            <p className="mt-4 max-w-[220px] text-[16px] font-semibold leading-8 text-[#6B7785]">
+              Farm records and vaccine confirmation
+            </p>
+          </div>
 
-        <section className="mt-4 rounded-[24px] bg-[#17212B] p-5 text-white">
-          <h1 className="text-2xl font-extrabold">Farmer Profile</h1>
-          <p className="mt-2 text-sm font-medium text-white/75">Rahim • Livestock owner</p>
+          <button
+            onClick={() => navigate('/farmer-dashboard')}
+            className="rounded-full bg-[#F8FCFA] px-6 py-4 text-[16px] font-extrabold text-[#17212B]"
+          >
+            Close
+          </button>
+        </div>
+
+        <section className="mt-8 rounded-[28px] border border-[#DCE7DF] bg-white p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[28px] font-extrabold leading-none text-[#17212B]">+</p>
+              <h3 className="mt-4 text-[24px] font-extrabold leading-tight text-[#17212B]">
+                Vaccination
+                <br />
+                record
+              </h3>
+            </div>
+            <div className="rounded-[24px] bg-[#EAF7EF] px-6 py-4 text-center">
+              <p className="text-[18px] font-extrabold text-[#1E9E6F]">{records.length}</p>
+              <p className="mt-1 text-[14px] font-bold text-[#1E9E6F]">records</p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => navigate('/vaccination-records')}
+            className="mt-5 w-full rounded-[22px] bg-[#56A774] px-4 py-4 text-[16px] font-extrabold text-white"
+          >
+            Open records
+          </button>
         </section>
 
-        <section className="mt-5 rounded-[22px] border border-[#DCE7DF] bg-white p-4">
-          <div className="flex items-center justify-between gap-4">
+        <section className="mt-6 rounded-[28px] border border-[#DCE7DF] bg-white p-5">
+          <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 className="text-base font-extrabold text-[#17212B]">Vaccination records</h2>
-              <p className="mt-1 text-xs font-medium text-[#6B7785]">
-                Open the full vaccination record list from your profile.
-              </p>
+              <h3 className="text-[24px] font-extrabold leading-tight text-[#17212B]">
+                Appointment
+                <br />
+                schedule
+              </h3>
             </div>
-            <button
-              onClick={() => navigate('/vaccination-records')}
-              className="rounded-2xl bg-[#1E9E6F] px-4 py-2 text-sm font-bold text-white"
-            >
-              + Record
-            </button>
+            <div className="rounded-[24px] bg-[#EAF7EF] px-6 py-4 text-center">
+              <p className="text-[18px] font-extrabold text-[#1E9E6F]">{acceptedAppointmentCount}</p>
+              <p className="mt-1 text-[14px] font-bold text-[#1E9E6F]">accepted</p>
+            </div>
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-3">
-            <div className="rounded-[18px] bg-[#F8FCFA] p-4">
-              <p className="text-xl font-black text-[#17212B]">{records.length}</p>
-              <p className="text-xs font-bold text-[#6B7785]">Total records</p>
+          <button
+            onClick={() => navigate('/appointment-schedule')}
+            className="mt-5 w-full rounded-[22px] bg-[#56A774] px-4 py-4 text-[16px] font-extrabold text-white"
+          >
+            Open appointments
+          </button>
+        </section>
+
+        <section className="mt-6 rounded-[28px] border border-[#DCE7DF] bg-white p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h3 className="text-[24px] font-extrabold leading-tight text-[#17212B]">
+                Vaccination
+                <br />
+                schedule
+              </h3>
             </div>
-            <div className="rounded-[18px] bg-[#FFF5DF] p-4">
-              <p className="text-xl font-black text-[#17212B]">{pendingCount}</p>
-              <p className="text-xs font-bold text-[#6B7785]">Pending records</p>
+            <div className="rounded-[24px] bg-[#EAF7EF] px-6 py-4 text-center">
+              <p className="text-[18px] font-extrabold text-[#1E9E6F]">{pendingCount}</p>
+              <p className="mt-1 text-[14px] font-bold text-[#1E9E6F]">reminders</p>
             </div>
           </div>
+
+          <button
+            onClick={() => navigate('/vaccination-schedule')}
+            className="mt-5 w-full rounded-[22px] bg-[#56A774] px-4 py-4 text-[16px] font-extrabold text-white"
+          >
+            Open schedule
+          </button>
         </section>
       </div>
 
-      <MobileBottomNav active="home" />
+      <MobileBottomNav active="more" />
     </MobileShell>
   );
 }

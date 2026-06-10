@@ -153,6 +153,24 @@ export function FarmerDashboard() {
               </div>
             </button>
 
+            <section className="mt-4 rounded-[20px] border border-[#DCE7DF] bg-white p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-sm font-extrabold text-[#17212B]">Appointment schedule</p>
+                </div>
+                <span className="rounded-full bg-[#E6F7EF] px-3 py-1 text-[10px] font-bold text-[#1E9E6F]">
+                  1 accepted
+                </span>
+              </div>
+
+              <button
+                onClick={() => navigate('/appointment-schedule')}
+                className="mt-3 w-full rounded-2xl bg-[#1E9E6F] px-3 py-2 text-xs font-bold text-white"
+              >
+                Open appointments
+              </button>
+            </section>
+
             <div className="mt-4 space-y-3">
               <section className="rounded-[20px] border border-[#DCE7DF] bg-white p-4">
                 <div className="flex items-start justify-between gap-3">

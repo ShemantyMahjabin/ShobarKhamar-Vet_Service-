@@ -20,7 +20,12 @@ import { VaccinationSchedule } from './components/VaccinationSchedule';
 import { FarmerProfile } from './components/FarmerProfile';
 import { VaccinationRecords } from './components/VaccinationRecords';
 import { DiagnosisReport } from './components/DiagnosisReport';
+<<<<<<< HEAD
 import { VetOffers } from './components/VetOffers';
+=======
+import { AppointmentConfirmation } from './components/AppointmentConfirmation';
+import { AppointmentSchedule } from './components/AppointmentSchedule';
+>>>>>>> 8aa23c4a69a8203d8e8e1d845d1b0a66ecebd114
 
 export default function App() {
   return (
@@ -30,6 +35,7 @@ export default function App() {
           <Route path="/" element={<Login />} />
           <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
           <Route path="/profile" element={<FarmerProfile />} />
+          <Route path="/appointment-schedule" element={<AppointmentSchedule />} />
           <Route path="/farm-management" element={<FarmManagement />} />
           <Route path="/farm-management/:animalId" element={<AnimalDetails />} />
           <Route path="/farm-management/:animalId/vaccine-history/:vaccineIndex" element={<VaccineHistoryDetails />} />
@@ -47,6 +53,7 @@ export default function App() {
           <Route path="/booking" element={<BookAppointment />} />
           <Route path="/booking/:vetId" element={<VetProfile />} />
           <Route path="/booking/:vetId/chat" element={<VetChatPage />} />
+          <Route path="/booking-confirmation" element={<AppointmentConfirmation />} />
           <Route path="/heatmap" element={<DiseaseHeatmap />} />
           <Route path="/ai-detection" element={<AIDetection />} />
           <Route path="*" element={<Navigate to="/" replace />} />
