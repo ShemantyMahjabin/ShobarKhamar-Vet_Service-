@@ -275,12 +275,12 @@ export function BookAppointment() {
             <h1 className="text-2xl font-extrabold text-[#17212B]">Vet</h1>
           </div>
 
-          <section className="mx-auto mt-5 w-[96%] rounded-[22px] border border-[#DCE7DF] bg-white p-2.5">
+          <section className="mt-5">
             <div className="grid grid-cols-2 gap-2.5 rounded-[20px] bg-[#f8faf8] p-2">
               <button
                 type="button"
                 onClick={() => setActiveSection('book')}
-                className={`min-h-[68px] rounded-[18px] px-5 py-2.5 text-[15px] font-black leading-tight ${
+                className={`min-h-[58px] rounded-[18px] px-3 py-2.5 text-[13px] font-black leading-tight ${
                   activeSection === 'book' ? 'bg-[#27a36a] text-white' : 'bg-white text-[#69716b]'
                 }`}
               >
@@ -289,7 +289,7 @@ export function BookAppointment() {
               <button
                 type="button"
                 onClick={() => setActiveSection('schedule')}
-                className={`min-h-[68px] rounded-[18px] px-5 py-2.5 text-[15px] font-black leading-tight ${
+                className={`min-h-[58px] rounded-[18px] px-3 py-2.5 text-[13px] font-black leading-tight ${
                   activeSection === 'schedule' ? 'bg-[#27a36a] text-white' : 'bg-white text-[#69716b]'
                 }`}
               >
