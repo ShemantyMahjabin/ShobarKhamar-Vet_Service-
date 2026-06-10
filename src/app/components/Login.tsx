@@ -67,6 +67,13 @@ export function Login() {
           Register as veterinarian
         </button>
 
+        <button
+          onClick={() => navigate('/vet-dashboard')}
+          className="mt-3 h-12 w-full rounded-2xl border border-[#DCE7DF] bg-white text-sm font-bold text-[#17212B]"
+        >
+          Login as veterinarian
+        </button>
+
         <p className="mt-6 text-center text-xs font-semibold text-[#6B7785]">
           Farmer and veterinarian mobile interface
         </p>
