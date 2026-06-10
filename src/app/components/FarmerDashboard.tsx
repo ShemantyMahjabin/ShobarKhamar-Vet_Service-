@@ -222,25 +222,25 @@ export function FarmerDashboard() {
               <button
                 type="button"
                 onClick={() => setActiveProductTab('products')}
-                className={`flex items-center justify-center gap-3 rounded-[14px] py-4 text-[18px] font-black ${
+                className={`flex items-center justify-center gap-2 rounded-[14px] py-3.5 text-[13px] font-black ${
                   activeProductTab === 'products'
                     ? 'bg-white text-[#4a9462] shadow-[0_6px_18px_rgba(42,72,48,0.1)]'
                     : 'text-[#98a19a]'
                 }`}
               >
-                <Package className="h-5 w-5" />
+                <Package className="h-4 w-4" />
                 My Products
               </button>
               <button
                 type="button"
                 onClick={() => setActiveProductTab('favourites')}
-                className={`flex items-center justify-center gap-3 rounded-[14px] py-4 text-[18px] font-black ${
+                className={`flex items-center justify-center gap-2 rounded-[14px] py-3.5 text-[13px] font-black ${
                   activeProductTab === 'favourites'
                     ? 'bg-white text-[#4a9462] shadow-[0_6px_18px_rgba(42,72,48,0.1)]'
                     : 'text-[#98a19a]'
                 }`}
               >
-                <Heart className="h-5 w-5" />
+                <Heart className="h-4 w-4" />
                 Favourite Products
               </button>
             </div>
