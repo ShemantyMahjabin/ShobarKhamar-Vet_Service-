@@ -91,7 +91,7 @@ export function FarmerDashboard() {
   const statActions = [
     () => navigate('/farm-management'),
     () => navigate('/booking'),
-    () => undefined,
+    () => navigate('/vaccination-schedule'),
   ];
 
   return (
