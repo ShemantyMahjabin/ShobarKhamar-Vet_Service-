@@ -46,6 +46,7 @@ export function FarmManagement() {
   const [animalRecords] = useState(() => getAllAnimals());
   const [searchTerm, setSearchTerm] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isAnimalTypeMenuOpen, setIsAnimalTypeMenuOpen] = useState(false);
   const [animalType, setAnimalType] = useState<(typeof animalTypeOptions)[number]>('All');
   const [statusFilter, setStatusFilter] = useState<(typeof statusOptions)[number]>('All status');
   const [ageMin, setAgeMin] = useState('');
@@ -75,7 +76,7 @@ export function FarmManagement() {
     <MobileShell>
       <MobileStatusBar />
 
-      <div className="px-6 pt-2">
+      <div className="relative px-6 pt-2">
         <button
           onClick={() => navigate('/farmer-dashboard')}
           className="rounded-full border border-[#DCE7DF] bg-white px-4 py-2 text-sm font-bold text-[#17212B]"
@@ -98,7 +99,11 @@ export function FarmManagement() {
           </button>
         </div>
 
-        <div className="mt-5 space-y-3 rounded-[20px] border border-[#DCE7DF] bg-white p-4">
+        <div
+          className={`mt-5 space-y-3 rounded-[20px] border border-[#DCE7DF] bg-white p-4 transition ${
+            isAnimalTypeMenuOpen ? 'relative z-30' : ''
+          }`}
+        >
           <div className="flex items-center gap-3">
             <input
               value={searchTerm}
@@ -128,19 +133,46 @@ export function FarmManagement() {
             </button>
           </div>
 
-          <div className="-mx-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex min-w-max gap-2 px-1 pb-1">
-              <select
-                value={animalType}
-                onChange={(event) => setAnimalType(event.target.value as (typeof animalTypeOptions)[number])}
-                className="rounded-full border border-[#DCE7DF] bg-[#F8FCFA] px-3 py-2 text-xs font-bold text-[#17212B] outline-none"
-              >
-                {animalTypeOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+          <div
+            className={`-mx-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+              isAnimalTypeMenuOpen ? 'overflow-visible' : 'overflow-x-auto'
+            }`}
+          >
+            <div className="relative flex min-w-max gap-2 px-1 pb-1">
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsAnimalTypeMenuOpen((current) => !current)}
+                  className="rounded-full border border-[#DCE7DF] bg-[#F8FCFA] px-3 py-2 text-xs font-bold text-[#17212B]"
+                >
+                  {animalType}
+                </button>
+
+                {isAnimalTypeMenuOpen ? (
+                  <div className="absolute left-0 top-full z-50 mt-2 w-40 overflow-hidden rounded-[20px] border border-[#DCE7DF] bg-[#17212B]/78 shadow-2xl backdrop-blur-md">
+                    {animalTypeOptions.map((option) => {
+                      const isActive = option === animalType;
+
+                      return (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => {
+                            setAnimalType(option);
+                            setIsAnimalTypeMenuOpen(false);
+                          }}
+                          className={`flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm font-bold ${
+                            isActive ? 'text-white' : 'text-white/90'
+                          }`}
+                        >
+                          <span className="w-3 text-white">{isActive ? '✓' : ''}</span>
+                          <span>{option}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : null}
+              </div>
               {statusOptions
                 .filter((option) => option !== 'All status')
                 .map((option) => {
@@ -164,7 +196,7 @@ export function FarmManagement() {
           </div>
         </div>
 
-        <div className="mt-5 space-y-3">
+        <div className={`mt-5 space-y-3 transition ${isAnimalTypeMenuOpen ? 'blur-[5px]' : ''}`}>
           {filteredAnimals.map((animal) => (
             <button
               key={animal.id}
@@ -193,6 +225,7 @@ export function FarmManagement() {
             </div>
           ) : null}
         </div>
+
       </div>
 
       {isFilterOpen ? (
