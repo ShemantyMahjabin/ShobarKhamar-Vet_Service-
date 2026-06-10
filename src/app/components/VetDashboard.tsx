@@ -9,11 +9,19 @@ import {
   Inbox,
   MessageCircle,
   Mic,
+  Phone,
   Send,
   Stethoscope,
   Tag,
+  Video,
   X,
 } from 'lucide-react';
+import {
+  setVetPresence,
+  updateConsultationRequestStatus,
+  useVetConsultationStore,
+  type ConsultationRequest,
+} from '../data/vetConsultation';
 import { serviceCategories } from '../data/vetService';
 import { MobileShell } from './layout/MobileShell';
 import { MobileStatusBar } from './layout/MobileStatusBar';
@@ -111,6 +119,8 @@ const tabItems: Array<{ key: VetTab; label: string; icon: typeof Home }> = [
   { key: 'schedule', label: 'Schedule', icon: CalendarDays },
 ];
 
+const loggedInVetId = 1;
+
 function getInitials(name: string) {
   return name
     .split(' ')
@@ -122,6 +132,7 @@ function getInitials(name: string) {
 }
 
 export function VetDashboard() {
+  const { presence, requests } = useVetConsultationStore();
   const [activeTab, setActiveTab] = useState<VetTab>('home');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
@@ -132,6 +143,20 @@ export function VetDashboard() {
   const activeChats = useMemo(() => chats.filter((chat) => chat.status === 'active'), [chats]);
   const resolvedChats = useMemo(() => chats.filter((chat) => chat.status === 'resolved'), [chats]);
   const selectedChat = chats.find((chat) => chat.id === selectedChatId && chat.status === 'active');
+  const vetPresence = presence[loggedInVetId] ?? 'online';
+  const vetRequests = useMemo(() => requests.filter((request) => request.vetId === loggedInVetId), [requests]);
+  const pendingCallRequests = useMemo(
+    () => vetRequests.filter((request) => request.status === 'pending' && request.kind === 'instant-video'),
+    [vetRequests],
+  );
+  const pendingScheduledRequests = useMemo(
+    () => vetRequests.filter((request) => request.status === 'pending' && request.kind === 'scheduled-video'),
+    [vetRequests],
+  );
+  const handledRequests = useMemo(
+    () => vetRequests.filter((request) => request.status !== 'pending').slice(0, 3),
+    [vetRequests],
+  );
 
   function openTab(tab: VetTab) {
     setActiveTab(tab);
@@ -178,6 +203,75 @@ export function VetDashboard() {
       ),
     );
     setSelectedChatId(null);
+  }
+
+  function togglePresence() {
+    setVetPresence(loggedInVetId, vetPresence === 'online' ? 'offline' : 'online');
+  }
+
+  function formatRequestTime(request: ConsultationRequest) {
+    const date = request.scheduledFor ?? request.requestedAt;
+    return new Date(date).toLocaleString([], {
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    });
+  }
+
+  function renderConsultationRequest(request: ConsultationRequest) {
+    return (
+      <div key={request.id} className="rounded-[20px] border border-[#DCE7DF] bg-white p-4">
+        <div className="flex items-start gap-3">
+          <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-[#EAF3FB] text-[#0F4C81]">
+            {request.kind === 'instant-video' ? <Phone className="h-5 w-5" /> : <CalendarDays className="h-5 w-5" />}
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-extrabold text-[#17212B]">{request.farmerName}</p>
+                <p className="mt-1 text-[11px] font-bold text-[#6B7785]">
+                  {request.kind === 'instant-video' ? 'Video call requested' : 'Proposed video slot'}
+                </p>
+              </div>
+              <span className="flex-none rounded-full bg-[#F8FCFA] px-2.5 py-1 text-[10px] font-bold text-[#435160]">
+                {formatRequestTime(request)}
+              </span>
+            </div>
+            <p className="mt-3 line-clamp-2 text-xs font-semibold leading-5 text-[#435160]">{request.symptoms}</p>
+            <p className="mt-2 text-[11px] font-bold text-[#6B7785]">
+              Animals: {request.animalIds.filter(Boolean).join(', ') || 'Not selected'}
+            </p>
+            {request.status === 'pending' ? (
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => updateConsultationRequestStatus(request.id, 'rejected')}
+                  className="rounded-2xl border border-[#F1C9C9] bg-[#FFF5F5] px-3 py-2 text-xs font-extrabold text-[#BF3434]"
+                >
+                  Reject
+                </button>
+                <button
+                  type="button"
+                  onClick={() => updateConsultationRequestStatus(request.id, 'accepted')}
+                  className="rounded-2xl bg-[#1E9E6F] px-3 py-2 text-xs font-extrabold text-white"
+                >
+                  Accept
+                </button>
+              </div>
+            ) : (
+              <span
+                className={`mt-4 inline-flex rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] ${
+                  request.status === 'accepted' ? 'bg-[#E6F7EF] text-[#1E9E6F]' : 'bg-[#FFECEC] text-[#BF3434]'
+                }`}
+              >
+                {request.status}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   function renderAvatar(name = 'Dr. Nusrat') {
@@ -260,6 +354,35 @@ export function VetDashboard() {
         {renderAppHeader('Good morning, Dr. Nusrat', `${activeChats.length} active issue chats today`)}
 
         <div className="px-6 pt-6">
+          <div className="mb-5 rounded-[22px] border border-[#DCE7DF] bg-white p-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span
+                  className={`flex h-11 w-11 items-center justify-center rounded-full ${
+                    vetPresence === 'online' ? 'bg-[#E6F7EF] text-[#1E9E6F]' : 'bg-[#F5F7F6] text-[#6B7785]'
+                  }`}
+                >
+                  <Video className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-extrabold text-[#17212B]">Video consultation status</p>
+                  <p className="mt-1 text-xs font-semibold text-[#6B7785]">
+                    {vetPresence === 'online' ? 'Farmers can request a call now' : 'Farmers can propose a time slot'}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={togglePresence}
+                className={`rounded-2xl px-4 py-2 text-xs font-extrabold ${
+                  vetPresence === 'online' ? 'bg-[#17212B] text-white' : 'bg-[#1E9E6F] text-white'
+                }`}
+              >
+                Go {vetPresence === 'online' ? 'offline' : 'online'}
+              </button>
+            </div>
+          </div>
+
           <div className="rounded-[24px] bg-[#1E9E6F] p-5 text-white">
             <p className="text-sm font-bold opacity-90">Next priority</p>
             <h2 className="mt-2 text-lg font-extrabold">{activeChats[0]?.issue ?? 'No active issue right now'}</h2>
@@ -281,8 +404,8 @@ export function VetDashboard() {
             </div>
             <div className="rounded-[20px] border border-[#DCE7DF] bg-white p-4">
               <CheckCircle2 className="h-5 w-5 text-[#1E9E6F]" />
-              <p className="mt-3 text-[28px] font-black text-[#17212B]">{resolvedChats.length}</p>
-              <p className="text-xs font-bold text-[#6B7785]">Chat history</p>
+              <p className="mt-3 text-[28px] font-black text-[#17212B]">{pendingCallRequests.length}</p>
+              <p className="text-xs font-bold text-[#6B7785]">Video calls</p>
             </div>
           </div>
 
@@ -358,6 +481,30 @@ export function VetDashboard() {
       <>
         {renderAppHeader('Schedule', 'Consultations and farm visits')}
         <div className="px-6 pt-6">
+          <div className="mb-5 rounded-[22px] border border-[#DCE7DF] bg-white p-4">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <h2 className="text-base font-extrabold text-[#17212B]">Video requests</h2>
+                <p className="mt-1 text-xs font-semibold text-[#6B7785]">
+                  Accept or reject live calls and offline slot proposals.
+                </p>
+              </div>
+              <span className="rounded-full bg-[#E6F7EF] px-3 py-1 text-[10px] font-extrabold text-[#1E9E6F]">
+                {pendingCallRequests.length + pendingScheduledRequests.length} pending
+              </span>
+            </div>
+
+            <div className="mt-4 space-y-3">
+              {[...pendingCallRequests, ...pendingScheduledRequests].length ? (
+                [...pendingCallRequests, ...pendingScheduledRequests].map((request) => renderConsultationRequest(request))
+              ) : (
+                <p className="rounded-[18px] bg-[#F8FCFA] p-4 text-xs font-semibold text-[#6B7785]">
+                  No pending video requests right now.
+                </p>
+              )}
+            </div>
+          </div>
+
           <div className="mb-4 flex items-center justify-between gap-3">
             <h2 className="text-lg font-extrabold text-[#17212B]">Today</h2>
             <span className="rounded-full bg-[#E6F7EF] px-3 py-1 text-[10px] font-extrabold text-[#1E9E6F]">
@@ -392,6 +539,12 @@ export function VetDashboard() {
                 Open inbox chats
               </button>
             </div>
+            {handledRequests.length ? (
+              <div className="space-y-3">
+                <h2 className="text-lg font-extrabold text-[#17212B]">Recent video decisions</h2>
+                {handledRequests.map((request) => renderConsultationRequest(request))}
+              </div>
+            ) : null}
           </div>
         </div>
       </>
@@ -555,8 +708,41 @@ export function VetDashboard() {
             <div className="mt-5 rounded-[20px] bg-[#E6F7EF] p-4">
               <div className="flex items-center gap-3">
                 <Stethoscope className="h-5 w-5 text-[#1E9E6F]" />
-                <p className="text-sm font-extrabold text-[#17212B]">Online for consultations</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-extrabold text-[#17212B]">
+                    {vetPresence === 'online' ? 'Online for consultations' : 'Offline for consultations'}
+                  </p>
+                  <p className="mt-1 text-[11px] font-semibold text-[#6B7785]">
+                    {vetPresence === 'online' ? 'Farmers can request live video calls.' : 'Farmers will propose future slots.'}
+                  </p>
+                </div>
               </div>
+              <button
+                type="button"
+                onClick={togglePresence}
+                className={`mt-4 w-full rounded-2xl px-4 py-3 text-xs font-extrabold ${
+                  vetPresence === 'online' ? 'bg-[#17212B] text-white' : 'bg-[#1E9E6F] text-white'
+                }`}
+              >
+                Go {vetPresence === 'online' ? 'offline' : 'online'}
+              </button>
+            </div>
+
+            <div className="mt-4 rounded-[20px] border border-[#DCE7DF] bg-white p-4">
+              <p className="text-sm font-extrabold text-[#17212B]">Pending video requests</p>
+              <p className="mt-1 text-xs font-semibold text-[#6B7785]">
+                {pendingCallRequests.length} live calls, {pendingScheduledRequests.length} proposed slots
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsProfileOpen(false);
+                  openTab('schedule');
+                }}
+                className="mt-3 w-full rounded-2xl bg-[#E6F7EF] px-4 py-2 text-xs font-extrabold text-[#1E9E6F]"
+              >
+                Review requests
+              </button>
             </div>
           </aside>
         </div>
