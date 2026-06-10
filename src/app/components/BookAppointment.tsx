@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useVetConsultationStore } from '../data/vetConsultation';
 import { serviceModes, type ServiceMode, vets } from '../data/vetService';
 import { MobileBottomNav } from './layout/MobileBottomNav';
 import { MobileShell } from './layout/MobileShell';
@@ -33,6 +34,7 @@ const defaultFilters: VetFilters = {
 
 export function BookAppointment() {
   const navigate = useNavigate();
+  const { presence } = useVetConsultationStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filters, setFilters] = useState<VetFilters>(defaultFilters);
@@ -140,6 +142,10 @@ export function BookAppointment() {
 
         <section className="mt-5 space-y-3">
           {filteredVets.map((vet) => (
+            (() => {
+              const onlineStatus = presence[vet.id] ?? vet.onlineStatus;
+
+              return (
             <button
               key={vet.id}
               type="button"
@@ -152,11 +158,11 @@ export function BookAppointment() {
                   <p className="mt-1 text-xs font-semibold text-[#1E9E6F]">{vet.specialty}</p>
                   <p className="mt-1 text-[11px] font-medium text-[#6B7785]">{vet.location}</p>
                   <p className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] ${
-                    vet.onlineStatus === 'online'
+                    onlineStatus === 'online'
                       ? 'bg-[#E6F7EF] text-[#1E9E6F]'
                       : 'bg-[#F5F7F6] text-[#6B7785]'
                   }`}>
-                    {vet.onlineStatus}
+                    {onlineStatus}
                   </p>
                 </div>
                 <div className="text-right">
@@ -165,6 +171,8 @@ export function BookAppointment() {
                 </div>
               </div>
             </button>
+              );
+            })()
           ))}
 
           {filteredVets.length === 0 ? (

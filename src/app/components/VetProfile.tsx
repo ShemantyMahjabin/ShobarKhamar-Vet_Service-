@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CalendarDays } from "lucide-react";
 
 import { animals } from "../data/animals";
+import { createConsultationRequest, useVetConsultationStore } from "../data/vetConsultation";
 import { vets } from "../data/vetService";
 import { MobileShell } from "./layout/MobileShell";
 import { MobileStatusBar } from "./layout/MobileStatusBar";
@@ -74,12 +75,14 @@ export function VetProfile() {
   const navigate = useNavigate();
   const { vetId } = useParams();
   const schedulingSectionRef = useRef<HTMLDivElement | null>(null);
+  const { presence, requests } = useVetConsultationStore();
 
   const vet = vets.find((item) => String(item.id) === vetId) ?? vets[0];
-  const isVideoOnline = vet.onlineStatus === "online";
+  const vetPresence = presence[vet.id] ?? vet.onlineStatus;
+  const isVideoOnline = vetPresence === "online";
 
   const [selectedVisitMode, setSelectedVisitMode] = useState<Exclude<VisitMode, "Chat">>("In Person");
-  const [selectedDate, setSelectedDate] = useState(9);
+  const [selectedDate, setSelectedDate] = useState(11);
   const [selectedSlot, setSelectedSlot] = useState(slotOptions["In Person"][1]);
   const [selectedAnimalIds, setSelectedAnimalIds] = useState<string[]>([animals[0]?.id ?? ""]);
   const [showConflictWarning, setShowConflictWarning] = useState(false);
@@ -115,6 +118,12 @@ export function VetProfile() {
       ? appointment.time === selectedSchedule.time
       : appointment.label === selectedSlot),
   );
+  const farmerConsultationRequests = requests.filter((request) => request.vetId === vet.id && request.farmerName === "Rahim Uddin");
+
+  function getScheduledSlotDate() {
+    const dateWithoutWeekday = selectedSchedule.dateText.replace(/^[^,]+,\s*/, "");
+    return new Date(`${dateWithoutWeekday} ${selectedSlot}`);
+  }
 
   function handleVisitModeChange(mode: VisitMode) {
     if (mode === "Chat") {
@@ -140,9 +149,38 @@ export function VetProfile() {
   }
 
   function handleSubmit() {
+    if (shouldShowVideoImmediateCall) {
+      createConsultationRequest({
+        vetId: vet.id,
+        vetName: vet.name,
+        farmerName: "Rahim Uddin",
+        animalIds: selectedAnimalIds,
+        symptoms,
+        kind: "instant-video",
+      });
+      return;
+    }
+
     if (!shouldShowVideoImmediateCall && hasAppointmentConflict) {
       setShowConflictWarning(true);
       schedulingSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    if (selectedVisitMode === "Video consultation") {
+      const scheduledFor = getScheduledSlotDate();
+
+      createConsultationRequest({
+        vetId: vet.id,
+        vetName: vet.name,
+        farmerName: "Rahim Uddin",
+        animalIds: selectedAnimalIds,
+        symptoms,
+        kind: "scheduled-video",
+        scheduledFor: scheduledFor.toISOString(),
+        expiresAt: new Date(scheduledFor.getTime() + 60_000).toISOString(),
+      });
+
       return;
     }
 
@@ -194,6 +232,46 @@ export function VetProfile() {
             </div>
           </CardContent>
         </Card>
+
+        {farmerConsultationRequests.length ? (
+          <Card className="mt-5 rounded-[24px] border-[#d7e3d6] bg-white shadow-none">
+            <CardContent className="space-y-3 p-5">
+              <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-slate-500">Video requests</p>
+              {farmerConsultationRequests.slice(0, 2).map((request) => (
+                <div key={request.id} className="rounded-[18px] bg-[#f8fcfa] p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-extrabold text-slate-900">
+                        {request.kind === "instant-video" ? "Instant video call" : "Proposed video slot"}
+                      </p>
+                      <p className="mt-1 text-xs font-semibold text-slate-500">
+                        {request.scheduledFor
+                          ? new Date(request.scheduledFor).toLocaleString([], {
+                              month: "short",
+                              day: "numeric",
+                              hour: "numeric",
+                              minute: "2-digit",
+                            })
+                          : "Requested now"}
+                      </p>
+                    </div>
+                    <span
+                      className={`rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] ${
+                        request.status === "accepted"
+                          ? "bg-[#E6F7EF] text-[#1E9E6F]"
+                          : request.status === "rejected"
+                            ? "bg-[#FFECEC] text-[#BF3434]"
+                            : "bg-[#FFF4D8] text-[#A96F08]"
+                      }`}
+                    >
+                      {request.status}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        ) : null}
 
         <div ref={schedulingSectionRef} className="mt-8 space-y-4">
           <h3 className="text-2xl font-extrabold text-slate-900">Consultation option</h3>
@@ -511,9 +589,13 @@ export function VetProfile() {
         <Button
           type="button"
           className="mt-8 h-20 rounded-[28px] bg-[#56a774] text-[20px] font-extrabold text-white hover:bg-[#4b9968]"
-          onClick={() => (shouldShowVideoImmediateCall ? navigate("/diagnosis-report") : handleSubmit())}
+          onClick={handleSubmit}
         >
-          {shouldShowVideoImmediateCall ? "Call now" : "Submit request"}
+          {shouldShowVideoImmediateCall
+            ? "Request video call"
+            : selectedVisitMode === "Video consultation"
+              ? "Propose time slot"
+              : "Submit request"}
         </Button>
       </div>
     </MobileShell>
