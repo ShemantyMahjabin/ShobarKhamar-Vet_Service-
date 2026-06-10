@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { vets } from '../data/vetService';
 import { MobileBottomNav } from './layout/MobileBottomNav';
 import { MobileShell } from './layout/MobileShell';
@@ -65,17 +65,29 @@ function formatDate(value: string) {
 
 export function AppointmentSchedule() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [appointments, setAppointments] = useState(initialAppointments);
   const [message, setMessage] = useState('');
   const [showRescheduleWarning, setShowRescheduleWarning] = useState(false);
   const [showCancelWarning, setShowCancelWarning] = useState(false);
   const [pendingReschedule, setPendingReschedule] = useState<{ id: number; vetName: string; hoursRemaining: number } | null>(null);
   const [pendingCancel, setPendingCancel] = useState<{ id: number; hoursRemaining: number } | null>(null);
+  const appointmentIdParam = searchParams.get('appointmentId');
+  const selectedAppointmentId = appointmentIdParam ? Number(appointmentIdParam) : null;
 
   const activeAppointments = useMemo(
     () => appointments.filter((appointment) => appointment.status !== 'cancelled'),
     [appointments],
   );
+
+  const visibleAppointments = useMemo(() => {
+    if (selectedAppointmentId === null || !Number.isFinite(selectedAppointmentId)) {
+      return activeAppointments;
+    }
+
+    const matchedAppointment = activeAppointments.find((appointment) => appointment.id === selectedAppointmentId);
+    return matchedAppointment ? [matchedAppointment] : activeAppointments;
+  }, [activeAppointments, selectedAppointmentId]);
 
   function calculateHoursRemaining(appointmentDate: string): number {
     const now = new Date();
@@ -188,7 +200,9 @@ export function AppointmentSchedule() {
         </button>
 
         <section className="mt-4 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
-          <h1 className="text-2xl font-extrabold text-[#17212B]">Appointment Schedule</h1>
+          <h1 className="text-2xl font-extrabold text-[#17212B]">
+            {selectedAppointmentId !== null && Number.isFinite(selectedAppointmentId) ? 'Appointment Details' : 'Appointment Schedule'}
+          </h1>
         </section>
 
         {message ? (
@@ -199,8 +213,8 @@ export function AppointmentSchedule() {
 
         <section className="mt-5 rounded-[22px] border border-[#DCE7DF] bg-white p-4">
           <div className="mt-4 space-y-4">
-            {activeAppointments.length > 0 ? (
-              activeAppointments.map((appointment) => (
+            {visibleAppointments.length > 0 ? (
+              visibleAppointments.map((appointment) => (
                 <div key={appointment.id} className="rounded-[20px] border border-[#DCE7DF] bg-[#F8FCFA] p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -243,9 +257,13 @@ export function AppointmentSchedule() {
               ))
             ) : (
               <div className="rounded-[18px] border border-dashed border-[#DCE7DF] bg-[#F8FCFA] px-4 py-8 text-center">
-                <p className="text-sm font-bold text-[#17212B]">No appointments yet</p>
+                <p className="text-sm font-bold text-[#17212B]">
+                  {selectedAppointmentId !== null && Number.isFinite(selectedAppointmentId) ? 'Appointment not found' : 'No appointments yet'}
+                </p>
                 <p className="mt-1 text-xs font-medium text-[#6B7785]">
-                  Book an appointment to see it here.
+                  {selectedAppointmentId !== null && Number.isFinite(selectedAppointmentId)
+                    ? 'This appointment is no longer available.'
+                    : 'Book an appointment to see it here.'}
                 </p>
               </div>
             )}

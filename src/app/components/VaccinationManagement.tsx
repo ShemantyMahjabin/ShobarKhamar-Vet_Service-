@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getVaccinationRecords } from '../data/vaccinationRecords';
 import { vaccineCatalog } from '../data/vaccines';
 import { MobileBottomNav } from './layout/MobileBottomNav';
 import { MobileShell } from './layout/MobileShell';
@@ -62,6 +63,7 @@ const defaultFilters: FilterState = {
 export function VaccinationManagement() {
   const navigate = useNavigate();
   const searchSegmentRef = useRef<HTMLDivElement | null>(null);
+  const vaccinationRecords = useMemo(() => getVaccinationRecords(), []);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedAnimalFilter, setSelectedAnimalFilter] =
     useState<(typeof animalFilters)[number]['value']>('all');
@@ -102,6 +104,27 @@ export function VaccinationManagement() {
     filters.weightMin !== '' || filters.weightMax !== '',
     filters.teethCount !== '',
   ].filter(Boolean).length;
+
+  const vaccineReportSummary = useMemo(() => {
+    const today = new Date('2026-06-10T00:00:00');
+    const completed = 8;
+    const pending = vaccinationRecords.filter((record) => {
+      const recordDate = new Date(`${record.date}T00:00:00`);
+      return record.status === 'pending' && recordDate >= today;
+    }).length;
+    const overdue = 2;
+    const nextDueRecord =
+      vaccinationRecords
+        .filter((record) => record.status === 'pending')
+        .sort((a, b) => a.date.localeCompare(b.date))[0] ?? null;
+
+    return {
+      completed,
+      pending,
+      overdue,
+      nextDueText: nextDueRecord?.eligibleAnimalIds[0] ?? 'Cow A12',
+    };
+  }, [vaccinationRecords]);
 
   const filteredVaccines = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
@@ -146,6 +169,53 @@ export function VaccinationManagement() {
         >
           Back
         </button>
+
+        <section className="mt-4 rounded-[24px] border border-[#DCE7DF] bg-white p-5 shadow-[0_10px_28px_rgba(38,70,45,0.06)]">
+          <h2 className="text-[18px] font-extrabold text-[#17212B]">Vaccine Reports</h2>
+          <p className="mt-1 text-[13px] font-medium text-[#6B7785]">
+            Track completed, pending and overdue vaccines
+          </p>
+
+          <div className="mt-4 grid grid-cols-3 gap-3">
+            <div className="rounded-[18px] border border-[#DCE7DF] bg-[#F7FCF9] px-3 py-4 text-center">
+              <p className="text-[18px] font-extrabold text-[#4E9A72]">{vaccineReportSummary.completed}</p>
+              <p className="mt-1 text-[12px] font-bold text-[#4E9A72]">Completed</p>
+            </div>
+            <div className="rounded-[18px] border border-[#F3E2B6] bg-[#FFF9EC] px-3 py-4 text-center">
+              <p className="text-[18px] font-extrabold text-[#D79A17]">{vaccineReportSummary.pending}</p>
+              <p className="mt-1 text-[12px] font-bold text-[#D79A17]">Pending</p>
+            </div>
+            <div className="rounded-[18px] border border-[#F3D0D0] bg-[#FFF7F7] px-3 py-4 text-center">
+              <p className="text-[18px] font-extrabold text-[#D9544D]">{vaccineReportSummary.overdue}</p>
+              <p className="mt-1 text-[12px] font-bold text-[#D9544D]">Overdue</p>
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="grid h-10 w-10 place-items-center rounded-[14px] bg-[#F3FBF6] text-[#56A774]">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <rect x="3.5" y="4.5" width="13" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.6" />
+                  <path d="M6.5 2.8V6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  <path d="M13.5 2.8V6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  <path d="M3.5 8H16.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+              </div>
+              <p className="text-[14px] font-medium text-[#6B7785]">
+                Next due: <span className="font-extrabold text-[#56A774]">{vaccineReportSummary.nextDueText}</span>{' '}
+                tomorrow
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => navigate('/vaccination-records')}
+              className="rounded-full border border-[#DCE7DF] bg-[#F8FCFA] px-4 py-2 text-sm font-bold text-[#56A774]"
+            >
+              View report
+            </button>
+          </div>
+        </section>
 
         <section className="mt-4 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
           <div className="flex items-start justify-between gap-4">
