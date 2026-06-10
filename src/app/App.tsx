@@ -20,12 +20,9 @@ import { VaccinationSchedule } from './components/VaccinationSchedule';
 import { FarmerProfile } from './components/FarmerProfile';
 import { VaccinationRecords } from './components/VaccinationRecords';
 import { DiagnosisReport } from './components/DiagnosisReport';
-<<<<<<< HEAD
 import { VetOffers } from './components/VetOffers';
-=======
 import { AppointmentConfirmation } from './components/AppointmentConfirmation';
 import { AppointmentSchedule } from './components/AppointmentSchedule';
->>>>>>> 8aa23c4a69a8203d8e8e1d845d1b0a66ecebd114
 
 export default function App() {
   return (
