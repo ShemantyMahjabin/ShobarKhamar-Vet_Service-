@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   BriefcaseMedical,
   CalendarDays,
@@ -132,6 +133,7 @@ function getInitials(name: string) {
 }
 
 export function VetDashboard() {
+  const navigate = useNavigate();
   const { presence, requests } = useVetConsultationStore();
   const [activeTab, setActiveTab] = useState<VetTab>('home');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -159,6 +161,11 @@ export function VetDashboard() {
   );
 
   function openTab(tab: VetTab) {
+    if (tab === 'offer') {
+      navigate('/offer');
+      return;
+    }
+
     setActiveTab(tab);
     setSelectedChatId(null);
     setIsProfileOpen(false);
@@ -748,7 +755,7 @@ export function VetDashboard() {
         </div>
       ) : null}
 
-      <div className="sticky bottom-0 border-t border-[#DCE7DF] bg-white/95 px-4 py-3 backdrop-blur">
+      <div className="absolute inset-x-0 bottom-0 border-t border-[#DCE7DF] bg-white/95 px-4 py-3 backdrop-blur">
         <div className="flex items-center justify-between">
           {tabItems.map((tab) => {
             const Icon = tab.icon;

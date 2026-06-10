@@ -141,6 +141,7 @@ export function AnimalDetails() {
   const initialAnimal = getAllAnimals().find((item) => item.id === decodedAnimalId) ?? null;
 
   const [isEditing, setIsEditing] = useState(false);
+  const [activeTopSection, setActiveTopSection] = useState<'details' | 'vaccine'>('details');
   const [draftAnimal, setDraftAnimal] = useState<AnimalRecord | null>(initialAnimal);
 
   if (!draftAnimal) {
@@ -423,292 +424,199 @@ export function AnimalDetails() {
         </section>
 
         <section className="mt-5 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
-          <h2 className="text-lg font-extrabold text-[#17212B]">Animal Details</h2>
-          <div className="mt-3">
-            <DetailRow label="Animal Type" value={valueOrDash(draftAnimal.animalType)} />
-            <DetailRow label="Subtype / Breed" value={valueOrDash(draftAnimal.subtype || draftAnimal.breed)} />
-            {isEditing ? (
-              <>
-                <EditableRow label="Age" value={draftAnimal.age} onChange={(value) => updateAnimalField('age', value)} />
-                <EditableRow label="Age Minimum" value={draftAnimal.ageMin} onChange={(value) => updateAnimalField('ageMin', value)} />
-                <EditableRow label="Age Maximum" value={draftAnimal.ageMax} onChange={(value) => updateAnimalField('ageMax', value)} />
-                <EditableRow label="Weight" value={draftAnimal.weight} onChange={(value) => updateAnimalField('weight', value)} />
-                <EditableRow label="Weight Minimum" value={draftAnimal.weightMin} onChange={(value) => updateAnimalField('weightMin', value)} />
-                <EditableRow label="Weight Maximum" value={draftAnimal.weightMax} onChange={(value) => updateAnimalField('weightMax', value)} />
-                <EditableRow label="Color" value={draftAnimal.color} onChange={(value) => updateAnimalField('color', value)} />
-                <EditableRow label="Teeth Count" value={draftAnimal.teethCount} onChange={(value) => updateAnimalField('teethCount', value)} />
-                <EditableRow label="Height" value={draftAnimal.height} onChange={(value) => updateAnimalField('height', value)} />
-                <EditableRow label="Width" value={draftAnimal.width} onChange={(value) => updateAnimalField('width', value)} />
-                <EditableRow label="Length" value={draftAnimal.length} onChange={(value) => updateAnimalField('length', value)} />
-                <EditableRow label="Has Calved" value={draftAnimal.hasCalved} onChange={(value) => updateAnimalField('hasCalved', value)} />
-                <EditableRow label="Health Status" value={draftAnimal.status} onChange={(value) => updateAnimalField('status', value)} />
-                <EditableRow label="Note" value={draftAnimal.note} onChange={(value) => updateAnimalField('note', value)} />
-              </>
-            ) : (
-              <>
-                <DetailRow label="Age" value={valueOrDash(draftAnimal.age)} />
-                <DetailRow label="Age Minimum" value={valueOrDash(draftAnimal.ageMin)} />
-                <DetailRow label="Age Maximum" value={valueOrDash(draftAnimal.ageMax)} />
-                <DetailRow label="Weight" value={valueOrDash(draftAnimal.weight)} />
-                <DetailRow label="Weight Minimum" value={valueOrDash(draftAnimal.weightMin)} />
-                <DetailRow label="Weight Maximum" value={valueOrDash(draftAnimal.weightMax)} />
-                <DetailRow label="Color" value={valueOrDash(draftAnimal.color)} />
-                <DetailRow label="Teeth Count" value={valueOrDash(draftAnimal.teethCount)} />
-                <DetailRow label="Height" value={valueOrDash(draftAnimal.height)} />
-                <DetailRow label="Width" value={valueOrDash(draftAnimal.width)} />
-                <DetailRow label="Length" value={valueOrDash(draftAnimal.length)} />
-                <DetailRow label="Has Calved" value={valueOrDash(draftAnimal.hasCalved)} />
-                <DetailRow label="Health Status" value={draftAnimal.status} />
-                <DetailRow label="Note" value={draftAnimal.note} />
-              </>
-            )}
-          </div>
-        </section>
-
-        <section className="mt-5 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
-          <h2 className="text-lg font-extrabold text-[#17212B]">Media</h2>
-          <div className="mt-3 space-y-2">
-            {draftAnimal.mediaFiles?.length ? (
-              draftAnimal.mediaFiles.map((file, index) =>
-                isMediaFile(file) ? (
-                  <div key={file.url} className="overflow-hidden rounded-2xl bg-[#F8FCFA]">
-                    {file.type.startsWith('image/') ? (
-                      <img src={file.url} alt={file.name} className="h-44 w-full object-cover" />
-                    ) : (
-                      <video src={file.url} className="h-44 w-full object-cover" controls />
-                    )}
-                    <div className="flex items-center justify-between gap-3 px-4 py-3">
-                      <p className="truncate text-sm font-semibold text-[#6B7785]">{file.name}</p>
-                      {isEditing ? (
-                        <button
-                          type="button"
-                          onClick={() => removeMediaFile(index)}
-                          className="text-xs font-bold text-[#D96758]"
-                        >
-                          Remove
-                        </button>
-                      ) : null}
-                    </div>
-                  </div>
-                ) : (
-                  <p key={file} className="truncate rounded-2xl bg-[#F8FCFA] px-4 py-3 text-sm font-semibold text-[#6B7785]">
-                    {file}
-                  </p>
-                ),
-              )
-            ) : (
-              <p className="text-sm font-semibold text-[#6B7785]">No media added.</p>
-            )}
-            {isEditing ? (
-              <label className="flex h-12 cursor-pointer items-center justify-center rounded-2xl border border-[#DCE7DF] bg-[#F8FCFA] text-sm font-bold text-[#1E9E6F]">
-                Add media
-                <input
-                  type="file"
-                  accept="image/*,video/*"
-                  multiple
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => updateMediaFiles(event.target.files)}
-                  className="sr-only"
-                />
-              </label>
-            ) : null}
-          </div>
-        </section>
-
-        <section className="mt-5 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
-          <h2 className="text-lg font-extrabold text-[#17212B]">Description</h2>
-          {isEditing ? (
-            <div className="mt-3">
-              <EditableTextarea
-                value={draftAnimal.description}
-                onChange={(value) => updateAnimalField('description', value)}
-                placeholder="Write animal description"
-              />
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-lg font-extrabold text-[#17212B]">
+              {activeTopSection === 'details' ? 'Animal Details' : 'Vaccine History Taken'}
+            </h2>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setActiveTopSection('details')}
+                className={`rounded-full px-4 py-2 text-xs font-bold ${
+                  activeTopSection === 'details'
+                    ? 'bg-[#1E9E6F] text-white'
+                    : 'border border-[#DCE7DF] bg-[#F8FCFA] text-[#1E9E6F]'
+                }`}
+              >
+                Details
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTopSection('vaccine')}
+                className={`rounded-full px-4 py-2 text-xs font-bold ${
+                  activeTopSection === 'vaccine'
+                    ? 'bg-[#1E9E6F] text-white'
+                    : 'border border-[#DCE7DF] bg-[#F8FCFA] text-[#1E9E6F]'
+                }`}
+              >
+                Vaccine
+              </button>
             </div>
-          ) : (
-            <p className="mt-3 text-sm font-semibold leading-6 text-[#6B7785]">{draftAnimal.description}</p>
-          )}
-        </section>
-
-        <section className="mt-5 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
-          <h2 className="text-lg font-extrabold text-[#17212B]">Disease History</h2>
-          <div className="mt-3 space-y-3">
-            {draftAnimal.diseaseHistory?.length ? (
-              draftAnimal.diseaseHistory.map((disease, index) => (
-                <div key={`${disease.diseaseName}-${index}`} className="rounded-2xl bg-[#F8FCFA] p-4">
-                  {isEditing ? (
-                    <div className="space-y-2">
-                      <EditableInput
-                        value={disease.diseaseName}
-                        onChange={(value) => updateDiseaseHistory(index, 'diseaseName', value)}
-                        placeholder="Disease name"
-                      />
-                      <EditableInput
-                        value={disease.startDate}
-                        onChange={(value) => updateDiseaseHistory(index, 'startDate', value)}
-                        type="date"
-                      />
-                      <EditableInput
-                        value={disease.endDate}
-                        onChange={(value) => updateDiseaseHistory(index, 'endDate', value)}
-                        type="date"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => removeDiseaseHistory(index)}
-                        className="text-xs font-bold text-[#D96758]"
-                      >
-                        Remove disease
-                      </button>
-                    </div>
-                  ) : (
-                    <>
-                      <p className="text-sm font-extrabold text-[#17212B]">{valueOrDash(disease.diseaseName)}</p>
-                      <p className="mt-1 text-sm font-semibold text-[#6B7785]">
-                        Starting date: {valueOrDash(disease.startDate)}
-                      </p>
-                      <p className="mt-1 text-sm font-semibold text-[#6B7785]">
-                        Ending date: {valueOrDash(disease.endDate)}
-                      </p>
-                    </>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p className="text-sm font-semibold text-[#6B7785]">No disease history added.</p>
-            )}
-            {isEditing ? (
-              <button
-                type="button"
-                onClick={addDiseaseHistory}
-                className="w-full rounded-2xl border border-[#DCE7DF] bg-white px-4 py-3 text-sm font-bold text-[#1E9E6F]"
-              >
-                Add disease history
-              </button>
-            ) : null}
           </div>
-        </section>
-
-        <section className="mt-5 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
-          <h2 className="text-lg font-extrabold text-[#17212B]">Vaccine History Taken</h2>
-          <div className="mt-3 space-y-3">
-            {draftAnimal.vaccineHistory?.length ? (
-              draftAnimal.vaccineHistory.map((vaccine, index) => (
-                <div key={`${vaccine.vaccineName}-${index}`} className="rounded-2xl bg-[#F8FCFA] p-4">
-                  {isEditing ? (
-                    <div className="space-y-2">
-                      <EditableInput
-                        value={vaccine.vaccineName}
-                        onChange={(value) => updateVaccineHistory(index, 'vaccineName', value)}
-                        placeholder="Vaccine name"
-                      />
-                      <EditableInput
-                        value={vaccine.date}
-                        onChange={(value) => updateVaccineHistory(index, 'date', value)}
-                        type="date"
-                      />
-                      <EditableInput
-                        value={vaccine.centre}
-                        onChange={(value) => updateVaccineHistory(index, 'centre', value)}
-                        placeholder="Centre"
-                      />
-                      <div className="space-y-3 rounded-xl border border-[#DCE7DF] bg-white p-3">
-                        {getVaccineSideEffects(vaccine).map((sideEffect, sideEffectIndex) => (
-                          <div key={`${index}-${sideEffectIndex}`} className="rounded-xl bg-[#F8FCFA] p-3">
-                            <div className="flex items-center justify-between gap-3">
-                              <p className="text-sm font-extrabold text-[#17212B]">Side Effect #{sideEffectIndex + 1}</p>
-                              {getVaccineSideEffects(vaccine).length > 1 ? (
-                                <button
-                                  type="button"
-                                  onClick={() => removeVaccineSideEffect(index, sideEffectIndex)}
-                                  className="text-xs font-bold text-[#D96758]"
-                                >
-                                  Remove
-                                </button>
-                              ) : null}
-                            </div>
-                            <div className="mt-2">
-                              <EditableTextarea
-                                value={sideEffect.description}
-                                onChange={(value) => updateVaccineSideEffect(index, sideEffectIndex, 'description', value)}
-                                placeholder="Side effect description"
-                                rows={3}
-                              />
-                            </div>
-                            <div className="mt-2">
-                              <EditableInput
-                                value={sideEffect.date}
-                                onChange={(value) => updateVaccineSideEffect(index, sideEffectIndex, 'date', value)}
-                                type="date"
-                              />
-                            </div>
-                            <label className="mt-2 flex h-11 cursor-pointer items-center justify-center rounded-xl border border-[#DCE7DF] bg-white text-sm font-bold text-[#1E9E6F]">
-                              {sideEffect.mediaName || 'Upload side effect image or video'}
-                              <input
-                                type="file"
-                                accept="image/*,video/*"
-                                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                                  updateVaccineSideEffectMedia(index, sideEffectIndex, event.target.files)
-                                }
-                                className="sr-only"
-                              />
-                            </label>
-                            {sideEffect.mediaUrl ? (
-                              sideEffect.mediaType?.startsWith('video/') ? (
-                                <video src={sideEffect.mediaUrl} className="mt-3 h-40 w-full rounded-2xl object-cover" controls />
-                              ) : (
-                                <img src={sideEffect.mediaUrl} alt={sideEffect.mediaName} className="mt-3 h-40 w-full rounded-2xl object-cover" />
-                              )
-                            ) : null}
+          <div className="mt-3">
+            {activeTopSection === 'details' ? (
+              <>
+                <DetailRow label="Animal Type" value={valueOrDash(draftAnimal.animalType)} />
+                <DetailRow label="Subtype / Breed" value={valueOrDash(draftAnimal.subtype || draftAnimal.breed)} />
+                {isEditing ? (
+                  <>
+                    <EditableRow label="Age" value={draftAnimal.age} onChange={(value) => updateAnimalField('age', value)} />
+                    <EditableRow label="Age Minimum" value={draftAnimal.ageMin} onChange={(value) => updateAnimalField('ageMin', value)} />
+                    <EditableRow label="Age Maximum" value={draftAnimal.ageMax} onChange={(value) => updateAnimalField('ageMax', value)} />
+                    <EditableRow label="Weight" value={draftAnimal.weight} onChange={(value) => updateAnimalField('weight', value)} />
+                    <EditableRow label="Weight Minimum" value={draftAnimal.weightMin} onChange={(value) => updateAnimalField('weightMin', value)} />
+                    <EditableRow label="Weight Maximum" value={draftAnimal.weightMax} onChange={(value) => updateAnimalField('weightMax', value)} />
+                    <EditableRow label="Color" value={draftAnimal.color} onChange={(value) => updateAnimalField('color', value)} />
+                    <EditableRow label="Teeth Count" value={draftAnimal.teethCount} onChange={(value) => updateAnimalField('teethCount', value)} />
+                    <EditableRow label="Height" value={draftAnimal.height} onChange={(value) => updateAnimalField('height', value)} />
+                    <EditableRow label="Width" value={draftAnimal.width} onChange={(value) => updateAnimalField('width', value)} />
+                    <EditableRow label="Length" value={draftAnimal.length} onChange={(value) => updateAnimalField('length', value)} />
+                    <EditableRow label="Has Calved" value={draftAnimal.hasCalved} onChange={(value) => updateAnimalField('hasCalved', value)} />
+                    <EditableRow label="Health Status" value={draftAnimal.status} onChange={(value) => updateAnimalField('status', value)} />
+                    <EditableRow label="Note" value={draftAnimal.note} onChange={(value) => updateAnimalField('note', value)} />
+                  </>
+                ) : (
+                  <>
+                    <DetailRow label="Age" value={valueOrDash(draftAnimal.age)} />
+                    <DetailRow label="Age Minimum" value={valueOrDash(draftAnimal.ageMin)} />
+                    <DetailRow label="Age Maximum" value={valueOrDash(draftAnimal.ageMax)} />
+                    <DetailRow label="Weight" value={valueOrDash(draftAnimal.weight)} />
+                    <DetailRow label="Weight Minimum" value={valueOrDash(draftAnimal.weightMin)} />
+                    <DetailRow label="Weight Maximum" value={valueOrDash(draftAnimal.weightMax)} />
+                    <DetailRow label="Color" value={valueOrDash(draftAnimal.color)} />
+                    <DetailRow label="Teeth Count" value={valueOrDash(draftAnimal.teethCount)} />
+                    <DetailRow label="Height" value={valueOrDash(draftAnimal.height)} />
+                    <DetailRow label="Width" value={valueOrDash(draftAnimal.width)} />
+                    <DetailRow label="Length" value={valueOrDash(draftAnimal.length)} />
+                    <DetailRow label="Has Calved" value={valueOrDash(draftAnimal.hasCalved)} />
+                    <DetailRow label="Health Status" value={draftAnimal.status} />
+                    <DetailRow label="Note" value={draftAnimal.note} />
+                  </>
+                )}
+              </>
+            ) : (
+              <div className="space-y-3">
+                {draftAnimal.vaccineHistory?.length ? (
+                  draftAnimal.vaccineHistory.map((vaccine, index) => (
+                    <div key={`${vaccine.vaccineName}-${index}`} className="rounded-2xl bg-[#F8FCFA] p-4">
+                      {isEditing ? (
+                        <div className="space-y-2">
+                          <EditableInput
+                            value={vaccine.vaccineName}
+                            onChange={(value) => updateVaccineHistory(index, 'vaccineName', value)}
+                            placeholder="Vaccine name"
+                          />
+                          <EditableInput
+                            value={vaccine.date}
+                            onChange={(value) => updateVaccineHistory(index, 'date', value)}
+                            type="date"
+                          />
+                          <EditableInput
+                            value={vaccine.centre}
+                            onChange={(value) => updateVaccineHistory(index, 'centre', value)}
+                            placeholder="Centre"
+                          />
+                          <div className="space-y-3 rounded-xl border border-[#DCE7DF] bg-white p-3">
+                            {getVaccineSideEffects(vaccine).map((sideEffect, sideEffectIndex) => (
+                              <div key={`${index}-${sideEffectIndex}`} className="rounded-xl bg-[#F8FCFA] p-3">
+                                <div className="flex items-center justify-between gap-3">
+                                  <p className="text-sm font-extrabold text-[#17212B]">Side Effect #{sideEffectIndex + 1}</p>
+                                  {getVaccineSideEffects(vaccine).length > 1 ? (
+                                    <button
+                                      type="button"
+                                      onClick={() => removeVaccineSideEffect(index, sideEffectIndex)}
+                                      className="text-xs font-bold text-[#D96758]"
+                                    >
+                                      Remove
+                                    </button>
+                                  ) : null}
+                                </div>
+                                <div className="mt-2">
+                                  <EditableTextarea
+                                    value={sideEffect.description}
+                                    onChange={(value) => updateVaccineSideEffect(index, sideEffectIndex, 'description', value)}
+                                    placeholder="Side effect description"
+                                    rows={3}
+                                  />
+                                </div>
+                                <div className="mt-2">
+                                  <EditableInput
+                                    value={sideEffect.date}
+                                    onChange={(value) => updateVaccineSideEffect(index, sideEffectIndex, 'date', value)}
+                                    type="date"
+                                  />
+                                </div>
+                                <label className="mt-2 flex h-11 cursor-pointer items-center justify-center rounded-xl border border-[#DCE7DF] bg-white text-sm font-bold text-[#1E9E6F]">
+                                  {sideEffect.mediaName || 'Upload side effect image or video'}
+                                  <input
+                                    type="file"
+                                    accept="image/*,video/*"
+                                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                      updateVaccineSideEffectMedia(index, sideEffectIndex, event.target.files)
+                                    }
+                                    className="sr-only"
+                                  />
+                                </label>
+                                {sideEffect.mediaUrl ? (
+                                  sideEffect.mediaType?.startsWith('video/') ? (
+                                    <video src={sideEffect.mediaUrl} className="mt-3 h-40 w-full rounded-2xl object-cover" controls />
+                                  ) : (
+                                    <img src={sideEffect.mediaUrl} alt={sideEffect.mediaName} className="mt-3 h-40 w-full rounded-2xl object-cover" />
+                                  )
+                                ) : null}
+                              </div>
+                            ))}
+                            <button
+                              type="button"
+                              onClick={() => addVaccineSideEffect(index)}
+                              className="w-full rounded-xl border border-[#DCE7DF] bg-[#F8FCFA] px-4 py-3 text-sm font-bold text-[#1E9E6F]"
+                            >
+                              Add another side effect
+                            </button>
                           </div>
-                        ))}
-                        <button
-                          type="button"
-                          onClick={() => addVaccineSideEffect(index)}
-                          className="w-full rounded-xl border border-[#DCE7DF] bg-[#F8FCFA] px-4 py-3 text-sm font-bold text-[#1E9E6F]"
-                        >
-                          Add another side effect
-                        </button>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => removeVaccineHistory(index)}
-                        className="text-xs font-bold text-[#D96758]"
-                      >
-                        Remove vaccine history
-                      </button>
+                          <button
+                            type="button"
+                            onClick={() => removeVaccineHistory(index)}
+                            className="text-xs font-bold text-[#D96758]"
+                          >
+                            Remove vaccine history
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              navigate(
+                                `/farm-management/${encodeURIComponent(decodedAnimalId)}/vaccine-history/${index}`,
+                              )
+                            }
+                            className="text-left text-sm font-extrabold text-[#17212B] underline decoration-[#C9D6E0] underline-offset-4"
+                          >
+                            {valueOrDash(vaccine.vaccineName)}
+                          </button>
+                          <p className="mt-1 text-sm font-semibold text-[#6B7785]">Taken on: {valueOrDash(vaccine.date)}</p>
+                        </>
+                      )}
                     </div>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          navigate(
-                            `/farm-management/${encodeURIComponent(decodedAnimalId)}/vaccine-history/${index}`,
-                          )
-                        }
-                        className="text-left text-sm font-extrabold text-[#17212B] underline decoration-[#C9D6E0] underline-offset-4"
-                      >
-                        {valueOrDash(vaccine.vaccineName)}
-                      </button>
-                      <p className="mt-1 text-sm font-semibold text-[#6B7785]">Taken on: {valueOrDash(vaccine.date)}</p>
-                    </>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p className="text-sm font-semibold text-[#6B7785]">No vaccine history added.</p>
+                  ))
+                ) : (
+                  <p className="text-sm font-semibold text-[#6B7785]">No vaccine history added.</p>
+                )}
+                {isEditing ? (
+                  <button
+                    type="button"
+                    onClick={addVaccineHistory}
+                    className="w-full rounded-2xl border border-[#DCE7DF] bg-white px-4 py-3 text-sm font-bold text-[#1E9E6F]"
+                  >
+                    Add vaccine history
+                  </button>
+                ) : null}
+              </div>
             )}
-            {isEditing ? (
-              <button
-                type="button"
-                onClick={addVaccineHistory}
-                className="w-full rounded-2xl border border-[#DCE7DF] bg-white px-4 py-3 text-sm font-bold text-[#1E9E6F]"
-              >
-                Add vaccine history
-              </button>
-            ) : null}
           </div>
         </section>
+
       </div>
 
       <MobileBottomNav active="animals" />

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { vaccineCatalog } from '../data/vaccines';
 import { MobileBottomNav } from './layout/MobileBottomNav';
@@ -61,9 +61,11 @@ const defaultFilters: FilterState = {
 
 export function VaccinationManagement() {
   const navigate = useNavigate();
+  const searchSegmentRef = useRef<HTMLDivElement | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedAnimalFilter, setSelectedAnimalFilter] =
     useState<(typeof animalFilters)[number]['value']>('all');
+  const [isAnimalFilterMenuOpen, setIsAnimalFilterMenuOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [draftFilters, setDraftFilters] = useState<FilterState>(defaultFilters);
@@ -120,6 +122,19 @@ export function VaccinationManagement() {
     });
   }, [filters, searchTerm, selectedAnimalFilter]);
 
+  useEffect(() => {
+    if (!isAnimalFilterMenuOpen) return;
+
+    function handlePointerDown(event: MouseEvent) {
+      if (!searchSegmentRef.current?.contains(event.target as Node)) {
+        setIsAnimalFilterMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDown);
+    return () => document.removeEventListener('mousedown', handlePointerDown);
+  }, [isAnimalFilterMenuOpen]);
+
   return (
     <MobileShell>
       <MobileStatusBar />
@@ -146,7 +161,10 @@ export function VaccinationManagement() {
             </button>
           </div>
 
-          <div className="mt-4 space-y-3">
+          <div
+            ref={searchSegmentRef}
+            className={`mt-4 space-y-3 ${isAnimalFilterMenuOpen ? 'relative z-30' : ''}`}
+          >
             <div className="flex items-center gap-3">
               <input
                 type="text"
@@ -182,41 +200,66 @@ export function VaccinationManagement() {
               </button>
             </div>
 
-            <div className="-mx-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex min-w-max gap-2 px-1 pb-1">
-              <select
-                value={selectedAnimalFilter}
-                onChange={(event) =>
-                  setSelectedAnimalFilter(event.target.value as (typeof animalFilters)[number]['value'])
-                }
-                className="rounded-full border border-[#DCE7DF] bg-[#F8FCFA] px-3 py-2 text-xs font-bold text-[#17212B] outline-none"
-              >
-                {animalFilters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>
-                    {filter.label}
-                  </option>
-                ))}
-              </select>
+            <div
+              className={`-mx-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+                isAnimalFilterMenuOpen ? 'overflow-visible' : 'overflow-x-auto'
+              }`}
+            >
+              <div className="relative flex min-w-max gap-2 px-1 pb-1">
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsAnimalFilterMenuOpen((current) => !current)}
+                    className="rounded-full border border-[#DCE7DF] bg-[#F8FCFA] px-3 py-2 text-xs font-bold text-[#17212B]"
+                  >
+                    {animalFilters.find((filter) => filter.value === selectedAnimalFilter)?.label ?? 'All'}
+                  </button>
 
-              {animalFilters
-                .filter((filter) => filter.value !== 'all')
-                .map((filter) => {
-                  const isActive = selectedAnimalFilter === filter.value;
-                  return (
-                    <button
-                      key={filter.value}
-                      type="button"
-                      onClick={() => setSelectedAnimalFilter(filter.value)}
-                      className={`rounded-full px-3 py-2 text-xs font-bold transition-colors ${
-                        isActive
-                          ? 'bg-[#1E9E6F] text-white'
-                          : 'border border-[#DCE7DF] bg-[#F8FCFA] text-[#6B7785]'
-                      }`}
-                    >
-                      {filter.label}
-                    </button>
-                  );
-                })}
+                  {isAnimalFilterMenuOpen ? (
+                    <div className="absolute left-0 top-full z-50 mt-2 w-40 overflow-hidden rounded-[20px] border border-[#DCE7DF] bg-[#17212B]/78 shadow-2xl backdrop-blur-md">
+                      {animalFilters.map((filter) => {
+                        const isActive = filter.value === selectedAnimalFilter;
+
+                        return (
+                          <button
+                            key={filter.value}
+                            type="button"
+                            onClick={() => {
+                              setSelectedAnimalFilter(filter.value);
+                              setIsAnimalFilterMenuOpen(false);
+                            }}
+                            className={`flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm font-bold ${
+                              isActive ? 'text-white' : 'text-white/90'
+                            }`}
+                          >
+                            <span className="w-3 text-white">{isActive ? '✓' : ''}</span>
+                            <span>{filter.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                </div>
+
+                {animalFilters
+                  .filter((filter) => filter.value !== 'all')
+                  .map((filter) => {
+                    const isActive = selectedAnimalFilter === filter.value;
+                    return (
+                      <button
+                        key={filter.value}
+                        type="button"
+                        onClick={() => setSelectedAnimalFilter(filter.value)}
+                        className={`rounded-full px-3 py-2 text-xs font-bold transition-colors ${
+                          isActive
+                            ? 'bg-[#1E9E6F] text-white'
+                            : 'border border-[#DCE7DF] bg-[#F8FCFA] text-[#6B7785]'
+                        }`}
+                      >
+                        {filter.label}
+                      </button>
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -227,7 +270,9 @@ export function VaccinationManagement() {
           </div>
         </section>
 
-        <section className="mt-5 space-y-3">
+        <section
+          className={`relative mt-5 space-y-3 ${isAnimalFilterMenuOpen ? 'blur-[5px] pointer-events-none' : ''}`}
+        >
           {filteredVaccines.map((item) => (
             <button
               key={item.id}
@@ -266,6 +311,15 @@ export function VaccinationManagement() {
                 Try a different search term or animal filter.
               </p>
             </div>
+          ) : null}
+
+          {isAnimalFilterMenuOpen ? (
+            <button
+              type="button"
+              aria-label="Close vaccine animal filter menu"
+              onClick={() => setIsAnimalFilterMenuOpen(false)}
+              className="absolute inset-0 z-10 cursor-default"
+            />
           ) : null}
         </section>
       </div>

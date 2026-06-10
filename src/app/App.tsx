@@ -46,7 +46,7 @@ export default function App() {
           <Route path="/diagnosis-report" element={<DiagnosisReport />} />
           <Route path="/vet-registration" element={<VetRegistration />} />
           <Route path="/vet-dashboard" element={<VetDashboard />} />
-          <Route path="/vet-offers" element={<VetOffers />} />
+          <Route path="/offer" element={<VetOffers />} />
           <Route path="/booking" element={<BookAppointment />} />
           <Route path="/booking/:vetId" element={<VetProfile />} />
           <Route path="/booking/:vetId/chat" element={<VetChatPage />} />
