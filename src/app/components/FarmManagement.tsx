@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ChevronRight, Heart } from 'lucide-react';
 import { getAllAnimals, type AnimalRecord } from '../data/animals';
-import { Avatar, AvatarFallback } from './ui/avatar';
 import { MobileBottomNav } from './layout/MobileBottomNav';
 import { MobileShell } from './layout/MobileShell';
 import { MobileStatusBar } from './layout/MobileStatusBar';
@@ -15,10 +15,26 @@ const ageChips = [
   { label: '36-48 months', min: 36, max: 48 },
 ] as const;
 
+const animalImageByType: Record<string, string> = {
+  Cow: 'https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?w=520&h=300&fit=crop&auto=format',
+  Goat: 'https://images.unsplash.com/photo-1524024973431-2ad916746881?w=520&h=300&fit=crop&auto=format',
+  Buffalo: 'https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?w=520&h=300&fit=crop&auto=format',
+  Sheep: 'https://images.unsplash.com/photo-1484557985045-edf25e08da73?w=520&h=300&fit=crop&auto=format',
+  Camel: 'https://images.unsplash.com/photo-1489161587020-79aa193f04ff?w=520&h=300&fit=crop&auto=format',
+  Calf: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=520&h=300&fit=crop&auto=format',
+  Poultry: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=520&h=300&fit=crop&auto=format',
+  Others: 'https://images.unsplash.com/photo-1596733430284-f7437764b1a9?w=520&h=300&fit=crop&auto=format',
+};
+
+const previewAnimalCount = 5;
+
 function getAnimalType(animal: AnimalRecord) {
   if (animal.animalType) return animal.animalType;
   if (animal.id.startsWith('Cow')) return 'Cow';
   if (animal.id.startsWith('Goat')) return 'Goat';
+  if (animal.id.startsWith('Buffalo')) return 'Buffalo';
+  if (animal.id.startsWith('Sheep')) return 'Sheep';
+  if (animal.id.startsWith('Camel')) return 'Camel';
   if (animal.id.startsWith('Calf')) return 'Calf';
   if (animal.id.startsWith('Poultry')) return 'Poultry';
   return 'Others';
@@ -32,13 +48,30 @@ function parseAgeToMonths(age: string) {
   return years * 12 + months;
 }
 
-function getAnimalInitials(name: string) {
-  return name
-    .split(' ')
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
+function getAnimalImage(animal: AnimalRecord) {
+  const mediaFile = animal.mediaFiles?.[0];
+
+  if (typeof mediaFile === 'string' && mediaFile) {
+    return mediaFile;
+  }
+
+  if (typeof mediaFile === 'object' && mediaFile?.url) {
+    return mediaFile.url;
+  }
+
+  return animalImageByType[getAnimalType(animal)] ?? animalImageByType.Others;
+}
+
+function getStatusTone(status: string) {
+  if (status === 'Healthy' || status === 'Registered' || status === 'Recovered') {
+    return 'bg-emerald-50 text-[#529864]';
+  }
+
+  if (status === 'Needs check') {
+    return 'bg-amber-50 text-amber-600';
+  }
+
+  return 'bg-sky-50 text-sky-600';
 }
 
 export function FarmManagement() {
@@ -52,6 +85,7 @@ export function FarmManagement() {
   const [statusFilter, setStatusFilter] = useState<(typeof statusOptions)[number]>('All status');
   const [ageMin, setAgeMin] = useState('');
   const [ageMax, setAgeMax] = useState('');
+  const [showAllAnimals, setShowAllAnimals] = useState(false);
 
   const filteredAnimals = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
@@ -73,6 +107,9 @@ export function FarmManagement() {
     });
   }, [ageMax, ageMin, animalRecords, animalType, searchTerm, statusFilter]);
 
+  const visibleAnimals = showAllAnimals ? filteredAnimals : filteredAnimals.slice(0, previewAnimalCount);
+  const hiddenAnimalCount = Math.max(filteredAnimals.length - previewAnimalCount, 0);
+
   useEffect(() => {
     if (!isAnimalTypeMenuOpen) return;
 
@@ -85,6 +122,10 @@ export function FarmManagement() {
     document.addEventListener('mousedown', handlePointerDown);
     return () => document.removeEventListener('mousedown', handlePointerDown);
   }, [isAnimalTypeMenuOpen]);
+
+  useEffect(() => {
+    setShowAllAnimals(false);
+  }, [ageMax, ageMin, animalType, searchTerm, statusFilter]);
 
   return (
     <MobileShell>
@@ -211,29 +252,61 @@ export function FarmManagement() {
           </div>
         </div>
 
-        <div
-          className={`relative mt-5 space-y-3 transition ${isAnimalTypeMenuOpen ? 'blur-[5px] pointer-events-none' : ''}`}
-        >
-          {filteredAnimals.map((animal) => (
-            <button
-              key={animal.id}
-              type="button"
-              onClick={() => navigate(`/farm-management/${encodeURIComponent(animal.id)}`)}
-              className="w-full rounded-[20px] border border-[#DCE7DF] bg-white p-4 text-left transition active:scale-[0.99]"
-            >
-              <div className="flex items-center gap-3">
-                <Avatar className="h-12 w-12 border border-[#DCE7DF] bg-[#E6F7EF]">
-                  <AvatarFallback className="bg-[#E6F7EF] text-sm font-extrabold text-[#1E9E6F]">
-                    {getAnimalInitials(animal.name)}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm font-extrabold text-[#17212B]">{animal.name}</p>
-                  <p className="mt-1 text-xs font-medium text-[#6B7785]">{animal.id}</p>
+        <div className={`relative mt-5 transition ${isAnimalTypeMenuOpen ? 'blur-[5px] pointer-events-none' : ''}`}>
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.12em] text-[#8a908a]">Animals</p>
+              <p className="mt-1 text-sm font-black text-[#202720]">
+                Showing {visibleAnimals.length} of {filteredAnimals.length}
+              </p>
+            </div>
+            {hiddenAnimalCount > 0 ? (
+              <button
+                type="button"
+                onClick={() => setShowAllAnimals((current) => !current)}
+                className="rounded-[14px] bg-[#3d7f52] px-4 py-3 text-xs font-black text-white shadow-sm transition active:scale-[0.98]"
+              >
+                {showAllAnimals ? 'Show Less' : 'Show All'}
+              </button>
+            ) : null}
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 pb-4">
+            {visibleAnimals.map((animal) => (
+              <button
+                key={animal.id}
+                type="button"
+                onClick={() => navigate(`/farm-management/${encodeURIComponent(animal.id)}`)}
+                className="overflow-hidden rounded-[18px] border border-[#e3e9e5] bg-white text-left shadow-[0_8px_18px_rgba(42,72,48,0.08)] transition active:scale-[0.99]"
+              >
+                <div className="relative h-[110px] bg-emerald-100">
+                  <img src={getAnimalImage(animal)} alt={animal.name} className="h-full w-full object-cover" />
+                  <span className="absolute left-2 top-2 rounded bg-white/85 px-2 py-1 text-[9px] font-black text-[#4b9463] backdrop-blur">
+                    {getAnimalType(animal)}
+                  </span>
+                  <span className="absolute right-2 top-2 grid h-8 w-8 place-items-center rounded-full bg-white/80 backdrop-blur">
+                    <Heart className="h-5 w-5 fill-transparent stroke-white drop-shadow" />
+                  </span>
                 </div>
-              </div>
-            </button>
-          ))}
+                <div className="p-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <h3 className="truncate text-[14px] font-black leading-tight text-[#202720]">{animal.name}</h3>
+                      <p className="mt-1 truncate text-[11px] font-bold text-[#6f7771]">{animal.breed} • {animal.age}</p>
+                    </div>
+                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#9aa29c]" />
+                  </div>
+                  <p className="mt-2 truncate text-[11px] font-bold text-[#6f7771]">{animal.note}</p>
+                  <div className="mt-3 flex items-center justify-between gap-2">
+                    <p className="truncate text-[12px] font-black text-[#4b9463]">{animal.id}</p>
+                    <span className={`shrink-0 rounded px-2 py-1 text-[9px] font-black ${getStatusTone(animal.status)}`}>
+                      {animal.status}
+                    </span>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
 
           {filteredAnimals.length === 0 ? (
             <div className="rounded-[20px] border border-[#DCE7DF] bg-white p-5 text-center">

@@ -91,6 +91,33 @@ export const animals: AnimalRecord[] = [
     note: 'Respiratory concern',
     description: 'Layer group with early respiratory symptoms requiring quick flock-level assessment.',
   },
+  {
+    id: 'Cow B17',
+    name: 'Rani',
+    breed: 'Sahiwal',
+    age: '2 years 7 months',
+    status: 'Healthy',
+    note: 'High milk yield',
+    description: 'Calm dairy cow with steady milk production and up-to-date routine checks.',
+  },
+  {
+    id: 'Buffalo BF02',
+    name: 'Kalo',
+    breed: 'Murrah',
+    age: '4 years 1 month',
+    status: 'Registered',
+    note: 'Newly registered',
+    description: 'Strong adult buffalo recently added to the farm profile for regular health tracking.',
+  },
+  {
+    id: 'Sheep S11',
+    name: 'Champa',
+    breed: 'Garole',
+    age: '1 year 4 months',
+    status: 'Healthy',
+    note: 'Routine monitoring',
+    description: 'Small ruminant kept under routine observation with no active health alerts.',
+  },
 ];
 
 export function getSavedAnimals() {
