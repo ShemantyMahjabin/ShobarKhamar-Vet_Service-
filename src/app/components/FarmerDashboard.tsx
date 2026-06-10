@@ -32,15 +32,8 @@ const profileStats = [
     icon: ShieldPlus,
   },
   {
-    title: 'Pending Vaccine',
-    subtitle: '1 due',
-    tone: 'bg-violet-50 text-violet-700',
-    icon: Syringe,
-    badge: '1',
-  },
-  {
-    title: 'Appointments',
-    subtitle: '4 upcoming',
+    title: 'Calendar',
+    subtitle: 'Schedule overview',
     tone: 'bg-blue-50 text-blue-600',
     icon: CalendarDays,
   },
@@ -98,8 +91,7 @@ export function FarmerDashboard() {
   const statActions = [
     () => navigate('/farm-management'),
     () => navigate('/booking'),
-    () => navigate('/vaccination-management'),
-    () => navigate('/appointment-schedule'),
+    () => undefined,
   ];
 
   return (
@@ -158,7 +150,7 @@ export function FarmerDashboard() {
           </div>
 
           <div className="mx-4 mt-8 rounded-[28px] border border-[#dce5de] bg-white p-4 shadow-[0_10px_28px_rgba(38,70,45,0.08)]">
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               {profileStats.map((item, index) => (
                 <button
                   key={item.title}
