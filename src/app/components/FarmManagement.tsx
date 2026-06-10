@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllAnimals, type AnimalRecord } from '../data/animals';
 import { Avatar, AvatarFallback } from './ui/avatar';
@@ -43,6 +43,7 @@ function getAnimalInitials(name: string) {
 
 export function FarmManagement() {
   const navigate = useNavigate();
+  const searchSegmentRef = useRef<HTMLDivElement | null>(null);
   const [animalRecords] = useState(() => getAllAnimals());
   const [searchTerm, setSearchTerm] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -72,6 +73,19 @@ export function FarmManagement() {
     });
   }, [ageMax, ageMin, animalRecords, animalType, searchTerm, statusFilter]);
 
+  useEffect(() => {
+    if (!isAnimalTypeMenuOpen) return;
+
+    function handlePointerDown(event: MouseEvent) {
+      if (!searchSegmentRef.current?.contains(event.target as Node)) {
+        setIsAnimalTypeMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDown);
+    return () => document.removeEventListener('mousedown', handlePointerDown);
+  }, [isAnimalTypeMenuOpen]);
+
   return (
     <MobileShell>
       <MobileStatusBar />
@@ -100,6 +114,7 @@ export function FarmManagement() {
         </div>
 
         <div
+          ref={searchSegmentRef}
           className={`mt-5 space-y-3 rounded-[20px] border border-[#DCE7DF] bg-white p-4 transition ${
             isAnimalTypeMenuOpen ? 'relative z-30' : ''
           }`}
@@ -196,7 +211,9 @@ export function FarmManagement() {
           </div>
         </div>
 
-        <div className={`mt-5 space-y-3 transition ${isAnimalTypeMenuOpen ? 'blur-[5px]' : ''}`}>
+        <div
+          className={`relative mt-5 space-y-3 transition ${isAnimalTypeMenuOpen ? 'blur-[5px] pointer-events-none' : ''}`}
+        >
           {filteredAnimals.map((animal) => (
             <button
               key={animal.id}
@@ -223,6 +240,15 @@ export function FarmManagement() {
               <p className="text-sm font-extrabold text-[#17212B]">No animals found</p>
               <p className="mt-2 text-xs font-medium text-[#6B7785]">Try another search or filter combination.</p>
             </div>
+          ) : null}
+
+          {isAnimalTypeMenuOpen ? (
+            <button
+              type="button"
+              aria-label="Close animal type menu"
+              onClick={() => setIsAnimalTypeMenuOpen(false)}
+              className="absolute inset-0 z-10 cursor-default"
+            />
           ) : null}
         </div>
 
