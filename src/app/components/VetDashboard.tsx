@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   BriefcaseMedical,
   CalendarDays,
@@ -122,6 +123,7 @@ function getInitials(name: string) {
 }
 
 export function VetDashboard() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<VetTab>('home');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
@@ -134,6 +136,11 @@ export function VetDashboard() {
   const selectedChat = chats.find((chat) => chat.id === selectedChatId && chat.status === 'active');
 
   function openTab(tab: VetTab) {
+    if (tab === 'offer') {
+      navigate('/offer');
+      return;
+    }
+
     setActiveTab(tab);
     setSelectedChatId(null);
     setIsProfileOpen(false);

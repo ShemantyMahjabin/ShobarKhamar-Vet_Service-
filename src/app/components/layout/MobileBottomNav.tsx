@@ -14,7 +14,7 @@ export function MobileBottomNav({ active }: { active: Tab }) {
   ];
 
   return (
-    <div className="sticky bottom-0 mt-6 border-t border-[#DCE7DF] bg-white/95 px-4 py-3 backdrop-blur">
+    <div className="absolute inset-x-0 bottom-0 z-20 border-t border-[#DCE7DF] bg-white/95 px-4 py-3 backdrop-blur">
       <div className="flex items-center justify-between">
         {tabs.map((tab) => {
           const isActive = tab.key === active;
