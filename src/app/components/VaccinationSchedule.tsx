@@ -11,6 +11,36 @@ const vaccineReminders = [
   { id: 4, date: '2026-06-15', vaccineId: 6, vaccineName: 'Goat pox vaccine', animal: 'Goat G08' },
 ];
 
+const weeklyVetAppointments = [
+  {
+    id: 101,
+    date: '2026-06-11',
+    vetName: 'Dr. Farhana Akter',
+    time: '10:00 AM - 11:00 AM',
+    mode: 'Farm visit',
+    animals: 'Goat G05',
+    status: 'Accepted',
+  },
+  {
+    id: 102,
+    date: '2026-06-12',
+    vetName: 'Dr. Nadia Islam',
+    time: '11:30 AM - 12:30 PM',
+    mode: 'In Person',
+    animals: 'Cow A12, Goat G08',
+    status: 'Accepted',
+  },
+  {
+    id: 103,
+    date: '2026-06-15',
+    vetName: 'Dr. Mahmud Hasan',
+    time: '3:00 PM - 3:30 PM',
+    mode: 'Video consultation',
+    animals: 'Calf C03',
+    status: 'Pending',
+  },
+];
+
 const scheduleDays = [
   '2026-06-09',
   '2026-06-10',
@@ -27,6 +57,8 @@ const reminderColors = [
   'bg-[#EAF3FB] text-[#0F4C81]',
   'bg-[#F3ECFF] text-[#7A59C4]',
 ];
+
+const appointmentCardTone = 'border border-[#D8E8F2] bg-[#EEF7FD] text-[#215B7C]';
 
 function formatFullDate(value: string) {
   const date = new Date(`${value}T00:00:00`);
@@ -54,6 +86,7 @@ export function VaccinationSchedule() {
     return scheduleDays.map((date) => ({
       date,
       reminders: vaccineReminders.filter((reminder) => reminder.date === date),
+      appointments: weeklyVetAppointments.filter((appointment) => appointment.date === date),
     }));
   }, []);
 
@@ -70,7 +103,7 @@ export function VaccinationSchedule() {
         </button>
 
         <section className="mt-4 rounded-[24px] border border-[#DCE7DF] bg-white p-5">
-          <h1 className="text-2xl font-extrabold text-[#17212B]">Vaccination Schedule</h1>
+          <h1 className="text-2xl font-extrabold text-[#17212B]">Calender</h1>
         </section>
 
         <section className="mt-5 rounded-[22px] border border-[#DCE7DF] bg-white p-4">
@@ -90,12 +123,11 @@ export function VaccinationSchedule() {
           <div className="mt-4 rounded-[20px] border border-[#DCE7DF] bg-[#F8FCFA] p-3">
             <div className="mb-3 flex items-center justify-between gap-2">
               <span className="rounded-xl bg-white px-3 py-2 text-xs font-bold text-[#17212B]">Week</span>
-              <span className="text-xs font-medium text-[#6B7785]">{vaccineReminders.length} scheduled reminders</span>
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <div className="grid min-w-[680px] grid-cols-7 gap-3">
-                {remindersByDate.map(({ date, reminders }) => (
+                {remindersByDate.map(({ date, reminders, appointments }) => (
                   <div key={date} className="rounded-[18px] border border-[#DCE7DF] bg-white p-3 align-top">
                     <div className="border-b border-[#EEF1F4] pb-3">
                       <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#6B7785]">
@@ -105,23 +137,42 @@ export function VaccinationSchedule() {
                     </div>
 
                     <div className="mt-3 space-y-2">
-                      {reminders.length > 0 ? (
-                        reminders.map((reminder, index) => (
-                          <button
-                            key={reminder.id}
-                            type="button"
-                            onClick={() => navigate(`/give-vaccine?vaccineId=${reminder.vaccineId}`)}
-                            className={`w-full rounded-[14px] px-3 py-3 text-left text-xs font-bold ${
-                              reminderColors[index % reminderColors.length]
-                            }`}
-                          >
-                            <p>{reminder.vaccineName}</p>
-                            <p className="mt-1 text-[11px] font-semibold opacity-80">{reminder.animal}</p>
-                          </button>
-                        ))
+                      {reminders.length > 0 || appointments.length > 0 ? (
+                        <>
+                          {reminders.map((reminder, index) => (
+                            <button
+                              key={reminder.id}
+                              type="button"
+                              onClick={() => navigate(`/give-vaccine?vaccineId=${reminder.vaccineId}`)}
+                              className={`w-full rounded-[14px] px-3 py-3 text-left text-xs font-bold ${
+                                reminderColors[index % reminderColors.length]
+                              }`}
+                            >
+                              <p>{reminder.vaccineName}</p>
+                              <p className="mt-1 text-[11px] font-semibold opacity-80">{reminder.animal}</p>
+                            </button>
+                          ))}
+
+                          {appointments.map((appointment) => (
+                            <button
+                              key={appointment.id}
+                              type="button"
+                              onClick={() => navigate('/appointment-schedule')}
+                              className={`w-full rounded-[14px] px-3 py-3 text-left text-xs font-bold ${appointmentCardTone}`}
+                            >
+                              <p>
+                                {appointment.mode === 'Request vet to visit'
+                                  ? 'Vet visit'
+                                  : appointment.mode === 'Video consultation'
+                                    ? 'Video call'
+                                    : appointment.mode}
+                              </p>
+                            </button>
+                          ))}
+                        </>
                       ) : (
                         <div className="rounded-[14px] border border-dashed border-[#DCE7DF] px-3 py-6 text-center text-[11px] font-medium text-[#9AA5B1]">
-                          No vaccine
+                          No schedule
                         </div>
                       )}
                     </div>
@@ -133,15 +184,22 @@ export function VaccinationSchedule() {
 
           <div className="mt-4 rounded-[18px] bg-[#F8FCFA] px-4 py-3">
             <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#6B7785]">Upcoming dates</p>
-            <div className="mt-3 space-y-2">
+            <div className="mt-3 max-h-[220px] space-y-2 overflow-y-auto pr-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {remindersByDate
-                .filter(({ reminders }) => reminders.length > 0)
-                .map(({ date, reminders }) => (
+                .filter(({ reminders, appointments }) => reminders.length > 0 || appointments.length > 0)
+                .map(({ date, reminders, appointments }) => (
                   <div key={date} className="rounded-[16px] bg-white px-4 py-3">
                     <p className="text-sm font-extrabold text-[#17212B]">{formatFullDate(date)}</p>
-                    <p className="mt-1 text-xs font-medium text-[#6B7785]">
-                      {reminders.map((reminder) => reminder.vaccineName).join(', ')}
-                    </p>
+                    {reminders.length > 0 ? (
+                      <p className="mt-1 text-xs font-medium text-[#6B7785]">
+                        Vaccines: {reminders.map((reminder) => reminder.vaccineName).join(', ')}
+                      </p>
+                    ) : null}
+                    {appointments.length > 0 ? (
+                      <p className="mt-1 text-xs font-medium text-[#6B7785]">
+                        Vet appointments: {appointments.map((appointment) => `${appointment.vetName} (${appointment.mode})`).join(', ')}
+                      </p>
+                    ) : null}
                   </div>
                 ))}
             </div>
