@@ -1,0 +1,542 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+\definecolor{headerblue}{RGB}{41, 82, 143}
+\definecolor{rowgray}{RGB}{240, 240, 245}
+\definecolor{highrisk}{RGB}{220, 53, 69}
+\definecolor{medrisk}{RGB}{255, 193, 7}
+\definecolor{lowrisk}{RGB}{40, 167, 69}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{headerblue}{\textbf{System Design Specification}}}
+\fancyhead[R]{\textcolor{headerblue}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{
+    {\Large \textbf{System Design Specification}}\\[0.5em]
+    {\large Shobar Khamar Livestock Care Mobile Prototype}
+}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Project Scope Alignment}
+
+This document is rewritten to match the currently implemented project modules. The specification is aligned with the actual mobile prototype screens and flows present in the project codebase.
+
+\subsection{Included Core Features}
+\begin{itemize}
+    \item Vet Registration
+    \item Appointment Booking and Appointment Schedule
+    \item Farm Management as My Animals and Add Animal
+    \item Vaccination Management, including vaccine catalog, give vaccine flow, calendar, records, and vaccination centers
+\end{itemize}
+
+\subsection{Excluded from This Specification}
+\begin{itemize}
+    \item AI Disease Detection
+    \item Payment System as a standalone feature
+\end{itemize}
+
+Although cancellation and reschedule fee warnings appear in the appointment module, they are treated here as appointment policy logic, not as a separate payment feature.
+
+\newpage
+\section{Feature 1: Vet Registration}
+
+\subsection{Sub Features}
+\begin{itemize}
+    \item Basic veterinarian identity capture
+    \item Institute and BVC registration capture
+    \item Present address entry
+    \item Permanent address entry
+    \item Same-as-present address copy option
+    \item Professional profile completion
+    \item Expertise and affiliation selection
+    \item Additional service note submission
+    \item Application submission and profile activation to vet dashboard
+\end{itemize}
+
+\subsection{Metadata}
+\textbf{Vet Basic Profile:} Name, Institute, BVCRegistrationNo, Mobile, Email\\
+\textbf{Present Address:} PresentHouse, PresentRoad, PresentDistrict, PresentUpazila, PresentPostOffice\\
+\textbf{Permanent Address:} PermanentHouse, PermanentRoad, PermanentDistrict, PermanentUpazila, PermanentPostOffice\\
+\textbf{Professional Details:} MasterOfScience, OrganizationName, ExperienceYears, FieldOfExpertise, Affiliation, AnythingSpecial\\
+\textbf{Reference Data:} DistrictList, UpazilaListByDistrict, PostOfficeListByDistrict, InstituteOptions, MSOptions, ExpertiseOptions, AffiliationOptions\\
+\textbf{Submission State:} ApplicationStatus, SubmittedAt, VetDashboardRedirect
+
+\subsection{Stakeholder Analysis}
+
+\begin{longtable}{|p{3cm}|p{6cm}|p{3cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Stakeholder}} & \textcolor{white}{\textbf{Role / Interest}} & \textcolor{white}{\textbf{Impact Level}} \\
+\hline
+\textbf{Veterinarian} & Primary actor who submits personal, address, and professional information to create a service profile & \textbf{High} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Farmers} & Depend on trustworthy, complete, and searchable veterinarian profiles for service booking & \textbf{High} \\
+\hline
+\textbf{Platform Admin} & Oversees quality, consistency, and legitimacy of veterinarian information shown in the system & \textbf{Medium} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Bangladesh Veterinary Council / Regulatory Bodies} & External trust source for registration identity and professional legitimacy & \textbf{Medium} \\
+\hline
+\textbf{Project Backend / Local State Store} & Holds submitted form state and controls successful transition into the vet dashboard experience & \textbf{Medium} \\
+\hline
+\end{longtable}
+
+\subsection{Risk Analysis}
+
+\begin{longtable}{|p{3.8cm}|p{2.5cm}|p{2.5cm}|p{4cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Risk}} & \textcolor{white}{\textbf{Likelihood}} & \textcolor{white}{\textbf{Impact}} & \textcolor{white}{\textbf{Mitigation}} \\
+\hline
+Incorrect BVC or contact information entry & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{highrisk}{\textbf{High}} & Required field validation, structured input labels, and review before submission \\
+\hline
+\rowcolor{rowgray}
+District and upazila mismatch & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{medrisk}{\textbf{Medium}} & Cascading district to upazila and district to post office selection logic \\
+\hline
+Incomplete professional profile reduces booking trust & \textcolor{highrisk}{\textbf{High}} & \textcolor{medrisk}{\textbf{Medium}} & Mandatory expertise, affiliation, and experience fields before submission \\
+\hline
+\rowcolor{rowgray}
+Fake or misleading service specialization & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{highrisk}{\textbf{High}} & Restrict entries to curated expertise and affiliation options, plus admin review in later deployment \\
+\hline
+Loss of entered data during long form completion & \textcolor{lowrisk}{\textbf{Low}} & \textcolor{medrisk}{\textbf{Medium}} & Save draft state in future enhancement, keep sections separated and easy to review \\
+\hline
+\end{longtable}
+
+\subsection{Detailed Flow}
+
+\begin{longtable}{|p{1.2cm}|p{5.6cm}|p{5.7cm}|p{2cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Step}} & \textcolor{white}{\textbf{Action}} & \textcolor{white}{\textbf{Metadata Used}} & \textcolor{white}{\textbf{Actor}} \\
+\hline
+1 & Open Vet Registration from login area & EntryPoint, UserRole & Veterinarian \\
+\hline
+\rowcolor{rowgray}
+2 & Fill basic information section & Name, Institute, BVCRegistrationNo, Mobile, Email & Veterinarian \\
+\hline
+3 & Fill present address section & PresentHouse, PresentRoad, PresentDistrict, PresentUpazila, PresentPostOffice & Veterinarian \\
+\hline
+\rowcolor{rowgray}
+4 & Fill permanent address or copy from present address & PermanentHouse, PermanentRoad, PermanentDistrict, PermanentUpazila, PermanentPostOffice & Veterinarian \\
+\hline
+5 & Add professional details & MasterOfScience, OrganizationName, ExperienceYears, FieldOfExpertise, Affiliation & Veterinarian \\
+\hline
+\rowcolor{rowgray}
+6 & Add additional service notes & AnythingSpecial & Veterinarian \\
+\hline
+7 & Submit application & FullFormPayload, ApplicationStatus & Veterinarian \\
+\hline
+\rowcolor{rowgray}
+8 & Redirect to vet dashboard after successful submission & VetDashboardRedirect & System \\
+\hline
+\end{longtable}
+
+\newpage
+\section{Feature 2: Appointment Booking and Appointment Schedule}
+
+\subsection{Sub Features}
+\begin{itemize}
+    \item Vet search by keyword
+    \item Vet filtering by service type, specialty, availability, nearby option, and fee range
+    \item Vet list with location, price, rating, and online status
+    \item Transition from list to vet profile
+    \item Personalized consultation mode selection from In Person, Video consultation, Chat, and Request vet to visit
+    \item In Person booking through weekly time schedule rows
+    \item Video consultation as instant video call when the veterinarian is online
+    \item Video consultation as scheduled future slot when the veterinarian is offline
+    \item Chat redirect for direct text conversation
+    \item Request vet to visit slot selection
+    \item Multi-animal selection for one appointment request
+    \item Symptom note submission with the booking request
+    \item Dynamic payment summary based on consultation mode, extra animals, travel fee, and added charges
+    \item Appointment schedule viewing
+    \item Accepted and pending appointment tracking
+    \item Reschedule support
+    \item Cancel support
+    \item Extra payment warning for vet visit reschedule or cancellation when less than 24 hours remain
+    \item Conflict prompt when the selected schedule overlaps with another appointment
+    \item Focused appointment detail view when opened from the calendar
+\end{itemize}
+
+\subsection{Metadata}
+\textbf{Vet Search and Discovery:} SearchTerm, ServiceType, Specialty, Availability, NearbyOnly, MinPrice, MaxPrice\\
+\textbf{Vet Card Data:} VetID, VetName, SpecialtyName, ServiceTypes, Location, Price, Rating, AvailabilityLabel, OnlineStatus\\
+\textbf{Consultation Option Metadata:} SelectedVisitMode, InPersonSchedule, VideoStatus, ChatRedirect, VetVisitSlot\\
+\textbf{Booking Input Metadata:} SelectedDate, SelectedSlot, SelectedAnimalIDs, Symptoms, FarmerName\\
+\textbf{Appointment Data:} AppointmentID, VetName, AnimalNames, AppointmentDate, AppointmentTime, Center, Mode, Status, AdditionalCharge\\
+\textbf{Schedule Control:} ActiveSection, SelectedAppointmentID, Message, HoursRemaining, ShowConflictWarning\\
+\textbf{Pricing Metadata:} BasePrice, ExtraAnimalCharge, TravelCharge, TotalPrice\\
+\textbf{Policy Logic:} RescheduleChargeAmount, CancellationChargeAmount, ModeType, LateChangeRule, LessThan24HoursRule
+
+\subsection{Stakeholder Analysis}
+
+\begin{longtable}{|p{3cm}|p{6cm}|p{3cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Stakeholder}} & \textcolor{white}{\textbf{Role / Interest}} & \textcolor{white}{\textbf{Impact Level}} \\
+\hline
+\textbf{Farmer} & Searches vets, evaluates options, books care, and manages upcoming appointments & \textbf{High} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Veterinarian} & Appears in the searchable list, receives bookings, and is affected by schedule changes & \textbf{High} \\
+\hline
+\textbf{Platform Scheduler} & Maintains appointment status, displays accepted versus pending records, and applies change rules & \textbf{High} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Consultation Presence Store} & Supplies online or offline state that affects user trust and booking urgency & \textbf{Medium} \\
+\hline
+\textbf{Platform Admin} & Monitors booking quality, cancellation behavior, and policy consistency & \textbf{Medium} \\
+\hline
+\end{longtable}
+
+\subsection{Risk Analysis}
+
+\begin{longtable}{|p{3.8cm}|p{2.5cm}|p{2.5cm}|p{4cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Risk}} & \textcolor{white}{\textbf{Likelihood}} & \textcolor{white}{\textbf{Impact}} & \textcolor{white}{\textbf{Mitigation}} \\
+\hline
+Wrong vet selected due to weak filtering & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{medrisk}{\textbf{Medium}} & Multiple filters, search by name and location, and clear vet card metadata \\
+\hline
+\rowcolor{rowgray}
+Schedule conflicts or duplicate slot expectations & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{highrisk}{\textbf{High}} & Centralized appointment record view, explicit status labels, and focused appointment detail screen \\
+\hline
+Late cancellation or reschedule harms vet operations & \textcolor{highrisk}{\textbf{High}} & \textcolor{medrisk}{\textbf{Medium}} & 24-hour fee notice and confirmation modal before final action \\
+\hline
+\rowcolor{rowgray}
+Farmer confusion between pending and accepted appointments & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{medrisk}{\textbf{Medium}} & Color-coded status badges and dedicated schedule section \\
+\hline
+Farmer reschedules or cancels a Request vet to visit appointment with less than 24 hours remaining & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{highrisk}{\textbf{High}} & Apply extra payment of BDT 100 and display confirmation warning before continuing \\
+\hline
+\rowcolor{rowgray}
+Farmer selects a schedule that already overlaps with another appointment & \textcolor{highrisk}{\textbf{High}} & \textcolor{medrisk}{\textbf{Medium}} & Detect the conflict and ask whether to choose another time or continue on the same date \\
+\hline
+Online presence becomes stale & \textcolor{lowrisk}{\textbf{Low}} & \textcolor{medrisk}{\textbf{Medium}} & Presence store refresh and fallback to availability label \\
+\hline
+\end{longtable}
+
+\subsection{Detailed Flow}
+
+\begin{longtable}{|p{1.2cm}|p{5.6cm}|p{5.7cm}|p{2cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Step}} & \textcolor{white}{\textbf{Action}} & \textcolor{white}{\textbf{Metadata Used}} & \textcolor{white}{\textbf{Actor}} \\
+\hline
+1 & Open Vet module from dashboard or navigation & EntryPoint, ActiveSection & Farmer \\
+\hline
+\rowcolor{rowgray}
+2 & Choose Book a Vet tab or Appointment Schedule tab & ActiveSection & Farmer \\
+\hline
+3 & Search and filter veterinarians & SearchTerm, ServiceType, Specialty, Availability, NearbyOnly, MinPrice, MaxPrice & Farmer \\
+\hline
+\rowcolor{rowgray}
+4 & Review vet cards and open a selected vet profile & VetID, VetName, Price, Rating, OnlineStatus, Location & Farmer \\
+\hline
+5 & Select consultation option from In Person, Video consultation, Chat, or Request vet to visit & SelectedVisitMode, ServiceTypes, OnlineStatus & Farmer \\
+\hline
+\rowcolor{rowgray}
+6 & If Chat is selected, redirect immediately to chat page & VetID, ChatRedirect & System \\
+\hline
+7 & If In Person is selected, choose from weekly schedule rows that contain day, center, and fixed appointment time & SelectedDate, AppointmentTime, Center, InPersonSchedule & Farmer \\
+\hline
+\rowcolor{rowgray}
+8 & If Video consultation is selected and the veterinarian is online, submit an instant video call request & VetID, FarmerName, SelectedAnimalIDs, Symptoms, Mode & Farmer \\
+\hline
+9 & If Video consultation is selected and the veterinarian is offline, choose future date and slot and submit a scheduled video request & SelectedDate, SelectedSlot, FarmerName, Symptoms, Mode & Farmer \\
+\hline
+\rowcolor{rowgray}
+10 & If Request vet to visit is selected, choose a visit slot and include travel-aware pricing & SelectedDate, SelectedSlot, TravelCharge, TotalPrice & Farmer \\
+\hline
+11 & Select one or more animals for the request & SelectedAnimalIDs, AnimalNames & Farmer \\
+\hline
+\rowcolor{rowgray}
+12 & Add symptom details to personalize the consultation request & Symptoms & Farmer \\
+\hline
+13 & System calculates payment summary from base consultation fee, extra animals, travel fee, and previous additional charge if any & BasePrice, ExtraAnimalCharge, TravelCharge, AdditionalCharge, TotalPrice & System \\
+\hline
+\rowcolor{rowgray}
+14 & If another appointment already exists in that schedule, show conflict warning and ask whether to choose another time or continue on the same date & SelectedDate, SelectedSlot, ShowConflictWarning & System \\
+\hline
+15 & View upcoming appointments in schedule tab & AppointmentID, Status, Mode, AppointmentDate, AppointmentTime, Center & Farmer \\
+\hline
+\rowcolor{rowgray}
+16 & Open a single appointment from calendar-focused route if needed & SelectedAppointmentID & Farmer \\
+\hline
+17 & Reschedule appointment & AppointmentID, VetName, Mode, AppointmentDate, AdditionalCharge & Farmer \\
+\hline
+\rowcolor{rowgray}
+18 & If the mode is Request vet to visit and less than 24 hours remain, add BDT 100 before rescheduling & LessThan24HoursRule, RescheduleChargeAmount, AdditionalCharge & System \\
+\hline
+19 & Cancel appointment & AppointmentID, Mode, AppointmentDate, AdditionalCharge & Farmer \\
+\hline
+\rowcolor{rowgray}
+20 & If the mode is Request vet to visit and less than 24 hours remain, add BDT 100 before cancellation & LessThan24HoursRule, CancellationChargeAmount, AdditionalCharge & System \\
+\hline
+21 & Show late-change warning when rule applies & HoursRemaining, LateChangeRule, AdditionalCharge & System \\
+\hline
+\end{longtable}
+
+\newpage
+\section{Feature 3: Farm Management (My Animals and Add Animal)}
+
+\subsection{Sub Features}
+\begin{itemize}
+    \item My Livestock listing
+    \item Animal search by ID, name, breed, and note
+    \item Animal filtering by type, status, and age range
+    \item Limited preview with Show All toggle
+    \item Add Animal multi-step wizard
+    \item Animal media upload with images and video
+    \item Disease history entry
+    \item Vaccine history entry
+    \item Vaccine side-effect evidence capture
+    \item Final verification before saving
+    \item Animal profile opening from list
+\end{itemize}
+
+\subsection{Metadata}
+\textbf{Animal Core Record:} AnimalID, Name, AnimalType, Subtype, Breed, Age, AgeMin, AgeMax, Weight, WeightMin, WeightMax, Status, Note, Description\\
+\textbf{Physical Attributes:} Color, TeethCount, Height, Width, Length, HasCalved\\
+\textbf{Media:} MediaFiles, MediaName, MediaURL, MediaType, ImageCount, VideoCount\\
+\textbf{Disease History:} DiseaseName, DiseaseStartDate, DiseaseEndDate, DiseaseDuration\\
+\textbf{Vaccine History:} VaccineName, VaccineDate, VaccineCentre\\
+\textbf{Vaccine Side Effect Record:} SideEffectDescription, SideEffectDate, SideEffectMediaName, SideEffectMediaURL, SideEffectMediaType\\
+\textbf{Farm Filters:} SearchTerm, AnimalTypeFilter, StatusFilter, AgeMinFilter, AgeMaxFilter, ShowAllAnimals
+
+\subsection{Stakeholder Analysis}
+
+\begin{longtable}{|p{3cm}|p{6cm}|p{3cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Stakeholder}} & \textcolor{white}{\textbf{Role / Interest}} & \textcolor{white}{\textbf{Impact Level}} \\
+\hline
+\textbf{Farmer} & Creates, updates, filters, and reviews animal records for daily herd management & \textbf{High} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Veterinarian} & Uses animal history, status, and vaccine context during consultation and follow-up & \textbf{High} \\
+\hline
+\textbf{Platform Admin} & Needs structured and consistent records for support and future analytics & \textbf{Medium} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Local Data Store / Browser Storage} & Retains saved animal records, media references, and appended vaccine history & \textbf{High} \\
+\hline
+\end{longtable}
+
+\subsection{Risk Analysis}
+
+\begin{longtable}{|p{3.8cm}|p{2.5cm}|p{2.5cm}|p{4cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Risk}} & \textcolor{white}{\textbf{Likelihood}} & \textcolor{white}{\textbf{Impact}} & \textcolor{white}{\textbf{Mitigation}} \\
+\hline
+Incorrect animal profile data entry & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{highrisk}{\textbf{High}} & Multi-step review, constrained selects, and verification summary before submit \\
+\hline
+\rowcolor{rowgray}
+Too much media or unsupported file mix & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{medrisk}{\textbf{Medium}} & Limit to three images and one video with clear upload rules \\
+\hline
+Missing disease or vaccine history causes poor clinical context & \textcolor{highrisk}{\textbf{High}} & \textcolor{medrisk}{\textbf{Medium}} & Dedicated history step and structured repeatable cards \\
+\hline
+\rowcolor{rowgray}
+Duplicate or ambiguous animal IDs & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{medrisk}{\textbf{Medium}} & Constructed ID strategy and review screen before final save \\
+\hline
+Local storage loss or browser clear & \textcolor{lowrisk}{\textbf{Low}} & \textcolor{highrisk}{\textbf{High}} & Future sync support and export-ready record structure \\
+\hline
+\end{longtable}
+
+\subsection{Detailed Flow}
+
+\begin{longtable}{|p{1.2cm}|p{5.6cm}|p{5.7cm}|p{2cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Step}} & \textcolor{white}{\textbf{Action}} & \textcolor{white}{\textbf{Metadata Used}} & \textcolor{white}{\textbf{Actor}} \\
+\hline
+1 & Open My Livestock page & EntryPoint & Farmer \\
+\hline
+\rowcolor{rowgray}
+2 & Search and filter animals & SearchTerm, AnimalTypeFilter, StatusFilter, AgeMinFilter, AgeMaxFilter & Farmer \\
+\hline
+3 & Review animal cards and open a specific animal profile & AnimalID, Name, Breed, Age, Status, Note & Farmer \\
+\hline
+\rowcolor{rowgray}
+4 & Open Add Animal flow & EntryPoint, CurrentStep & Farmer \\
+\hline
+5 & Fill animal information step & Name, AnimalType, Subtype, AgeMin, AgeMax, WeightMin, WeightMax, Color, TeethCount, Height, Width, Length, HasCalved, Description & Farmer \\
+\hline
+\rowcolor{rowgray}
+6 & Upload images and video & MediaFiles, MediaName, MediaURL, MediaType & Farmer \\
+\hline
+7 & Add disease history records & DiseaseName, DiseaseStartDate, DiseaseEndDate & Farmer \\
+\hline
+\rowcolor{rowgray}
+8 & Add vaccine history and side-effect records & VaccineName, VaccineDate, VaccineCentre, SideEffectDescription, SideEffectDate, SideEffectMediaURL & Farmer \\
+\hline
+9 & Verify all information & FullAnimalRecordDraft & Farmer \\
+\hline
+\rowcolor{rowgray}
+10 & Submit and save animal record & AnimalRecord, Status, Note & System \\
+\hline
+\end{longtable}
+
+\newpage
+\section{Feature 4: Vaccination Management}
+
+\subsection{Sub Features}
+\begin{itemize}
+    \item Vaccine report summary card
+    \item Vaccine catalog browsing
+    \item Vaccine search
+    \item Vaccine filtering by animal type, disease, age, weight, and teeth count
+    \item Add vaccine catalog entry
+    \item Give vaccine flow for selected animals
+    \item Eligibility and timing check
+    \item Vaccination table showing last date, current date, duration, and right-time or wrong-time status
+    \item Vaccination schedule calendar
+    \item Combined view of vaccine reminders and vet appointments
+    \item Appointment-mode-aware labels inside the calendar such as In Person, Video call, and Vet visit
+    \item Direct navigation from appointment cards to exact appointment details
+    \item Vaccination records with pending to done confirmation
+    \item Per-animal vaccination entry creation after confirmation
+    \item Eligible and ineligible animal separation
+    \item Vaccination center discovery
+    \item Book vaccination visit linkage to vet booking
+    \item Automatic append of completed vaccine entries into animal history
+\end{itemize}
+
+\subsection{Metadata}
+\textbf{Vaccine Catalog Item:} VaccineID, VaccineName, CenterName, SupportedAnimalTypes, DiseaseName, AgeRangeMonths, WeightRangeKg, TeethCounts, Dose, Schedule, Stock, Note, RecommendedDays\\
+\textbf{Vaccination Planning:} SelectedAnimalIDs, SelectedDate, SelectedCenter, RequestedVaccineID\\
+\textbf{Eligibility Summary:} AnimalID, AnimalType, IsEligible, LastDate, DurationDays, IsTimingOk, RightTimeStatus, WrongTimeStatus\\
+\textbf{Vaccination Record:} RecordID, VaccineID, VaccineName, AnimalIDs, EligibleAnimalIDs, IneligibleAnimalIDs, Date, Center, Status\\
+\textbf{Vaccination Entry:} EntryID, AnimalID, VaccineName, Date, EntryStatus\\
+\textbf{Calendar Metadata:} ScheduleDate, ReminderDate, ReminderLabel, AppointmentID, AppointmentMode, AppointmentStatus, AppointmentLabel\\
+\textbf{Center Metadata:} CenterName, SupportedAnimals, AvailableVaccines, StockSummary\\
+\textbf{Dashboard Summary:} CompletedCount, PendingCount, OverdueCount, NextDueAnimal\\
+\textbf{Record Confirmation Metadata:} ConfirmationMessage, GivenAction, NotYetAction, AnimalEntryAppendStatus
+
+\subsection{Stakeholder Analysis}
+
+\begin{longtable}{|p{3cm}|p{6cm}|p{3cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Stakeholder}} & \textcolor{white}{\textbf{Role / Interest}} & \textcolor{white}{\textbf{Impact Level}} \\
+\hline
+\textbf{Farmer} & Reviews vaccine options, plans administration, confirms completion, and tracks vaccine history & \textbf{High} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Veterinarian} & Supports vaccination visits and appears in linked calendar and appointment flows & \textbf{High} \\
+\hline
+\textbf{Vaccination Center} & Supplies vaccine availability, stock context, and real-world service destination & \textbf{High} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Platform Admin} & Maintains vaccine catalog quality, center data, and overall data consistency & \textbf{Medium} \\
+\hline
+\textbf{Animal Record Store} & Receives appended vaccine history after pending records are confirmed as done & \textbf{High} \\
+\hline
+\rowcolor{rowgray}
+\textbf{Reminder and Calendar Layer} & Surfaces due vaccines and related vet appointments in calendar form & \textbf{Medium} \\
+\hline
+\end{longtable}
+
+\subsection{Risk Analysis}
+
+\begin{longtable}{|p{3.8cm}|p{2.5cm}|p{2.5cm}|p{4cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Risk}} & \textcolor{white}{\textbf{Likelihood}} & \textcolor{white}{\textbf{Impact}} & \textcolor{white}{\textbf{Mitigation}} \\
+\hline
+Wrong vaccine selected for an animal type & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{highrisk}{\textbf{High}} & Animal-type filters, eligibility tags, and eligibility check before scheduling \\
+\hline
+\rowcolor{rowgray}
+Vaccine given at the wrong interval & \textcolor{highrisk}{\textbf{High}} & \textcolor{highrisk}{\textbf{High}} & Timing table shows last date, duration, recommended timing, and right-time or wrong-time status \\
+\hline
+Pending record never confirmed as done & \textcolor{highrisk}{\textbf{High}} & \textcolor{medrisk}{\textbf{Medium}} & Dedicated records page with Yes given and Not yet actions \\
+\hline
+\rowcolor{rowgray}
+Catalog stock or center information becomes outdated & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{medrisk}{\textbf{Medium}} & Centralized vaccine catalog and center aggregation from maintained vaccine records \\
+\hline
+Duplicate vaccination entry appended to animal history & \textcolor{lowrisk}{\textbf{Low}} & \textcolor{medrisk}{\textbf{Medium}} & Duplicate prevention check before append into animal vaccine history \\
+\hline
+\rowcolor{rowgray}
+Farmer misses reminder or confuses vaccine due items with appointment items & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{medrisk}{\textbf{Medium}} & Calendar separates vaccine cards from appointment cards and includes upcoming date summaries \\
+\hline
+Wrong-time vaccination still gets scheduled without clear warning & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{highrisk}{\textbf{High}} & Show duration difference and explicit Right time or Wrong time status before final confirmation \\
+\hline
+\rowcolor{rowgray}
+Ineligible animals are mixed into a vaccine event without enough visibility & \textcolor{medrisk}{\textbf{Medium}} & \textcolor{highrisk}{\textbf{High}} & Store ineligible animal list separately and highlight it in the vaccination table and records screen \\
+\hline
+\end{longtable}
+
+\subsection{Detailed Flow}
+
+\begin{longtable}{|p{1.2cm}|p{5.6cm}|p{5.7cm}|p{2cm}|}
+\hline
+\rowcolor{headerblue}\textcolor{white}{\textbf{Step}} & \textcolor{white}{\textbf{Action}} & \textcolor{white}{\textbf{Metadata Used}} & \textcolor{white}{\textbf{Actor}} \\
+\hline
+1 & Open Vaccination Management dashboard & CompletedCount, PendingCount, OverdueCount, NextDueAnimal & Farmer \\
+\hline
+\rowcolor{rowgray}
+2 & Search or filter vaccine catalog & SearchTerm, SupportedAnimalTypes, DiseaseName, AgeRangeMonths, WeightRangeKg, TeethCounts & Farmer \\
+\hline
+3 & Select a vaccine to give & VaccineID, VaccineName, Dose, Schedule, Note & Farmer \\
+\hline
+\rowcolor{rowgray}
+4 & Select animals, date, and vaccination center & SelectedAnimalIDs, SelectedDate, SelectedCenter & Farmer \\
+\hline
+5 & Run eligibility and timing analysis for each selected animal & AnimalID, IsEligible, LastDate, DurationDays, IsTimingOk, RecommendedDays, RightTimeStatus, WrongTimeStatus & System \\
+\hline
+\rowcolor{rowgray}
+6 & Show vaccination table with last date, current date, duration, and dose timing status before saving & AnimalID, LastDate, SelectedDate, DurationDays, RightTimeStatus, WrongTimeStatus & Farmer \\
+\hline
+7 & Save a pending vaccination record & RecordID, VaccineID, AnimalIDs, EligibleAnimalIDs, IneligibleAnimalIDs, Date, Center, Status & System \\
+\hline
+\rowcolor{rowgray}
+8 & Review reminders in calendar & ScheduleDate, ReminderLabel, AppointmentID, AppointmentMode, AppointmentLabel & Farmer \\
+\hline
+9 & Show appointment cards in the calendar with personalized labels such as In Person, Video call, or Vet visit alongside vaccine reminders & AppointmentID, AppointmentMode, AppointmentLabel, ReminderLabel & System \\
+\hline
+\rowcolor{rowgray}
+10 & Open exact appointment details from the calendar appointment card when needed & AppointmentID, SelectedAppointmentID & Farmer \\
+\hline
+11 & Open Vaccination Records and confirm whether vaccine was given & RecordID, Status, GivenAction, NotYetAction & Farmer \\
+\hline
+\rowcolor{rowgray}
+12 & Convert pending record to done and create one vaccination entry per eligible animal & EntryID, AnimalID, VaccineName, Date, EntryStatus, AnimalEntryAppendStatus & System \\
+\hline
+13 & Append completed vaccination information into each animal's vaccine history & AnimalID, VaccineName, Date, Center & System \\
+\hline
+\rowcolor{rowgray}
+14 & Review vaccination centers with support type, vaccine list, and stock summary & CenterName, SupportedAnimals, AvailableVaccines, StockSummary & Farmer \\
+\hline
+15 & From a vaccination center card, book a vaccination visit through the appointment module & CenterName, BookingRedirect & Farmer \\
+\hline
+\end{longtable}
+
+\newpage
+\section{Implementation Notes}
+
+\subsection{Current Project Behavior Reflected in This Specification}
+\begin{itemize}
+    \item The appointment module includes both vet discovery and appointment schedule management.
+    \item The farm module is centered on ``My Livestock'' and a multi-step ``Add Animal'' flow.
+    \item The vaccination module is broader than a simple catalog; it includes scheduling, confirmation, center lookup, and linkage back into animal history.
+    \item The current project intentionally excludes AI disease detection and a standalone payment workflow from this rewritten specification.
+\end{itemize}
+
+\subsection{Future Extension Opportunities}
+\begin{itemize}
+    \item Server-side persistence instead of browser-only state
+    \item Formal admin review pipeline for veterinarian applications
+    \item Reminder notifications by SMS or push
+    \item Inventory synchronization with real vaccination centers
+    \item Analytics dashboard over animal health, bookings, and vaccination completion
+\end{itemize}
+
+\end{document}

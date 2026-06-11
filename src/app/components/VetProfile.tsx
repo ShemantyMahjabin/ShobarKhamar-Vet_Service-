@@ -167,6 +167,12 @@ export function VetProfile() {
       return;
     }
 
+    proceedWithBooking();
+  }
+
+  function proceedWithBooking() {
+    setShowConflictWarning(false);
+
     if (selectedVisitMode === "Video consultation") {
       const scheduledFor = getScheduledSlotDate();
 
@@ -565,23 +571,32 @@ export function VetProfile() {
             <CardContent className="space-y-4 p-5">
               <div className="space-y-2">
                 <p className="text-[18px] font-extrabold text-slate-900">
-                  You already have an appointment at that time.
+                  You already have another appointment in this schedule.
                 </p>
                 <p className="text-base font-medium leading-7 text-slate-600">
-                  Do you want to choose another time slot?
+                  Do you want to select another time, or go on this date?
                 </p>
                 <p className="text-sm font-semibold text-[#b7791f]">
                   {selectedSchedule.dateText} • {selectedTimeLabel}
                 </p>
               </div>
-              <Button
-                type="button"
-                variant="outline"
-                className="h-14 w-full rounded-[20px] border-[#e7c98d] bg-white text-[16px] font-extrabold text-slate-900"
-                onClick={() => schedulingSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
-              >
-                Choose another time slot
-              </Button>
+              <div className="grid grid-cols-2 gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-14 rounded-[20px] border-[#e7c98d] bg-white text-[15px] font-extrabold text-slate-900"
+                  onClick={() => schedulingSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                >
+                  Select other time
+                </Button>
+                <Button
+                  type="button"
+                  className="h-14 rounded-[20px] bg-[#56a774] text-[15px] font-extrabold text-white hover:bg-[#4b9968]"
+                  onClick={proceedWithBooking}
+                >
+                  Go this date
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ) : null}
